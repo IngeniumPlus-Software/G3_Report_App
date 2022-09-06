@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
+using Rbl.Helpers;
 using Rbl.Models;
 using Rbl.Services;
 
@@ -35,6 +36,10 @@ namespace Rbl.Pages
         public decimal AllScoreTotal { get; set; }
         public decimal TopTenScoreTotal { get; set; }
         public decimal IndustryScoreTotal { get; set; }
+        public string[] TalentSentences { get; set; } = new string[0];
+        public string[] LeadershipSentences { get; set; } = new string[0];
+        public string[] OrganizationSentences { get; set; } = new string[0];
+        public string[] HrSentences { get; set; } = new string[0];
 
 
         public async Task<IActionResult> OnGetAsync(string ticker, string companyName)
@@ -54,7 +59,28 @@ namespace Rbl.Pages
                 return NotFound();
             }
 
-           
+            var allWordTypes = new[] { WordTypesEnum.Talent, WordTypesEnum.Leadership, WordTypesEnum.Organization, WordTypesEnum.Hr };
+            var importantWords = await _service.GetImportantWords(allWordTypes);
+            var allSentences = await _service.GetSentenceResponse(ticker, importantWords);
+            foreach(var t in allWordTypes)
+            {
+                var tSentences = allSentences.GetRawHtml(t);
+                switch(t)
+                {
+                    case WordTypesEnum.Talent:
+                        TalentSentences = tSentences;
+                        break;
+                    case WordTypesEnum.Leadership:
+                        LeadershipSentences = tSentences;
+                        break;
+                    case WordTypesEnum.Organization:
+                        OrganizationSentences = tSentences;
+                        break;
+                    case WordTypesEnum.Hr:
+                        HrSentences = tSentences;
+                        break;
+                }
+            }
 
             ScoresByTicker = await _service.GetOrganizationScoresByTicker(ticker);
             ScoresAll = await _service.GetScoresAll();
