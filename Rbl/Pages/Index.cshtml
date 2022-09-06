@@ -1,0 +1,69 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Home page";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Make me Pretty</h1>
+
+
+    @*@Html.Raw(Json.Serialize(Model.ScoresByTicker)).ToString()
+
+    @Model.CompanyName
+    <br/>
+    @Model.ScoresByTicker.HrScore*@
+  
+
+    <p>
+        <a asp-page="./Report">Report Test</a>
+    </p>
+
+
+    
+<div class="row">
+    <div class="col-md-6">
+        <form  method="post">
+            <h4>Select Company</h4>
+            <hr />
+            <div asp-validation-summary="All" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="Input.Ticker"></label>
+                <input asp-for="Input.Ticker" class="form-control TickerDropdown" />
+                <span asp-validation-for="Input.Ticker" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Input.CompanyName"></label>
+                <input asp-for="Input.CompanyName" class="form-control" />
+                <span asp-validation-for="Input.CompanyName" class="text-danger"></span>
+                
+                @*<input  id="Input.Ticker" class="TickerDropdown" />*@
+            </div>
+  
+            <button type="submit" class="btn btn-primary">Generate Report</button>
+        </form>
+    </div>
+    </div>
+
+    <script>
+
+        var activeUsers= @Html.Raw(Json.Serialize(Model.TickersList));
+        console.log(activeUsers);
+        $(document).ready(function() {
+            $(".TickerDropdown").kendoComboBox({
+                index: 0,
+                dataTextField: "text",
+                dataValueField: "text",
+                filter: "contains",
+                dataSource: activeUsers
+ 
+            });
+
+
+            
+
+
+        });
+    </script>
+
+</div>

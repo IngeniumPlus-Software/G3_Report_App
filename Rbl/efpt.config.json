@@ -1,0 +1,55 @@
+﻿{
+   "CodeGenerationMode": 0,
+   "ContextClassName": "RBLContext",
+   "ContextNamespace": null,
+   "DefaultDacpacSchema": null,
+   "FilterSchemas": false,
+   "IncludeConnectionString": false,
+   "ModelNamespace": null,
+   "OutputContextPath": "",
+   "OutputPath": "Models",
+   "ProjectRootNamespace": "Rbl",
+   "Schemas": null,
+   "SelectedHandlebarsLanguage": 0,
+   "SelectedToBeGenerated": 0,
+   "Tables": [
+      {
+         "Name": "[dbo].[Organizations]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[ScoresAll]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ScoresByIndustry]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ScoresByTicker]",
+         "ObjectType": 3
+      },
+      {
+         "Name": "[dbo].[ScoresTopTen]",
+         "ObjectType": 3
+      }
+   ],
+   "UiHint": "rbl-db.RBL",
+   "UseBoolPropertiesWithoutDefaultSql": false,
+   "UseDatabaseNames": true,
+   "UseDbContextSplitting": false,
+   "UseFluentApiOnly": false,
+   "UseHandleBars": false,
+   "UseHierarchyId": false,
+   "UseInflector": false,
+   "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
+   "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
+   "UseNoNavigations": false,
+   "UseNoObjectFilter": false,
+   "UseNodaTime": false,
+   "UseNullableReferences": false,
+   "UseSchemaFolders": false,
+   "UseSpatial": false
+}
