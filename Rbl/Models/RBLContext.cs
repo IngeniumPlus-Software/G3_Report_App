@@ -29,6 +29,7 @@ namespace Rbl.Models
         public virtual DbSet<WordlistOrganization> WordlistOrganizations { get; set; }
         public virtual DbSet<WordlistTalent> WordlistTalents { get; set; }
         public virtual DbSet<DfAllRatiosAvailable> DfAllRatiosAvailables { get; set; }
+        public virtual DbSet<DfSentence> DfSentences { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -219,6 +220,25 @@ namespace Rbl.Models
                 entity.Property(e => e.TrailingEps).HasColumnName("trailingEps");
 
                 entity.Property(e => e.Vision).HasColumnName("vision");
+            });
+
+            modelBuilder.Entity<DfSentence>(entity =>
+            {
+                entity.ToTable("df_sentences");
+
+                entity.HasIndex(e => e.Ticker, "idx_sentence_ticker");
+
+                entity.Property(e => e.HrSentences).HasColumnName("hr_sentences");
+
+                entity.Property(e => e.LeadershipSentences).HasColumnName("leadership_sentences");
+
+                entity.Property(e => e.OrganizationSentences).HasColumnName("organization_sentences");
+
+                entity.Property(e => e.TalentSentences).HasColumnName("talent_sentences");
+
+                entity.Property(e => e.Ticker)
+                    .HasMaxLength(255)
+                    .HasColumnName("ticker");
             });
 
             OnModelCreatingPartial(modelBuilder);
