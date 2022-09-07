@@ -1,0 +1,20 @@
+version: 0.0
+os: linux
+files:
+  - source: /
+    destination: /var/www/api-latest
+hooks:
+  ApplicationStop:
+    - location: deploy/scripts/application_stop.sh
+      timeout: 60
+  BeforeInstall:
+    - location: deploy/scripts/before_install.sh
+      timeout: 60
+  AfterInstall:
+    - location: deploy/scripts/app_setup.sh
+      timeout: 60
+    - location: deploy/scripts/after_install.sh
+      timeout: 60
+  ApplicationStart:
+    - location: deploy/scripts/application_start.sh
+      timeout: 60
