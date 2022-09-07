@@ -107,6 +107,19 @@ namespace Rbl.Services
             await Task.Delay(500);
             return result;
         }
+
+        public async Task<DfSentence> GetCachedSentences(string ticker)
+        {
+            return await _context.DfSentences.FirstOrDefaultAsync(x => x.Ticker == ticker);
+        }
+
+        public async Task<bool> SaveCachedSentences(DfSentence sentence)
+        {
+            if (sentence.Id == 0)
+                _context.DfSentences.Add(sentence);
+
+            return await _context.SaveChangesAsync() > 0;
+        }
     }
 
     #endregion
