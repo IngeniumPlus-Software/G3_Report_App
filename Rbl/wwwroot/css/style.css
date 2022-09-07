@@ -1,21 +1,21 @@
 @font-face {
     font-family: "Timesnewroman";
-    src: url(../fonts/Timesnewroman.ttf);
+    src: url(../fonts/Timesnewroman.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "Timesnewroman-italic";
-    src: url(../fonts/Timesnewromanbolditalic.ttf);
+    src: url(../fonts/Timesnewromanbolditalic.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "OpenSans-Light";
-    src: url(../fonts/OpenSans-Light.ttf);
+    src: url(../fonts/OpenSans-Light.ttf) format("truetype");
 }
 
 @font-face {
     font-family: "OpenSans";
-    src: url(../fonts/OpenSans-Regular.ttf);
+    src: url(../fonts/OpenSans-Regular.ttf) format("truetype");
 }
 
 body {
@@ -688,6 +688,7 @@ table.table-striped.custom tr td:nth-child(5) {
     bottom: 0px;
     width: 100%;
     color: #071d49;
+/*     display: none !important;*/
 }
 
     .footer h4 {

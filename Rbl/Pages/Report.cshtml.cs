@@ -7,6 +7,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore;
 using Rbl.Models;
 using Rbl.Services;
+using IronPdf;
+using IronPdf.Engines.Chrome;
+using Microsoft.CodeAnalysis.CSharp.Syntax;
+
 
 namespace Rbl.Pages
 {
@@ -76,7 +80,45 @@ namespace Rbl.Pages
             return Page();
         }
 
+        public  ActionResult OnPostReport(string ticker, string companyName)
+        {
 
+            var renderer = new IronPdf.ChromePdfRenderer
+            {
+                RenderingOptions =
+                {
+                    PrintHtmlBackgrounds = true,
+                    PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Portrait,
+                    Title = "My PDF Document Name",
+                    EnableJavaScript = true,
+                    RenderDelay = 50,
+                    CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
+                    FitToPaperMode = FitToPaperModes.Automatic,
+                    Zoom = 100,
+                    HtmlFooter = new IronPdf.HtmlHeaderFooter()
+                    {
+                        MaxHeight = 15, //millimeters
+                        // HtmlFragment = "<center><i>{page} of {total-pages}<i></center>",
+                        HtmlFragment = "<div class='footer'><h4>CONFIDENTIAL</h4>img src='./images/g3_logo_footer.png' /></div>",
+                        DrawDividerLine = false
+                    },
+                    MarginTop = 0,
+                    MarginLeft = 0,
+                    MarginRight = 0,
+                    MarginBottom = 0
+                }
+            };
+
+
+            var url = $"https://localhost:44325/Report?ticker={ticker}&CompanyName={companyName}";
+            var saveLocation = $"C:/Users/KP/Desktop/HTML/{ticker}_G3{DateTime.Now.ToString("yyyyMMdd")}.pdf";
+            var pdf = renderer.RenderUrlAsPdf(url.ToString());
+ 
+            pdf.SaveAs(saveLocation);
+            return null;
+        }
+
+        
 
 
     }

@@ -46,23 +46,18 @@ namespace Rbl.EndPoints
 
             var companyResponse = _mapper.Map<ReportResponse>(org);
 
-            
-
-            var response = new ReportResponse();
-            response.Ticker = org.ticker;
-            response.IndustryCode = org.industry_code;
-            response.HasExtendedData = org.HasExtendedData;
-
-            var scoresAll = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresAll());
-            var scoresIndustry = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresByIndustry(org.industry_code));
-            var scoresTopTen = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresTopTen());
-            var scoresCompany = _mapper.Map<GeneralScoreResponse>(await _service.GetOrganizationScoresByTicker(ticker));
 
 
-            response.ScoresAll = scoresAll;
-            response.ScoresByTicker = scoresCompany;
-            response.ScoresTopTen = scoresTopTen;
-            response.ScoresByIndustry = scoresIndustry;
+            var response = new ReportResponse
+            {
+                Ticker = org.ticker, IndustryCode = org.industry_code, HasExtendedData = org.HasExtendedData
+            };
+
+
+            response.ScoresAll = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresAll());
+            response.ScoresByTicker =  _mapper.Map<GeneralScoreResponse>(await _service.GetOrganizationScoresByTicker(ticker));
+            response.ScoresTopTen = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresTopTen());
+            response.ScoresByIndustry =  _mapper.Map<GeneralScoreResponse>(await _service.GetScoresByIndustry(org.industry_code));
 
 
             return Ok(response);
