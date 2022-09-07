@@ -630,6 +630,49 @@
                             <canvas id="chart-radar-overall" width="500px" height="500px"></canvas>
                         </div>
                     </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p><strong>Leadership</strong></p>
+                            <p>
+                                @Model.LeadershipEoReport5
+                            </p>
+                        </div>
+                    </div>
+                    <div class="footer">
+                        <h4>CONFIDENTIAL</h4>
+                        <img src="./images/g3_logo_footer.png" />
+                    </div>
+                </div>
+            </div>
+        </section>
+        <section class="sixth">
+            <span class="counter"></span>
+            <div>
+                <div class="bg-white">
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p><strong>Organization</strong></p>
+                            <p>
+                                @Model.OrganizationEoReport5
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p><strong>Talent</strong></p>
+                            <p>
+                                @Model.TalentEoReport5
+                            </p>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-8">
+                            <p><strong>HR</strong></p>
+                            <p>
+                                @Model.HrEoReport5
+                            </p>
+                        </div>
+                    </div>
                     <div class="footer">
                         <h4>CONFIDENTIAL</h4>
                         <img src="./images/g3_logo_footer.png" />
@@ -738,13 +781,8 @@
                 <div class="bg-white">
                     <div class="row">
                         <p>Interpretation and Implications:</p>
-                        <p class="red">
-                            Summary: <br />
-                            We need an simple algorithm to show where to improve in the four quadrants based on the data <br />
-                            <br />
-                            Based on your results, your human capability strengths are: <br />
-                            <br />
-                            Your human capability areas for improvement are:
+                        <p>
+                            @Html.Raw(Model.Report6Narrative)
                         </p>
                     </div>
                     <div class="footer">
