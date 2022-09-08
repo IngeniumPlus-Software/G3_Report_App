@@ -80,7 +80,7 @@ namespace Rbl.Pages
             return Page();
         }
 
-        public  ActionResult OnPostReport(string ticker, string companyName)
+        public  void OnPostReport(string ticker, string companyName)
         {
 
             var renderer = new IronPdf.ChromePdfRenderer
@@ -91,7 +91,7 @@ namespace Rbl.Pages
                     PaperOrientation = IronPdf.Rendering.PdfPaperOrientation.Portrait,
                     Title = "My PDF Document Name",
                     EnableJavaScript = true,
-                    RenderDelay = 50,
+                    RenderDelay = 5000,
                     CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
                     FitToPaperMode = FitToPaperModes.Automatic,
                     Zoom = 100,
@@ -115,7 +115,7 @@ namespace Rbl.Pages
             var pdf = renderer.RenderUrlAsPdf(url.ToString());
  
             pdf.SaveAs(saveLocation);
-            return null;
+            //return null;
         }
 
         

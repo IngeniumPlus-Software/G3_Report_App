@@ -7,7 +7,7 @@
 }
 
 <style>
-    /*        page {
+    page {
         background: white;
         display: block;
         margin: 0 auto;
@@ -17,7 +17,7 @@
     page[size="A4"] {
         width: 21cm;
         height: 29.7cm;
-    }*/
+    }
 </style>
 
 <div class="subheader-block d-lg-flex align-items-center">
@@ -4016,10 +4016,10 @@
     function getPDFKendoV2(selector) {
 
         kendo.pdf.defineFont({
-            "Timesnewroman": "../fonts/Timesnewroman.ttf",
-            "Timesnewroman-italic": "../fonts/Timesnewromanbolditalic.ttf",
-            "OpenSans-Light": "../fonts/OpenSans-Light.ttf",
-            "OpenSans": "../fonts/OpenSans-Regular.ttf"
+            "Timesnewroman": "https://localhost:44325//fonts/Timesnewroman.ttf",
+            "Timesnewroman-italic": "https://localhost:44325//fonts/Timesnewromanbolditalic.ttf",
+            "OpenSans-Light": "https://localhost:44325//fonts/OpenSans-Light.ttf",
+            "OpenSans": "https://localhost:44325//fonts/OpenSans-Regular.ttf"
        
         });
 
@@ -4030,9 +4030,9 @@
                 allPages: true,
                 paperSize: "A4",
                 landscape: false,
-                scale: 0.75,
+                scale: 0.72,
                 //repeatHeaders: true,
-                //forcePageBreak: ".page-break",
+                forcePageBreak: ".page-break",
                 //margin: { top: "1.25cm", right: "1cm", bottom: "1cm", left: "1cm" },
                 //margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "2cm" },
                 //template: $("#page-template").html()
