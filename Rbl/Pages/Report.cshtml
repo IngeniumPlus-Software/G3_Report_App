@@ -634,7 +634,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-11">
                             <p><strong>Leadership</strong></p>
                             <p>
                                 @Model.LeadershipEoReport5
@@ -648,12 +648,13 @@
                 </div>
             </div>
         </section>
-        <section class="sixth">
+        <section class="seven">
             <span class="counter"></span>
             <div>
+                <h2></h2>
                 <div class="bg-white">
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-11">
                             <p><strong>Organization</strong></p>
                             <p>
                                 @Model.OrganizationEoReport5
@@ -661,7 +662,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-11">
                             <p><strong>Talent</strong></p>
                             <p>
                                 @Model.TalentEoReport5
@@ -669,7 +670,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="col-md-8">
+                        <div class="col-md-11">
                             <p><strong>HR</strong></p>
                             <p>
                                 @Model.HrEoReport5
@@ -783,10 +784,12 @@
                 </div>
                 <div class="bg-white">
                     <div class="row">
-                        <p>Interpretation and Implications:</p>
-                        <p>
-                            @Html.Raw(Model.Report6Narrative)
-                        </p>
+                        <div class="col-md-11">
+                            <p>Interpretation and Implications:</p>
+                            <p>
+                                @Html.Raw(Model.Report6Narrative)
+                            </p>
+                        </div>
                     </div>
                     <div class="footer">
                         <h4>CONFIDENTIAL</h4>
