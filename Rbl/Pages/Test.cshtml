@@ -1,0 +1,344 @@
+﻿@page
+@model Rbl.Pages.ReportModel
+
+@{
+    ViewData["Title"] = "Report";
+    Layout = "~/Pages/Shared/_LayoutTest.cshtml";
+}
+
+
+
+<section class="bg-image" style="background-image: url('/images/page1.jpg');padding-top: 15%; background-color: yellow;">
+    <div>
+        <h1><i>The @Model.CompanyName Human Capability and <br>Governance Report</i></h1>
+        <h3 class="py-4">Provided by: G3</h3>
+    </div>
+</section>
+<section style="background-color: red">
+    <div>
+        <h1>Page 2</h1>
+    </div>
+</section>
+
+<script>
+
+    var scores;
+
+    Chart.defaults.global.startAngle = 45;
+
+    // Change default options for ALL charts
+    Chart.helpers.merge(Chart.defaults.global.plugins.datalabels, {
+        opacity: 5,
+        color: 'white',
+        //borderColor: '#11469e',
+        borderWidth: 2,
+        borderRadius: 100,
+        font: {
+            weight: 'bold',
+            size: 10,
+            lineHeight: 1 /* align v center */
+        },
+        padding: {
+            top: 5
+        },
+        /* hover styling */
+        backgroundColor: function (context) {
+            //return context.hovered ? context.dataset.borderColor : 'white';
+            return context.dataset.borderColor;
+        },
+        color: function (context) {
+            return 'black'; // context.dataset.borderColor;
+        },
+        bordercolor: function (context) {
+            return context.dataset.borderColor;
+        },
+        listeners: {
+            enter: function (context) {
+                context.hovered = true;
+                return true;
+            },
+            leave: function (context) {
+                context.hovered = false;
+                return true;
+            }
+        }
+    });
+
+    Chart.scaleService.updateScaleDefaults('radar', {
+        ticks: {
+            min: 0
+        }
+    });
+
+    const datasetIndustry = {
+        label: "Industry",
+        lineTension: 0.1,
+        backgroundColor: "rgba(102, 153, 204, 0.2)",
+        borderColor: "rgba(102, 153, 204, 1)",
+        pointBackgroundColor: "rgba(102, 153, 204, 1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(102, 153, 204, 1)",
+        data: [@Model.ScoresIndustry.OrganizationScore, @Model.ScoresIndustry.HrScore, @Model.ScoresIndustry.LeadershipScore, @Model.ScoresIndustry.TalentScore]
+
+    }
+
+    const datasetTop10 = {
+        label: "Top 10%",
+        lineTension: 0.1,
+        backgroundColor: "rgba(255, 204, 102, 0.2)",
+        borderColor: "rgba(255, 204, 102, 1)",
+        pointBackgroundColor: "rgba(255, 204, 102, 1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(255, 204, 102, 1)",
+        data: [@Model.ScoresTop10.OrganizationScore, @Model.ScoresTop10.HrScore, @Model.ScoresTop10.LeadershipScore, @Model.ScoresTop10.TalentScore]
+    }
+
+    const datasetCompany = {
+        label: "Company",
+        lineTension: 0.1,
+        backgroundColor: "rgba(242, 119, 122, 0.2)",
+        borderColor: "rgba(242, 119, 122, 1)",
+        pointBackgroundColor: "rgba(242, 119, 122, 1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(242, 119, 122, 1)",
+        data: [@Model.ScoresByTicker.OrganizationScore, @Model.ScoresByTicker.HrScore, @Model.ScoresByTicker.LeadershipScore, @Model.ScoresByTicker.TalentScore]
+        //data: GetScoresAll()
+    }
+
+    const datasetAll = {
+        label: "5,700 firms",
+        lineTension: 0.1,
+        backgroundColor: "rgba(170, 255, 0, 0.2)",
+        borderColor: "rgba(170, 255, 0, 1)",
+        pointBackgroundColor: "rgba(170, 255, 0, 1)",
+        pointBorderColor: "#fff",
+        pointHoverBackgroundColor: "#fff",
+        pointHoverBorderColor: "rgba(170, 255, 0, 1)",
+        data: [@Model.ScoresAll.OrganizationScore, @Model.ScoresAll.HrScore, @Model.ScoresAll.LeadershipScore, @Model.ScoresAll.TalentScore]
+
+    }
+
+    const radarLabels = [["Organization"], ["Human", "Resources"], ["Leadership"], ["Talent"]];
+
+    const data = {
+        labels: radarLabels,
+        datasets: [datasetIndustry, datasetTop10, datasetCompany, datasetAll]
+    };
+
+
+    var options = {
+        // responsive: true,
+        tooltips: false,
+        title: {
+            text: '     0 1 2 3 4 5 6 7 8 9 10',
+            display: false,
+            position: 'top'
+        },
+        plugins: {
+            /* ######### https://chartjs-plugin-datalabels.netlify.com/ #########*/
+            datalabels: {
+                /* formatter */
+                formatter: function (value, context) {
+                    return context.chart.data.labels[context.value];
+                },
+                aspectRatio: 4 / 3,
+                elements: {
+                    point: {
+                        hoverRadius: 7,
+                        radius: 5
+                    }
+                }
+            }
+        },
+        /* scale: https://www.chartjs.org/docs/latest/axes/radial/linear.html#axis-range-settings */
+
+        scale: {
+            angleLines: {
+                display: true,
+                lineWidth: 2,
+                color: 'black'
+
+            },
+            pointLabels: {
+                /* https://www.chartjs.org/docs/latest/axes/radial/linear.html#point-label-options */
+                fontSize: 12,
+                fontColor: 'black',
+                fontStyle: 'bold',
+                callback: function (value, index, values) {
+                    return value;
+                }
+            },
+            ticks: {
+                /* https://www.chartjs.org/docs/latest/axes/styling.html#tick-configuration */
+                /* suggestedMax and suggestedMin settings only change the data values that are used to scale the axis */
+                suggestedMin: 0,
+                suggestedMax: 11,
+                stepSize: 1,
+                /* 25 - 50 - 75 - 100 */
+                maxTicksLimit: 10,
+                /* Or use maximum number of ticks and gridlines to show */
+                display: false, // remove label text only,
+                callback: (value) => `${value}               `,
+            }
+        },
+        legend: {
+            /* https://www.chartjs.org/docs/latest/configuration/legend.html */
+            labels: {
+                padding: 10,
+                fontSize: 14,
+                lineHeight: 30
+
+            },
+            position: 'bottom'
+        }
+
+    };
+
+    var dataRadarCompany = {
+        labels: radarLabels,
+        datasets: [datasetCompany]
+    };
+
+    var dataRadarAll = {
+        labels: radarLabels,
+        datasets: [datasetCompany, datasetAll]
+    };
+
+    var dataRadarIndustry = {
+        labels: radarLabels,
+        datasets: [datasetCompany, datasetIndustry]
+    };
+
+    var dataRadarOverall = {
+        labels: radarLabels,
+        datasets: [datasetCompany, datasetIndustry, datasetAll, datasetTop10]
+    };
+
+    const chartOverall = new Chart(document.getElementById("chart-radar-overall"), {
+        type: 'radar',
+        data: data,
+        options: options
+    });
+
+    const chartCompany = new Chart(document.getElementById("chart-radar-company"), {
+        type: 'radar',
+        data: dataRadarCompany,
+        options: options
+    });
+
+    const chartAll = new Chart(document.getElementById("chart-radar-all"), {
+        type: 'radar',
+        data: dataRadarAll,
+        options: options
+    });
+
+    const chartIndustry = new Chart(document.getElementById("chart-radar-industry"), {
+        type: 'radar',
+        data: dataRadarIndustry,
+        options: options
+    });
+
+
+</script>
+<script>
+    /////////////////////
+    // Bar Kendo
+    /////////////////////
+    var dataKendo = [
+        {
+            type: 'Company',
+            category: "Overall",
+            from: @Model.OrganizationScoreTotal,
+            to: @Model.OrganizationScoreTotal+1,
+            color: "black"
+        }, {
+            type: '5,700 Firms',
+            category: "Overall",
+            from: @Model.AllScoreTotal,
+            to: @Model.AllScoreTotal + 1,
+            color: "blue"
+        }, {
+            type: 'Top 10',
+            category: "Overall",
+            from: @Model.TopTenScoreTotal,
+            to: @Model.TopTenScoreTotal +1,
+            color: "black"
+        }, {
+            type: 'Industry',
+            category: "Overall",
+            from: @Model.IndustryScoreTotal,
+            to: @Model.IndustryScoreTotal +1,
+            color: "red"
+
+        }
+    ];
+
+    $("#chart-bar").kendoChart({
+        dataSource: {
+            data: dataKendo,
+            group: {
+                field: "type",
+                dir: "desc"
+            }
+        },
+        series: [
+            {
+                type: "rangeBar",
+                fromField: "from",
+                toField: "to",
+                categoryField: "category",
+                spacing: -1,
+
+                opacity: function (point) {
+                    if (point.dataItem.type === "Company" ) {
+                        return ".3";
+                    }
+
+                }
+
+            }
+        ],
+        seriesColors: ["black", "red", "grey", "blue"],
+        valueAxis: {
+            min: 0,
+            max: 40,
+            majorUnit: 10,
+            labels: {
+                template: "#= value #",
+                rotation: "auto"
+            }
+        },
+        legend: {
+            visible: true,
+            position: "bottom"
+
+        }
+
+    });
+
+    function getPDFKendoV2(selector) {
+        console.log(selector);
+        kendo.drawing.drawDOM($(selector),
+            {
+
+                allPages: true,
+                paperSize: "A4",
+                landscape: false,
+                scale: 0.75,
+                //repeatHeaders: true,
+                forcePageBreak: ".page-break",
+                //margin: { top: "1.25cm", right: "1cm", bottom: "1cm", left: "1cm" },
+                //margin: { top: "2cm", left: "1cm", right: "1cm", bottom: "2cm" },
+                //template: $("#page-template").html()
+
+
+            }).then(function (group) {
+
+            kendo.drawing.pdf.saveAs(group, "@Model.Organization.ticker"+"_G3"+@(DateTime.Now.ToString("yyyyMMdd"))+"Report.pdf");
+        });
+    }
+
+</script>

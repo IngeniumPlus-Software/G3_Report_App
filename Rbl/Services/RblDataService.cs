@@ -98,13 +98,19 @@ namespace Rbl.Services
 
         public async Task<TickerHcSentencesResponse> GetSentenceResponse(string ticker, IDictionary<WordTypesEnum, IList<string>> importantWords)
         {
-            var tickerDfRatio = _context.DfAllRatiosAvailables.FirstOrDefault(x => x.Ticker == ticker);
-            if (tickerDfRatio == null)
-                throw new System.Exception($"Could not find a ratio score for ticker '{ticker}'");
+            TickerHcSentencesResponse result;
 
-            var result = new TickerHcSentencesResponse(tickerDfRatio, importantWords);
+            var tickerDfRatio = await _context.DfAllRatiosAvailables.FirstOrDefaultAsync(x => x.Ticker == ticker);
+            if (tickerDfRatio != null)
+                result = new TickerHcSentencesResponse(tickerDfRatio, importantWords);
+            else
+            {
+                var dfRanking = await _context.DfRankings.FirstOrDefaultAsync(x => x.Ticker == ticker);
+                if (dfRanking == null)
+                    throw new System.Exception($"Could not find sentences or paragraphs for ticker {ticker}");
+                result = new TickerHcSentencesResponse(dfRanking, importantWords);
+            }
 
-            await Task.Delay(500);
             return result;
         }
 
@@ -119,6 +125,18 @@ namespace Rbl.Services
                 _context.DfSentences.Add(sentence);
 
             return await _context.SaveChangesAsync() > 0;
+        }
+
+        public async Task<string?> GetbfuscatedTicker(string code)
+        {
+            if(!string.IsNullOrEmpty(code))
+            {
+                var map = await _context.OrganizationMaps.FirstOrDefaultAsync(x => x.Code == code);
+                if(map != null)
+                    return map.Ticker;
+            }
+
+            return null;
         }
     }
 

@@ -9,12 +9,12 @@ using Rbl.Services;
 
 namespace Rbl.Pages
 {
-    public class ReportModel : PageModel
+    public class TestModel : PageModel
     {
         private readonly Rbl.Models.RBLContext _context;
         private readonly IRblDataService _service;
 
-        public ReportModel(Rbl.Models.RBLContext context, IRblDataService service)
+        public TestModel(Rbl.Models.RBLContext context, IRblDataService service)
         {
             _context = context;
             _service = service;
@@ -88,7 +88,7 @@ namespace Rbl.Pages
             var anyUpdates = false;
             foreach(var t in neededSentences)
             {
-                var tSentences = allSentences.GetRawHtml(t);
+                var tSentences = allSentences.GetRawHtml(ticker, t);
                 switch(t)
                 {
                     case WordTypesEnum.Talent:

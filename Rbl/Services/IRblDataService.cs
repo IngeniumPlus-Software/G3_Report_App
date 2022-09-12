@@ -21,5 +21,6 @@ namespace Rbl.Services
         Task<TickerHcSentencesResponse> GetSentenceResponse(string ticker, IDictionary<WordTypesEnum, IList<string>> importantWords);
         Task<DfSentence> GetCachedSentences(string ticker);
         Task<bool> SaveCachedSentences(DfSentence sentence);
+        Task<string?> GetbfuscatedTicker(string code);
     }
 }

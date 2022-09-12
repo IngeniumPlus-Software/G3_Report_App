@@ -73,6 +73,14 @@ p {
         padding-top: 1px;
         page-break-before: always;
     }
+
+    .footer-text
+
+    .footer-img {
+        right: 100px;
+        bottom: 15px;
+        width: 4%;
+    }
 }
 
 @media only screen and (min-width: 1024px) {
@@ -700,8 +708,8 @@ table.table-striped.custom tr td:nth-child(5) {
         width: 4%;
     }
 
-.bg-image .footer img {
-    width: 14% !important;
+.first .footer img {
+    width: 14%;
 }
 
 .third .footer,

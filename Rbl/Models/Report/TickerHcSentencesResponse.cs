@@ -23,12 +23,30 @@ namespace Rbl.Models.Report
             }
         }
 
-        public string[] GetRawHtml(WordTypesEnum type, int count = 4)
+        public TickerHcSentencesResponse(DfRanking obj, IDictionary<WordTypesEnum, IList<string>> allImportantWords)
         {
+            Ticker = obj.Ticker;
+            var paragraphs = string.Join(" ", obj.HcParagraphs.Split("\n"));
+            var sentences = paragraphs.Split(".").Select(x => x.Trim()).Where(x => string.IsNullOrEmpty(x) == false);
+            foreach (var sentence in sentences)
+            {
+                Scores.Add(new SentenceScorer(sentence, allImportantWords));
+            }
+        }
+
+        public string[] GetRawHtml(WordTypesEnum type, int count = 4)
+        //public string[] GetRawHtml(string ticker, WordTypesEnum type, int count = 4)  // DEBUG
+        {
+
+            var sb = new StringBuilder();
             var top = Scores.OrderByDescending(x => x.Scores[type]).Take(count);
+            ///var top = Scores.Where(x => x.Scores[type] > 0).OrderByDescending(x => x.Scores[type]);  //DEBUG
 
-            return top.Select(x => x.GetSentenceRawHtml(type)).ToArray();
+            var results = top.Select(x => x.GetSentenceRawHtml(sb, type)).ToArray();
 
+            //System.IO.File.WriteAllText($"C:\\Users\\mrobb\\Desktop\\g3_top\\{ticker}_{type}.txt", sb.ToString());    // DEBUG
+
+            return results;
         }
 
         public class SentenceScorer
@@ -65,7 +83,8 @@ namespace Rbl.Models.Report
                 }
             }
 
-            public string GetSentenceRawHtml(WordTypesEnum wordType, int maxLength = 200)
+            //public string GetSentenceRawHtml(WordTypesEnum wordType, int maxLength = 200)
+            public string GetSentenceRawHtml(StringBuilder sb, WordTypesEnum wordType, int maxLength = 200)
             {
                 var result = Sentence;
 
@@ -76,6 +95,7 @@ namespace Rbl.Models.Report
 
                 foreach (var boldWord in BoldWords[wordType])
                 {
+                    sb.AppendLine(Sentence.Replace(boldWord, $"<b>{boldWord}</b>", StringComparison.CurrentCultureIgnoreCase)); // DEBUG REMOVE
                     result = result.Replace(boldWord, $"<b>{boldWord}</b>", System.StringComparison.CurrentCultureIgnoreCase);
                 }
 

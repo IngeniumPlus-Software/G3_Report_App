@@ -29,7 +29,9 @@ namespace Rbl.Models
         public virtual DbSet<WordlistOrganization> WordlistOrganizations { get; set; }
         public virtual DbSet<WordlistTalent> WordlistTalents { get; set; }
         public virtual DbSet<DfAllRatiosAvailable> DfAllRatiosAvailables { get; set; }
+        public virtual DbSet<DfRanking> DfRankings { get; set; }
         public virtual DbSet<DfSentence> DfSentences { get; set; }
+        public virtual DbSet<OrganizationMap> OrganizationMaps { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -222,6 +224,15 @@ namespace Rbl.Models
                 entity.Property(e => e.Vision).HasColumnName("vision");
             });
 
+            modelBuilder.Entity<DfRanking>(entity =>
+            {
+                entity.ToTable("df_ranking");
+
+                entity.HasIndex(e => e.Ticker, "idx_ticker");
+
+                entity.Property(e => e.HcParagraphs).HasColumnName("hc_paragraphs");
+            });
+
             modelBuilder.Entity<DfSentence>(entity =>
             {
                 entity.ToTable("df_sentences");
@@ -239,6 +250,21 @@ namespace Rbl.Models
                 entity.Property(e => e.Ticker)
                     .HasMaxLength(255)
                     .HasColumnName("ticker");
+            });
+
+            modelBuilder.Entity<OrganizationMap>(entity =>
+            {
+                entity.ToTable("OrganizationMap");
+
+                entity.HasIndex(x => x.Ticker, "IX_OrganizationMap_ticker");
+
+                entity.Property(x => x.Code)
+                    .HasMaxLength(50)
+                    .HasColumnName("Code");
+
+                entity.Property(e => e.Ticker)
+                    .HasMaxLength(255)
+                    .HasColumnName("Ticker");
             });
 
             OnModelCreatingPartial(modelBuilder);

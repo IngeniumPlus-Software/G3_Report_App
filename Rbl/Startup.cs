@@ -36,6 +36,8 @@ namespace Rbl
             services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = false).AddEntityFrameworkStores<ApplicationDbContext>();
             services.AddRazorPages();
             services.AddTransient<IRblDataService, RblDataService>();
+
+            IronPdf.License.LicenseKey = "IRONPDF.INGENIUMPLUS.IRO220908.4745.54126.809022-EB0AD2DDFD-POXPZEJ33R5VA-74MSBPHQEDFV-RL2B47SAIDP4-5TS3TK5UV2Y2-766DUXYT2ZH5-ZG2AVJ-LJOLLXZR6BKKUA-LITE.SUB-WDNXKT.RENEW.SUPPORT.08.SEP.2023";
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -37,10 +37,6 @@ namespace Rbl.Pages
 
         public class InputModel
         {
-            [Required]
-            [Display(Name = "Company Name")]
-            public string CompanyName { get; set; }
-
             [Required] 
             [Display(Name = "Ticker")] 
             public string Ticker { get; set; }
@@ -65,7 +61,7 @@ namespace Rbl.Pages
             
             if (ModelState.IsValid)
             {
-                return RedirectToPage("Report", new {ticker = Input.Ticker, Input.CompanyName});
+                return RedirectToPage("Report", new { ticker = Input.Ticker });
             }
 
             // If we got this far, something failed, redisplay form

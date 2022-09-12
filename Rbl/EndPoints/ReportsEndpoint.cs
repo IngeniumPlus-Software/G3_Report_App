@@ -1,35 +1,29 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rbl.Models;
-using Rbl.Models.Report;
 using Rbl.Services;
+using IronPdf;
+using System;
 
 namespace Rbl.EndPoints
 {
     [ApiController]
     [Route("api/reports")]
-    public class ReportsEndpoint :ControllerBase
+    public class ReportsEndpoint : ControllerBase
     {
         #region Properties
 
-        private readonly RBLContext _context;
         private readonly IRblDataService _service;
-        private readonly IMapper _mapper;
 
         #endregion
 
         #region Constructor
 
-        public ReportsEndpoint(IRblDataService service, RBLContext context, IMapper mapper)
+        public ReportsEndpoint(IRblDataService service)
         {
             _service = service;
-            _context = context;
-            _mapper = mapper;
         }
 
         #endregion
@@ -37,61 +31,69 @@ namespace Rbl.EndPoints
         #region Methods
 
         [HttpGet]
-        [Route("getScores")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        public async Task<ActionResult<ReportResponse>> GetScores(string ticker)
+        [Route("{code}")]
+        public async Task<IActionResult> DownloadPdfReport(string code)
         {
-            var org = await _service.GetOrganizationByTicker(ticker);
-           // var scoresAll =  await _service.GetScoresAll();
+            var ticker = await _service.GetbfuscatedTicker(code);
+            if (string.IsNullOrEmpty(code))
+                return BadRequest("Invalid Code");
 
-            var companyResponse = _mapper.Map<ReportResponse>(org);
-
-            
-
-            var response = new ReportResponse();
-            response.Ticker = org.ticker;
-            response.IndustryCode = org.industry_code;
-            response.HasExtendedData = org.HasExtendedData;
-
-            var scoresAll = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresAll());
-            var scoresIndustry = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresByIndustry(org.industry_code));
-            var scoresTopTen = _mapper.Map<GeneralScoreResponse>(await _service.GetScoresTopTen());
-            var scoresCompany = _mapper.Map<GeneralScoreResponse>(await _service.GetOrganizationScoresByTicker(ticker));
+            var schema = HttpContext.Request.Scheme;
+            var host = HttpContext.Request.Host;
+            var url = $"{schema}://{host}";
 
 
-            response.ScoresAll = scoresAll;
-            response.ScoresByTicker = scoresCompany;
-            response.ScoresTopTen = scoresTopTen;
-            response.ScoresByIndustry = scoresIndustry;
+            var renderer = new ChromePdfRenderer();
+            renderer.RenderingOptions = new ChromePdfRenderOptions
+            {
+                PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
+                CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
+                MarginTop = 0,
+                MarginBottom = 0,
+                MarginLeft = 0,
+                MarginRight = 0,
+                ApplyMarginToHeaderAndFooter = false,
+            };
+            var pdf = renderer.RenderUrlAsPdf($"{url}/report?ticker={ticker}");
 
-
-            return Ok(response);
+            return new FileContentResult(pdf.BinaryData, "application/pdf");
         }
 
-        //[HttpGet]
-        //[ProducesResponseType(StatusCodes.Status200OK)]
-        //public async Task<ActionResult<ReportResponse>> GetReport(ReportCreateRequest model)
-        //{
-        //    var org = await _service.G(model.Ticker);
-        //    var scoresAll =  await _service.GetScoresAll();
+        [HttpGet]
+        [Route("test/{code}")]
+        public async Task<IActionResult> Test(string code)
+        {
+            var ticker = await _service.GetbfuscatedTicker(code);
+            if (string.IsNullOrEmpty(code))
+                return BadRequest("Invalid Code");
 
-        //    var companyResponse = _mapper.Map<ReportResponse>(org);
-
-            
-
-        //    var response = new ReportResponse();
-        //    response.Ticker = org.ticker;
-        //    response.IndustryCode = org.ticker;
-        //    response.HasExtendedData = org.HasExtendedData;
+            var schema = HttpContext.Request.Scheme;
+            var host = HttpContext.Request.Host;
+            var url = $"{schema}://{host}";
 
 
-        //    return Ok(response);
-        //}
+            var renderer = new ChromePdfRenderer();
+            renderer.RenderingOptions = new ChromePdfRenderOptions
+            {
+                PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
+                CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
+                MarginTop = 0,
+                MarginBottom = 0,
+                MarginLeft = 0,
+                MarginRight = 0,
+                ApplyMarginToHeaderAndFooter = false,
+                HtmlFooter = new HtmlHeaderFooter {
+                    BaseUrl = new Uri($"{url}").AbsoluteUri,
+                    HtmlFragment = "<img style='width:4%;display:inline-block;right:100px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=''>CONFIDENTIAL</h4>",
+                    MaxHeight = 15,
 
+                }
+            };
+            var pdf = renderer.RenderUrlAsPdf($"{url}/test?ticker={ticker}");
 
+            return new FileContentResult(pdf.BinaryData, "application/pdf");
+        }
 
         #endregion
-
-
     }
 }
