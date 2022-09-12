@@ -35,6 +35,9 @@
                 var code = $("#code").val();
                 window.location = "/api/Reports/" + code;
             });
+            $(document).on("keydown", "form", function(event) { 
+                return event.key != "Enter";
+            });
         });
 </script>
 
