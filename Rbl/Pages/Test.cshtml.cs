@@ -88,7 +88,7 @@ namespace Rbl.Pages
             var anyUpdates = false;
             foreach(var t in neededSentences)
             {
-                var tSentences = allSentences.GetRawHtml(ticker, t);
+                var tSentences = allSentences.GetRawHtml(t);
                 switch(t)
                 {
                     case WordTypesEnum.Talent:
