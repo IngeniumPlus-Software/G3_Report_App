@@ -2,20 +2,46 @@
 @model IndexModel
 @{
     ViewData["Title"] = "Home page";
+    Layout = "~/Pages/Shared/_LayoutLandingPage.cshtml";
 }
 
+<div class="row content">
+    <div class="col-md-8 left-content">
+        <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
+        <form action="">
+            <div class="field">
+                <label>Code</label>
+                <input type="text" class="input" id="code">
+            </div>
+            <br>
+            <br>
+            <div class="button">
+                <input type="button" value="Submit" id="Submit">
+            </div>
+        </form>
+    </div> 
+    <div class="col-md-4 right-content">
+        <img src="./images/pattern_graphic.png" style="position: absolute; top: 0px; right: 0px; width: 30%;">
+        <p>Human Capability SEC Governance Report</p>
+        <img src="./images/g3_logo_footer.png" style="position: absolute; bottom: 40px; right: 10px; width: 15%;">
+    </div>
+</div>
+<div class="row footer">
+    <p>Copyright 2022 G3</p>
+</div>
+<script>
+    $(document).ready(function () {
+            $("#Submit").click(function () {
+                var code = $("#code").val();
+                window.location = "/api/Reports/" + code;
+            });
+        });
+</script>
 
 
+@* <div >
 
-
-<div >
-  
-
-
-    @*@Html.Raw(Json.Serialize(Model.ScoresByTicker)).ToString()*@
-
-
-
+    @Html.Raw(Json.Serialize(Model.ScoresByTicker)).ToString()
     
     <div class="row">
         <div class="col-md-3"></div>
@@ -61,4 +87,4 @@
         });
     </script>
 
-</div>
+</div> *@
