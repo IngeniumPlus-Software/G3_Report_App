@@ -495,24 +495,26 @@ section.red-border-line h6:before {
     background-size: 100%;
 }
 
-#title-page h1:before,
-.introduction h1:before,
-.toc h2:before,
-.section-page h1:before,
-.report-page h2:before,
-.text-page h2:first-child::before {
-    content: "";
-    position: absolute;
-    left: 0;
-    top: -60px;
-    height: 1px;
-    width: 95px;
-    /* or 100px */
-    border-bottom: 5px solid #0086d6;
-}
+    #title-page h1:before,
+    .introduction h1:before,
+    .toc h2:before,
+    .section-page h1:before,
+    .report-page h2:before,
+    .text-page h2:first-child::before,
+    .appendix h1:before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: -60px;
+        height: 1px;
+        width: 95px;
+        /* or 100px */
+        border-bottom: 5px solid #0086d6;
+    }
 
 .introduction h1:before,
-#title-page h1:before
+#title-page h1:before,
+.appendix h1:before
 {
     left: 60px;
 }
@@ -623,15 +625,11 @@ section.report-page {
 .appendix {
     color: #071d49;
     padding-top: 15%;
-    background-image: url(/images/appendix_bkg.jpg);
+    background-image: url(/images/appendix_bkg_clean.jpg);
     background-size: cover;
     background-position: top center;
     background-repeat: no-repeat;
     width: 100%;
-}
-
-.appendix h1:before {
-    border-bottom-color: yellow !important;
 }
 
 #page-17 h2:before {
