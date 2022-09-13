@@ -32,7 +32,7 @@ namespace Rbl.EndPoints
         #region Methods
 
         [HttpGet]
-        [Route("{code}")]
+        [Route("old/{code}")]
         public async Task<IActionResult> DownloadPdfReport(string code)
         {
             var ticker = await _service.GetbfuscatedTicker(code);
@@ -61,7 +61,7 @@ namespace Rbl.EndPoints
         }
 
         [HttpGet]
-        [Route("test/{code}")]
+        [Route("{code}")]
         public async Task<IActionResult> Test(string code)
         {
             var ticker = await _service.GetbfuscatedTicker(code);
