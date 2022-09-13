@@ -466,9 +466,15 @@ section.red-border-line h6:before {
     background-repeat: no-repeat;
 }
 
-    #page-3 h1:before {
-        left: 0;
-    }
+#page-3 h1:before {
+    left: 0;
+}
+
+#page-10 table ul li,
+#page-11 table ul li {
+    font-size: 11px;
+    line-height: 1.5em;
+}
 
 .introduction {
     padding-top: 15%;
@@ -501,6 +507,7 @@ section.red-border-line h6:before {
     .section-page h1:before,
     .report-page h2:before,
     .text-page h2:first-child::before,
+    .appendix-page h2:first-child::before,
     .appendix h1:before {
         content: "";
         position: absolute;
@@ -570,14 +577,23 @@ section.report-page {
     padding-top: 0;
 }
 
-.text-page {
+.text-page,
+.appendix-page {
     padding-top: 15%;
 }
 
-.text-page h2 {
+.text-page h2,
+.appendix-page h2
+{
     position: relative;
     color: #071d49;
 }
+
+    .appendix-page table p,
+    .appendix-page table ul li {
+        line-height: 1.5em;
+        font-size: 11px;
+    }
 
 #page-5 {
     line-height: .9em;

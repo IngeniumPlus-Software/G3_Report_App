@@ -35,19 +35,6 @@ namespace Rbl.EndPoints
 
         #region Methods
 
-        [HttpGet]
-        [Route("pdf")]
-        public async Task<IActionResult> GetPdf(string code)
-        {
-            var ticker = await _service.GetbfuscatedTicker(code);
-            if (string.IsNullOrEmpty(code))
-                return BadRequest("Invalid Code");
-
-            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
-            var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
-            return new FileContentResult(pdfFile, "application/pdf");
-        }
-
         [HttpPost]
         [Route("{code}")]
         public async Task<bool> CheckCode(string code)
