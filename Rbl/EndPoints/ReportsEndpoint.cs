@@ -7,6 +7,8 @@ using Rbl.Services;
 using IronPdf;
 using System;
 using System.Linq;
+using Microsoft.Extensions.Options;
+using Rbl.Helpers;
 
 namespace Rbl.EndPoints
 {
@@ -17,14 +19,16 @@ namespace Rbl.EndPoints
         #region Properties
 
         private readonly IRblDataService _service;
+        private readonly AppSettings _appSettings;
 
         #endregion
 
         #region Constructor
 
-        public ReportsEndpoint(IRblDataService service)
+        public ReportsEndpoint(IRblDataService service, IOptions<AppSettings> appSettings)
         {
             _service = service;
+            _appSettings = appSettings.Value;
         }
 
         #endregion
@@ -62,11 +66,22 @@ namespace Rbl.EndPoints
 
         [HttpGet]
         [Route("{code}")]
-        public async Task<IActionResult> Test(string code)
+        public async Task<IActionResult> Test(string code, bool? forceRegeneration = null)
         {
             var ticker = await _service.GetbfuscatedTicker(code);
             if (string.IsNullOrEmpty(code))
                 return BadRequest("Invalid Code");
+
+            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
+            forceRegeneration = forceRegeneration ?? false;
+            if(forceRegeneration.Value == false)
+            {
+                if(System.IO.File.Exists(pdfPath))
+                {
+                    var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
+                    return new FileContentResult(pdfFile, "application/pdf");
+                }
+            }
 
             var schema = HttpContext.Request.Scheme;
             var host = HttpContext.Request.Host;
@@ -104,6 +119,7 @@ namespace Rbl.EndPoints
 
             _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
 
+            await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
             return new FileContentResult(pdf.BinaryData, "application/pdf");
         }
 
