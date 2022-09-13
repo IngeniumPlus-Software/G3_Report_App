@@ -18,12 +18,13 @@
             <div class="button">
                 <input type="button" value="Submit" id="Submit">
             </div>
+            <div id="error-msg"></div>
         </form>
     </div> 
     <div class="col-md-4 right-content">
-        <img src="./images/pattern_graphic.png" style="position: absolute; top: 0px; right: 0px; width: 30%;">
+        <img src="/images/pattern_graphic.png" style="position: absolute; top: 0px; right: 0px; width: 30%;">
         <p>Human Capability SEC Governance Report</p>
-        <img src="./images/g3_logo_footer.png" style="position: absolute; bottom: 40px; right: 10px; width: 15%;">
+        <img src="/images/logo_triangle_large.svg" style="position: absolute; bottom: 40px; right: 10px; width: 15%;">
     </div>
 </div>
 <div class="row footer">
@@ -38,57 +39,19 @@
 
         function handleSubmit() {
             var code = $("#code").val();
-            window.location = "/api/Reports/" + code;
+            $.post('/api/Reports/' + code)
+            .done((data) => {
+                if(!data) {
+                    handleError('Your code is invalid');
+                } else {
+                    window.location = '/api/Reports/' + code;
+                }
+            }).fail((jqXHR, textStatus, errorThrown) => {
+                handleError('A server error occurred; please try again later or contact and admin');
+            });
+        }
+
+        function handleError(errorMsg) {
+            $('#error-msg').html(errorMsg);
         }
 </script>
-
-
-@* <div >
-
-    @Html.Raw(Json.Serialize(Model.ScoresByTicker)).ToString()
-    
-    <div class="row">
-        <div class="col-md-3"></div>
-        <div class="col-md-6">
-            <form method="post">
-                <h4>Select Company</h4>
-             
-                <div asp-validation-summary="All" class="text-danger"></div>
-                <div class="form-group">
-                    <label asp-for="Input.Ticker"></label>
-                    <input asp-for="Input.Ticker" class="form-control TickerDropdown"/>
-                    <span asp-validation-for="Input.Ticker" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <p></p>
-                    <button type="submit" class="btn btn-primary">Generate Report</button>
-
-                </div>
-
-            </form>
-        </div>
-        <div class="col-md-3"></div>
-    </div>
-
-    <script>
-
-        var activeUsers= @Html.Raw(Json.Serialize(Model.TickersList));
-        console.log(activeUsers);
-        $(document).ready(function() {
-            $(".TickerDropdown").kendoComboBox({
-                index: 0,
-                dataTextField: "text",
-                dataValueField: "text",
-                filter: "contains",
-                dataSource: activeUsers
- 
-            });
-
-
-            
-
-
-        });
-    </script>
-
-</div> *@

@@ -64,6 +64,23 @@ namespace Rbl.EndPoints
             return new FileContentResult(pdf.BinaryData, "application/pdf");
         }
 
+        [HttpPost]
+        [Route("{code}")]
+        public async Task<bool> CheckCode(string code)
+        {
+            try
+            {
+                if (code.Equals("mdr"))
+                    throw new Exception("MDR Exception");
+
+                var ticker = await _service.GetbfuscatedTicker(code);
+                return !string.IsNullOrEmpty(ticker);
+            } catch(ApplicationException exception)
+            {
+                return false;
+            }
+        }
+
         [HttpGet]
         [Route("{code}")]
         public async Task<IActionResult> Test(string code, bool? forceRegeneration = null)
@@ -90,14 +107,14 @@ namespace Rbl.EndPoints
             var blueFooterHtml = new HtmlHeaderFooter
             {
                 BaseUrl = new Uri($"{url}").AbsoluteUri,
-                HtmlFragment = "<img style='width:4%;display:inline-block;right:100px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=\"color:white;font-size:7px;font-family:'Timesnewroman';margin-left:20px;font-weight:bold\">CONFIDENTIAL</h4>",
+                HtmlFragment = FooterHtml("#FFF"),
                 MaxHeight = 15,
             };
 
             var whiteFooterHtml = new HtmlHeaderFooter
             {
                 BaseUrl = new Uri($"{url}").AbsoluteUri,
-                HtmlFragment = "<img style='width:4%;display:inline-block;right:100px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=\"color:black;font-size:7px;font-family:'Timesnewroman';margin-left:20px;font-weight:bold\">CONFIDENTIAL</h4>",
+                HtmlFragment = FooterHtml("#101010"),
                 MaxHeight = 15,
 
             };
@@ -121,6 +138,12 @@ namespace Rbl.EndPoints
 
             await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
             return new FileContentResult(pdf.BinaryData, "application/pdf");
+        }
+
+        private string FooterHtml(string color)
+        {
+            //return $"<span style='width: 100%;'><img style='height:60px;right50px;position:absolute;bottom:20px;' src='/images/logo_triangle_large.svg' /><h4 style='color:{color};font-size:7px;font-family:'Timesnewroman';display:inline;top:35px;position:absolute;left:40px;font-weight:bold'>CONFIDENTIAL</h4></span>";
+            return $"<img style='width:4%;display:inline-block;right:50px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=\"color:{color};font-size:7px;font-family:'Timesnewroman';margin-left:50px;font-weight:bold\">CONFIDENTIAL</h4>";
         }
 
         private void _ApplyFooters(PdfDocument pdf, HtmlHeaderFooter whiteBg, HtmlHeaderFooter blueBg)

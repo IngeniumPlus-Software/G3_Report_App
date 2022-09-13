@@ -503,12 +503,18 @@ section.red-border-line h6:before {
 .text-page h2:first-child::before {
     content: "";
     position: absolute;
-    left: 50px;
+    left: 0;
     top: -60px;
     height: 1px;
     width: 95px;
     /* or 100px */
     border-bottom: 5px solid #0086d6;
+}
+
+.introduction h1:before,
+#title-page h1:before
+{
+    left: 60px;
 }
 
 .report-page h2:before {
@@ -541,6 +547,10 @@ section.red-border-line h6:before {
     background-size: 100%;
 }
 
+.ips-row {
+    display: flex;
+}
+
 .report-page .bg-white .ips-row {
     padding-left: 50px;
 }
@@ -571,32 +581,8 @@ section.report-page {
     line-height: .9em;
 }
 
-
-#page-5 table tr td {
-    width: 25%;
-}
-
-    #page-5 table tr td ul,
-    #page-5 table tr td span {
-        height: 100%;
-        margin: 4px;
-        padding: 8px 6px;
-        display: block;
-        min-height: 85px;
-    }
-
-#page-5 table tr:last-child td ul,
-#page-5 table tr:last-child td span {
-    min-height: unset;
-}
-
-#page-5 table tr td ul li {
-    margin-bottom: 2px;
-    color: #d9dde1;
-}
-
-#page-5 table tr td.grey * {
-    color: #384a6d;
+#page-5 img {
+    width: 100%;
 }
 
 .section-page {
