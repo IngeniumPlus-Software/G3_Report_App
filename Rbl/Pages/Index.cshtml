@@ -8,7 +8,7 @@
 <div class="row content">
     <div class="col-md-8 left-content">
         <p>Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Donec quam felis, ultricies nec, pellentesque eu, pretium quis, sem. </p>
-        <form onsubmit="event.preventDefault();">
+        <form onsubmit="event.preventDefault();handleSubmit()">
             <div class="field">
                 <label>Code</label>
                 <input type="text" class="input" id="code">
@@ -32,10 +32,14 @@
 <script>
     $(document).ready(function () {
             $("#Submit").click(function () {
-                var code = $("#code").val();
-                window.location = "/api/Reports/" + code;
+                handleSubmit();
             });
         });
+
+        function handleSubmit() {
+            var code = $("#code").val();
+            window.location = "/api/Reports/" + code;
+        }
 </script>
 
 
