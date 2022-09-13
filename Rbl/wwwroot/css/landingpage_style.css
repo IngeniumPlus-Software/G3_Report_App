@@ -92,3 +92,7 @@ form .button{
     padding-left: 5%;
     font-size: 0.85em;
 }
+
+#error-msg {
+    color: red;
+}

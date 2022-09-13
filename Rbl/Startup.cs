@@ -14,6 +14,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Rbl.Models;
 using Rbl.Services;
+using Rbl.Helpers;
 
 namespace Rbl
 {
@@ -29,6 +30,7 @@ namespace Rbl
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.Configure<AppSettings>(Configuration.GetSection("AppSettings"));
             services.AddDbContext<ApplicationDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddDbContext<RBLContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddAutoMapper(AppDomain.CurrentDomain.GetAssemblies());

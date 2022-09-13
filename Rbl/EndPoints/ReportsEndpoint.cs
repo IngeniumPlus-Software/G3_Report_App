@@ -6,6 +6,9 @@ using Rbl.Models;
 using Rbl.Services;
 using IronPdf;
 using System;
+using System.Linq;
+using Microsoft.Extensions.Options;
+using Rbl.Helpers;
 
 namespace Rbl.EndPoints
 {
@@ -16,14 +19,16 @@ namespace Rbl.EndPoints
         #region Properties
 
         private readonly IRblDataService _service;
+        private readonly AppSettings _appSettings;
 
         #endregion
 
         #region Constructor
 
-        public ReportsEndpoint(IRblDataService service)
+        public ReportsEndpoint(IRblDataService service, IOptions<AppSettings> appSettings)
         {
             _service = service;
+            _appSettings = appSettings.Value;
         }
 
         #endregion
@@ -31,7 +36,7 @@ namespace Rbl.EndPoints
         #region Methods
 
         [HttpGet]
-        [Route("{code}")]
+        [Route("old/{code}")]
         public async Task<IActionResult> DownloadPdfReport(string code)
         {
             var ticker = await _service.GetbfuscatedTicker(code);
@@ -59,22 +64,65 @@ namespace Rbl.EndPoints
             return new FileContentResult(pdf.BinaryData, "application/pdf");
         }
 
+        [HttpPost]
+        [Route("{code}")]
+        public async Task<bool> CheckCode(string code)
+        {
+            try
+            {
+                if (code.Equals("mdr"))
+                    throw new Exception("MDR Exception");
+
+                var ticker = await _service.GetbfuscatedTicker(code);
+                return !string.IsNullOrEmpty(ticker);
+            } catch(ApplicationException exception)
+            {
+                return false;
+            }
+        }
+
         [HttpGet]
-        [Route("test/{code}")]
-        public async Task<IActionResult> Test(string code)
+        [Route("{code}")]
+        public async Task<IActionResult> Test(string code, bool? forceRegeneration = null)
         {
             var ticker = await _service.GetbfuscatedTicker(code);
             if (string.IsNullOrEmpty(code))
                 return BadRequest("Invalid Code");
 
+            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
+            forceRegeneration = forceRegeneration ?? false;
+            if(forceRegeneration.Value == false)
+            {
+                if(System.IO.File.Exists(pdfPath))
+                {
+                    var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
+                    return new FileContentResult(pdfFile, "application/pdf");
+                }
+            }
+
             var schema = HttpContext.Request.Scheme;
             var host = HttpContext.Request.Host;
             var url = $"{schema}://{host}";
 
+            var blueFooterHtml = new HtmlHeaderFooter
+            {
+                BaseUrl = new Uri($"{url}").AbsoluteUri,
+                HtmlFragment = FooterHtml("#FFF"),
+                MaxHeight = 15,
+            };
+
+            var whiteFooterHtml = new HtmlHeaderFooter
+            {
+                BaseUrl = new Uri($"{url}").AbsoluteUri,
+                HtmlFragment = FooterHtml("#101010"),
+                MaxHeight = 15,
+
+            };
 
             var renderer = new ChromePdfRenderer();
             renderer.RenderingOptions = new ChromePdfRenderOptions
             {
+                FirstPageNumber = 2,
                 PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
                 CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
                 MarginTop = 0,
@@ -82,16 +130,30 @@ namespace Rbl.EndPoints
                 MarginLeft = 0,
                 MarginRight = 0,
                 ApplyMarginToHeaderAndFooter = false,
-                HtmlFooter = new HtmlHeaderFooter {
-                    BaseUrl = new Uri($"{url}").AbsoluteUri,
-                    HtmlFragment = "<img style='width:4%;display:inline-block;right:100px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=''>CONFIDENTIAL</h4>",
-                    MaxHeight = 15,
-
-                }
+                EnableJavaScript = true,
             };
             var pdf = renderer.RenderUrlAsPdf($"{url}/test?ticker={ticker}");
 
+            _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
+
+            await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
             return new FileContentResult(pdf.BinaryData, "application/pdf");
+        }
+
+        private string FooterHtml(string color)
+        {
+            //return $"<span style='width: 100%;'><img style='height:60px;right50px;position:absolute;bottom:20px;' src='/images/logo_triangle_large.svg' /><h4 style='color:{color};font-size:7px;font-family:'Timesnewroman';display:inline;top:35px;position:absolute;left:40px;font-weight:bold'>CONFIDENTIAL</h4></span>";
+            return $"<img style='width:4%;display:inline-block;right:50px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=\"color:{color};font-size:7px;font-family:'Timesnewroman';margin-left:50px;font-weight:bold\">CONFIDENTIAL</h4>";
+        }
+
+        private void _ApplyFooters(PdfDocument pdf, HtmlHeaderFooter whiteBg, HtmlHeaderFooter blueBg)
+        {
+            var allpageNumbers = Enumerable.Range(0, pdf.PageCount);
+            var blueBgPageNumbers = allpageNumbers.Intersect(new int[] { 3, 4, 8, 10, 20, 24, }.Select(x => x-1));
+            var restPageNumbers = allpageNumbers.Except(blueBgPageNumbers).Except(new[] { 0 });
+
+            pdf.AddHtmlFooters(blueBg, 2, blueBgPageNumbers);
+            pdf.AddHtmlFooters(whiteBg, 2, restPageNumbers);
         }
 
         #endregion
