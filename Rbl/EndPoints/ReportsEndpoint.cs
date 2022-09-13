@@ -36,32 +36,16 @@ namespace Rbl.EndPoints
         #region Methods
 
         [HttpGet]
-        [Route("old/{code}")]
-        public async Task<IActionResult> DownloadPdfReport(string code)
+        [Route("pdf")]
+        public async Task<IActionResult> GetPdf(string code)
         {
             var ticker = await _service.GetbfuscatedTicker(code);
             if (string.IsNullOrEmpty(code))
                 return BadRequest("Invalid Code");
 
-            var schema = HttpContext.Request.Scheme;
-            var host = HttpContext.Request.Host;
-            var url = $"{schema}://{host}";
-
-
-            var renderer = new ChromePdfRenderer();
-            renderer.RenderingOptions = new ChromePdfRenderOptions
-            {
-                PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
-                CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
-                MarginTop = 0,
-                MarginBottom = 0,
-                MarginLeft = 0,
-                MarginRight = 0,
-                ApplyMarginToHeaderAndFooter = false,
-            };
-            var pdf = renderer.RenderUrlAsPdf($"{url}/report?ticker={ticker}");
-
-            return new FileContentResult(pdf.BinaryData, "application/pdf");
+            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
+            var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
+            return new FileContentResult(pdfFile, "application/pdf");
         }
 
         [HttpPost]
@@ -85,59 +69,66 @@ namespace Rbl.EndPoints
         [Route("{code}")]
         public async Task<IActionResult> Test(string code, bool? forceRegeneration = null)
         {
-            var ticker = await _service.GetbfuscatedTicker(code);
-            if (string.IsNullOrEmpty(code))
-                return BadRequest("Invalid Code");
-
-            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
-            forceRegeneration = forceRegeneration ?? false;
-            if(forceRegeneration.Value == false)
+            try
             {
-                if(System.IO.File.Exists(pdfPath))
+                var ticker = await _service.GetbfuscatedTicker(code);
+                if (string.IsNullOrEmpty(code))
+                    return BadRequest("Invalid Code");
+
+                var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
+                forceRegeneration = forceRegeneration ?? false;
+                if (forceRegeneration.Value == false)
                 {
-                    var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
-                    return new FileContentResult(pdfFile, "application/pdf");
+                    if (System.IO.File.Exists(pdfPath))
+                    {
+                        var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
+                        return new FileContentResult(pdfFile, "application/pdf");
+                    }
                 }
+
+                var schema = HttpContext.Request.Scheme;
+                var host = HttpContext.Request.Host;
+                var url = $"{schema}://{host}";
+
+                var blueFooterHtml = new HtmlHeaderFooter
+                {
+                    BaseUrl = new Uri($"{url}").AbsoluteUri,
+                    HtmlFragment = FooterHtml("#FFF"),
+                    MaxHeight = 15,
+                };
+
+                var whiteFooterHtml = new HtmlHeaderFooter
+                {
+                    BaseUrl = new Uri($"{url}").AbsoluteUri,
+                    HtmlFragment = FooterHtml("#101010"),
+                    MaxHeight = 15,
+
+                };
+
+                var renderer = new ChromePdfRenderer();
+                renderer.RenderingOptions = new ChromePdfRenderOptions
+                {
+                    FirstPageNumber = 2,
+                    PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
+                    CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
+                    MarginTop = 0,
+                    MarginBottom = 0,
+                    MarginLeft = 0,
+                    MarginRight = 0,
+                    ApplyMarginToHeaderAndFooter = false,
+                    EnableJavaScript = true,
+                };
+                var pdf = renderer.RenderUrlAsPdf($"{url}/test?ticker={ticker}");
+
+                _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
+
+                await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
+                return new FileContentResult(pdf.BinaryData, "application/pdf");
             }
-
-            var schema = HttpContext.Request.Scheme;
-            var host = HttpContext.Request.Host;
-            var url = $"{schema}://{host}";
-
-            var blueFooterHtml = new HtmlHeaderFooter
+            catch(Exception ex)
             {
-                BaseUrl = new Uri($"{url}").AbsoluteUri,
-                HtmlFragment = FooterHtml("#FFF"),
-                MaxHeight = 15,
-            };
-
-            var whiteFooterHtml = new HtmlHeaderFooter
-            {
-                BaseUrl = new Uri($"{url}").AbsoluteUri,
-                HtmlFragment = FooterHtml("#101010"),
-                MaxHeight = 15,
-
-            };
-
-            var renderer = new ChromePdfRenderer();
-            renderer.RenderingOptions = new ChromePdfRenderOptions
-            {
-                FirstPageNumber = 2,
-                PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
-                CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
-                MarginTop = 0,
-                MarginBottom = 0,
-                MarginLeft = 0,
-                MarginRight = 0,
-                ApplyMarginToHeaderAndFooter = false,
-                EnableJavaScript = true,
-            };
-            var pdf = renderer.RenderUrlAsPdf($"{url}/test?ticker={ticker}");
-
-            _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
-
-            await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
-            return new FileContentResult(pdf.BinaryData, "application/pdf");
+                return BadRequest(ex.Message);
+            }
         }
 
         private string FooterHtml(string color)
