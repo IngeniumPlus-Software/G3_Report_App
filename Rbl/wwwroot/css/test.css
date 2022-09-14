@@ -567,6 +567,7 @@ section.red-border-line h6:before {
 
 .report-page .bg-white .ips-row {
     padding-left: 50px;
+    padding-right: 50px;
 }
 
 .report-page span.blue {
@@ -602,6 +603,37 @@ section.report-page {
 
 #page-5 {
     line-height: .9em;
+}
+
+.high-parity {
+    color: forestgreen;
+}
+
+.below-parity {
+    color: red;
+}
+
+.legend label {
+    font-size: 12px;
+}
+
+.legend span {
+    width: 12px;
+    height: 12px;
+    display: inline-block;
+    border: 1px solid black;
+}
+
+.legend .below-parity {
+    background-color: red;
+}
+
+.legend .high-parity {
+    background-color: forestgreen;
+}
+
+.bold {
+    font-weight: bolder;
 }
 
 #page-5 img {

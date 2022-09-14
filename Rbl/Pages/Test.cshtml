@@ -1,5 +1,5 @@
 ﻿@page
-@model Rbl.Pages.ReportModel
+@model Rbl.Pages.TestModel
 
 @{
     ViewData["Title"] = "Report";
@@ -11,7 +11,7 @@
 <section id="title-page" class="bg-image white-border-line">
     <div>
         <h1><i>The @Model.CompanyName Human Capability and <br>Governance Report</i></h1>
-        <h3 class="py-4">Provided by: G3</h3>
+        <h3 class="py-4">Provided by: G3HC</h3>
     </div>
 </section>
 <section id="page-1" class="introduction">
@@ -188,7 +188,7 @@
         <h2 class="mb-4">
             Action: Articulate an approach to upgrading human capability that offers unique and valid insights.
         </h2>
-        <p><strong>2.1 Overall findings</strong> <br />Of the 5,760 organizations who filed 10-K SEC reports in 2021, 5,760 had sufficient data to include in this study. </p>
+        <p><strong>2.1 Overall findings</strong> <br />Of the 7,000 organizations who filed 10-K SEC reports in 2021, 5,760 had sufficient data to include in this study. </p>
         <p>
             The human capability framework we tested had an accuracy at 89% with which the machine learning model is able to distinguish human capital text from non-human capital text. This means that the human capability framework in Figure 2 can be applied to create
             a human capability score for each of the 5,760 organizations. This finding gives confidence in the reliability (consistency) and validity (accuracy) of @Model.CompanyName’s human capability scores.
@@ -670,16 +670,16 @@
                             <p>@Model.CompanyName</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresByTicker.TalentScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.TalentScore, true))">@Model.ScoresByTicker.TalentScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresByTicker.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrganizationScore, true))">@Model.ScoresByTicker.OrganizationScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresByTicker.LeadershipScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.LeadershipScore, true))">@Model.ScoresByTicker.LeadershipScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresByTicker.HrScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.HrScore, true))">@Model.ScoresByTicker.HrScore</p>
                         </td>
                     </tr>
                     <tr>
@@ -687,53 +687,62 @@
                             <p>Your Industry</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresIndustry.TalentScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.TalentScore))">@Model.ScoresIndustry.TalentScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresIndustry.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrganizationScore))">@Model.ScoresIndustry.OrganizationScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresIndustry.LeadershipScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.LeadershipScore))">@Model.ScoresIndustry.LeadershipScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresIndustry.HrScore</p>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <p>5,760 Firms</p>
-                        </td>
-                        <td>
-                            <p>@Model.ScoresAll.TalentScore</p>
-                        </td>
-                        <td>
-                            <p>@Model.ScoresAll.OrganizationScore</p>
-                        </td>
-                        <td>
-                            <p>@Model.ScoresAll.LeadershipScore</p>
-                        </td>
-                        <td>
-                            <p>@Model.ScoresAll.HrScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.HrScore))">@Model.ScoresIndustry.HrScore</p>
                         </td>
                     </tr>
                     <tr>
                         <td>
-                            <p>Top 10% Firms</p>
+                            <p>SEC Average</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresTop10.TalentScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresAll.TalentScore))">@Model.ScoresAll.TalentScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresTop10.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrganizationScore))">@Model.ScoresAll.OrganizationScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresTop10.LeadershipScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresAll.LeadershipScore))">@Model.ScoresAll.LeadershipScore</p>
                         </td>
                         <td>
-                            <p>@Model.ScoresTop10.HrScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresAll.HrScore))">@Model.ScoresAll.HrScore</p>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <p>Top 10% SEC</p>
+                        </td>
+                        <td>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresTop10.TalentScore))">@Model.ScoresTop10.TalentScore</p>
+                        </td>
+                        <td>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrganizationScore))">@Model.ScoresTop10.OrganizationScore</p>
+                        </td>
+                        <td>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresTop10.LeadershipScore))">@Model.ScoresTop10.LeadershipScore</p>
+                        </td>
+                        <td>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresTop10.HrScore))">@Model.ScoresTop10.HrScore</p>
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td></td>
+                        <td class="legend" colspan="4">
+                            <label><span class="below-parity"></span> = Below Parity (5.0)</label>
+                            <label><span class="high-parity"></span> = Excellent Score (8.0)</label>
+                        </td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
         <div class="bg-white">

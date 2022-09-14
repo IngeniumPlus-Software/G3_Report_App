@@ -21,8 +21,6 @@ namespace Rbl.Pages
         }
 
         public Organization Organization { get; set; }
-
-       
         public ScoresByTicker ScoresByTicker { get; set; }
         public ScoresAll ScoresAll { get; set; }
         public ScoresByIndustry ScoresIndustry { get; set; }
@@ -252,6 +250,20 @@ namespace Rbl.Pages
 
             // TODO: REMOVE
             return ("", "", "");
+        }
+
+        public string GetParityClassNames(double? score, bool myCompany = false)
+        {
+            var result = string.Empty;
+            if (score < 5)
+                result = "below-parity";
+            if (score >= 8)
+                result = "high-parity";
+
+            if (!string.IsNullOrEmpty(result) && myCompany)
+                result += " bold";
+
+            return result;
         }
     }
 }
