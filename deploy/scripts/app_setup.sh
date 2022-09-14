@@ -3,6 +3,7 @@ set -e
 
 rm -rf /var/www/api
 ln -s /var/www/api-latest/build_output /var/www/api
+mkdir -p /var/www/api-latest/build_output/wwwroot/pdfs
 
 chmod -R 775 /var/www/api-latest/build_output
 
