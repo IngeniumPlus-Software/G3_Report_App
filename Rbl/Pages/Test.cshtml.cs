@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -41,6 +42,7 @@ namespace Rbl.Pages
         public string TalentEoReport5 { get; set; }
         public string HrEoReport5 { get; set; }
         public string Report6Narrative { get; set; }
+        public string Report6FollowUp { get; set; }
 
 
         public async Task<IActionResult> OnGetAsync(string ticker)
@@ -137,7 +139,7 @@ namespace Rbl.Pages
             OrganizationEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Organization, ScoresByTicker.OrganizationScore);
             LeadershipEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Leadership, ScoresByTicker.LeadershipScore);
             HrEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Hr, ScoresByTicker.HrScore);
-            (Report6Narrative, _, _) = GetReport6Sentence(ScoresByTicker);
+            (Report6Narrative, Report6FollowUp, _) = GetReport6Sentence(ScoresByTicker);
 
             return Page();
         }
@@ -201,20 +203,23 @@ namespace Rbl.Pages
         public (string, string, string) GetReport6Sentence(ScoresByTicker scores)
         {
             var anyBelow5 = scores.TalentScore < 5 || scores.OrganizationScore < 5 || scores.LeadershipScore < 5 || scores.HrScore < 5;
-            if(anyBelow5)
+            if (anyBelow5)
             {
                 var below5 = new List<string>();
                 if (scores.TalentScore < 5)
-                    below5.Add("Talent");
+                    below5.Add("<a href='#page-31' class='red'>Appendix 5 (Talent)</a>");
                 if (scores.OrganizationScore < 5)
-                    below5.Add("Organization");
+                    below5.Add("<a href='#page-35' class='red'>Appendix 6 (Organization)</a>");
                 if (scores.LeadershipScore < 5)
-                    below5.Add("Leadership");
+                    below5.Add("<a href='#page-40' class='red'>Appendix 7 (Leadership)</a>");
                 if (scores.HrScore < 5)
-                    below5.Add("Hr");
+                    below5.Add("<a href='#page-43' class='red'>Appendix 8 (Hr)</a>");
+
+                var appendixStr = string.Join(", ", below5);
+                var followup = $"Based on your results; we recommend you take some time to review {appendixStr}.";
                 return (
-                    "<b>Improve on weaknesses</b>. Your scores show pathways below industry parity. Any pathway <b>below industry</b> parity should be priority for improvement because pathways are interdependent.  Poor performance in any pathway drags down the others. These pathways should be targeted for improvement first ",
-                    string.Join(", ", below5),
+                    "<b>Improve on weaknesses</b>. Your scores show pathways below parity. Any pathway <b>below</b> parity should be priority for improvement because pathways are interdependent.  Poor performance in any pathway drags down the others. These pathways should be targeted for improvement first ",
+                    followup,
                     "Improve on weaknesses"
                     );
             } else
@@ -233,7 +238,7 @@ namespace Rbl.Pages
                 {
                     return (
                         "<b>Prioritize strengths</b>. Your business is already superior. You score at industry best/ <b>world class</b> in one or more pathways. Your focus should be on prioritizing your strengths. You can shift away from comparisons to others and work on “conceptual best”. Conceptual best is imagining ways to ensure your reputation for distinctiveness in this area. In very strong businesses we see intention away from optimizing an individual pathway to integrating across pathways to increase human capability and culture.  These businesses have a strong, positive reputation and are very attractive to employees, customers, investors, and communities",
-                        "",
+                        "Based on your results; we recommend you review our appendices.",
                         ""
                         );
                 } 
@@ -241,8 +246,8 @@ namespace Rbl.Pages
                 else
                 {
                     return (
-                        "<b>Build on strengths</b>.  You do not have any scores below industry parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts customers, employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
-                        "",
+                        "<b>Build on strengths</b>.  You do not have any scores below parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts customers, employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
+                        "Based on your results; we recommend you review our appendices.",
                         ""
                         );
                 }

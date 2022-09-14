@@ -606,30 +606,42 @@ section.report-page {
 }
 
 .high-parity {
-    color: forestgreen;
+    color: #007236;
 }
 
 .below-parity {
-    color: red;
+    color: #ed1a34;
+}
+
+.legend {
+    text-align: right;
+}
+
+.red {
+    color: #ed1a34;
+}
+
+a.red {
+    text-decoration: none;
 }
 
 .legend label {
     font-size: 12px;
+    font-family: "OpenSans";
 }
 
 .legend span {
     width: 12px;
     height: 12px;
     display: inline-block;
-    border: 1px solid black;
 }
 
 .legend .below-parity {
-    background-color: red;
+    background-color: #ed1a34;
 }
 
 .legend .high-parity {
-    background-color: forestgreen;
+    background-color: #007236;
 }
 
 .bold {

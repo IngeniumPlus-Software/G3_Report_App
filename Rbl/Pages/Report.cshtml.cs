@@ -43,6 +43,7 @@ namespace Rbl.Pages
         public string TalentEoReport5 { get; set; }
         public string HrEoReport5 { get; set; }
         public string Report6Narrative { get; set; }
+        public string Report6FollowUp { get; set; }
 
 
         public async Task<IActionResult> OnGetAsync(string ticker)
