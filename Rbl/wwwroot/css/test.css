@@ -560,6 +560,11 @@ section.red-border-line h6:before {
     display: flex;
 }
 
+.ips-row > div {
+    padding-left: 12px;
+    padding-right: 12px;
+}
+
 .report-page .bg-white .ips-row {
     padding-left: 50px;
 }
