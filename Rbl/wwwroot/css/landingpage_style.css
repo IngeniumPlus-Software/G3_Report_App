@@ -37,6 +37,22 @@ form .field{
     justify-content: space-between;
 }
 
+form .field label {
+    padding-left: 70px;
+}
+
+form div.button input {
+    margin-right: 70px;
+}
+
+form div.button {
+    margin-top: 50px;
+}
+
+form .field > input {
+    margin-right: 65px;
+}
+
 form .input{
     border: 0px; 
     background-color: #dddddd; 
