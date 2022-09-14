@@ -121,7 +121,7 @@ namespace Rbl.EndPoints
         private string FooterHtml(string color)
         {
             //return $"<span style='width: 100%;'><img style='height:60px;right50px;position:absolute;bottom:20px;' src='/images/logo_triangle_large.svg' /><h4 style='color:{color};font-size:7px;font-family:'Timesnewroman';display:inline;top:35px;position:absolute;left:40px;font-weight:bold'>CONFIDENTIAL</h4></span>";
-            return $"<img style='width:4%;display:inline-block;right:50px;position:absolute' src='/images/g3_logo_footer.png'><h4 style=\"color:{color};font-size:7px;font-family:'Timesnewroman';margin-left:50px;font-weight:bold\">CONFIDENTIAL</h4>";
+            return $"<img style='width:6%;display:inline-block;right:50px;position:absolute;' src='/images/logo_triangle_large.svg'><h4 style=\"color:{color};font-size:7px;font-family:'Timesnewroman';margin-left:50px;font-weight:bold\">CONFIDENTIAL</h4>";
         }
 
         private void _ApplyFooters(PdfDocument pdf, HtmlHeaderFooter whiteBg, HtmlHeaderFooter blueBg)
