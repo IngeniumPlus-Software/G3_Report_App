@@ -105,7 +105,7 @@ namespace Rbl.EndPoints
                     ApplyMarginToHeaderAndFooter = false,
                     EnableJavaScript = true,
                 };
-                var pdf = renderer.RenderUrlAsPdf($"{url}/test?ticker={ticker}");
+                var pdf = renderer.RenderUrlAsPdf($"{url}/Report?ticker={ticker}");
 
                 _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
 

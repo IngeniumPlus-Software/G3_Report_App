@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -10,12 +9,12 @@ using Rbl.Services;
 
 namespace Rbl.Pages
 {
-    public class TestModel : PageModel
+    public class ReportModel : PageModel
     {
         private readonly Rbl.Models.RBLContext _context;
         private readonly IRblDataService _service;
 
-        public TestModel(Rbl.Models.RBLContext context, IRblDataService service)
+        public ReportModel(Rbl.Models.RBLContext context, IRblDataService service)
         {
             _context = context;
             _service = service;
