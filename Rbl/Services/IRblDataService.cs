@@ -13,6 +13,7 @@ namespace Rbl.Services
     {
         Task<ScoresByIndustry> GetScoresByIndustry(string industryCode);
         Task<ScoresTopTen> GetScoresTopTen();
+        Task<ScoresTotal> GetScoresTotalForLastInTopTen();
         Task<ScoresAll> GetScoresAll();
         Task<ScoresByTicker> GetOrganizationScoresByTicker(string ticker);
         Task<Organization> GetOrganizationByTicker(string ticker);

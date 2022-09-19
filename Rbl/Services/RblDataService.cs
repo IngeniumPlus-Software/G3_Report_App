@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -36,6 +37,14 @@ namespace Rbl.Services
         public async Task<ScoresTopTen> GetScoresTopTen()
         {
             return await _context.ScoresTopTen.FirstOrDefaultAsync();
+        }
+
+        public async Task<ScoresTotal> GetScoresTotalForLastInTopTen()
+        {
+            var total = await _context.ScoresTotal.CountAsync();
+            var top10Percent = (int)Math.Ceiling(total * .1);
+
+            return await _context.ScoresTotal.OrderByDescending(x => x.TotalScore).Take(top10Percent).LastOrDefaultAsync();
         }
 
         public async Task<ScoresAll> GetScoresAll()

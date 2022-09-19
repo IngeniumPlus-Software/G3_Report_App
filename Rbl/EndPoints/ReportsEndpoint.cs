@@ -104,6 +104,7 @@ namespace Rbl.EndPoints
                     MarginRight = 0,
                     ApplyMarginToHeaderAndFooter = false,
                     EnableJavaScript = true,
+                    RenderDelay = 500
                 };
                 var pdf = renderer.RenderUrlAsPdf($"{url}/Report?ticker={ticker}");
 

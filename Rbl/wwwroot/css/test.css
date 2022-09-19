@@ -652,6 +652,11 @@ a.red {
     width: 100%;
 }
 
+span.finding-explanation {
+    display: block;
+    text-align: center;
+}
+
 .section-page {
     padding-top: 15%;
     background: #071d49;

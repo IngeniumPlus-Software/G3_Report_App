@@ -362,18 +362,18 @@
     <span class="counter"></span>
     <div>
         <h2 style="background: #0086d6; background-image: url(./images/0086d6_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
-            Report 1: <br>
+            Finding 1: <br>
             @Model.CompanyName’s overall human capability score
         </h2>
         <table class="table table-striped table-bordered align-middle">
             <tr>
                 <td></td>
-                <td colspan="3">Comparison Groups</td>
+                <td colspan="3" style="text-align: center;">Comparison Groups</td>
             </tr>
             <tr>
-                <td>@Model.CompanyName (x)</td>
-                <td>All 5,700 firms (a)</td>
-                <td>Your industry (b)</td>
+                <td>@Model.CompanyName</td>
+                <td>SEC Filing Companies</td>
+                <td>Industry</td>
                 <td>Top 10%</td>
             </tr>
             <tr>
@@ -395,60 +395,71 @@
                     {
                         type: 'Company',
                         category: "Overall",
-                        from: @Model.OrganizationScoreTotal,
-                to: @Model.OrganizationScoreTotal+1,
-                    color: "black"
-                        }, {
-                    type: '5,700 Firms',
+                        from: @Model.OrganizationScoreTotal
+                    },
+                    {
+                        type: 'SEC Filing Companies',
                         category: "Overall",
-                            from: @Model.AllScoreTotal,
-                    to: @Model.AllScoreTotal + 1,
-                        color: "blue"
-                }, {
-                    type: 'Top 10',
+                        from: @Model.AllScoreTotal
+                    },
+                    {
+                        type: 'Top 10 %',
                         category: "Overall",
-                            from: @Model.TopTenScoreTotal,
-                    to: @Model.TopTenScoreTotal +1,
-                        color: "black"
-                }, {
-                    type: 'Industry',
+                        from: @Model.TopTenScoreTotal
+                    },
+                    {
+                        type: 'Industry',
                         category: "Overall",
-                            from: @Model.IndustryScoreTotal,
-                    to: @Model.IndustryScoreTotal +1,
-                        color: "red"
+                        from: @Model.IndustryScoreTotal
+                    }
+                ];
 
+                var sortedData = dataKendo.sort((a,b) => (a.from > b.from ? 1 : -1));
+                
+
+                var minRange = getMinRange(sortedData[0]);
+                var maxRange = getMaxRange(sortedData[sortedData.length-1]);
+
+                var width = (maxRange-minRange) * 0.025;
+                sortedData.forEach((x) => {
+                    x.to = x.from + width;
+                })
+
+                function getMinRange(minScoreObj) {
+                    return Math.floor((minScoreObj.from-2.5)/5)*5;
                 }
-                    ];
+
+                function getMaxRange(maxScoreObj) {
+                    return Math.ceil((maxScoreObj.from+1)/5)*5;
+                }
+
+                var colors = ['red', 'grey', 'blue', 'black'];
                 $("#chart-bar").kendoChart({
-                    dataSource: {
-                        data: dataKendo,
-                        group: {
+                    dataSource:
+                    {
+                        data: sortedData,
+                        group:
+                        {
                             field: "type",
                             dir: "desc"
                         }
                     },
-                    series: [
+                    series:
+                    [
                         {
                             type: "rangeBar",
                             fromField: "from",
                             toField: "to",
                             categoryField: "category",
                             spacing: -1,
-
-                            opacity: function (point) {
-                                if (point.dataItem.type === "Company") {
-                                    return ".3";
-                                }
-
-                            }
-
+                            visibleInLegend: true,
                         }
                     ],
-                    seriesColors: ["black", "red", "grey", "blue"],
+                    seriesColors: colors,
                     valueAxis: {
-                        min: 0,
-                        max: 40,
-                        majorUnit: 10,
+                        min: minRange,
+                        max: maxRange,
+                        majorUnit: 5,
                         labels: {
                             template: "#= value #",
                             rotation: "auto"
@@ -456,10 +467,8 @@
                     },
                     legend: {
                         visible: true,
-                        position: "bottom"
-
+                        position: "bottom",
                     }
-
                 });
             });
         </script>
@@ -469,7 +478,7 @@
     <span class="counter"></span>
     <div>
         <h2 style="background: #0f6aaf; background-image: url(./images/0f6aaf_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
-            Report 2: <br>
+            Finding 2: <br>
             @Model.CompanyName’s human capability score in each of the four domains
         </h2>
         <div class="bg-white">
@@ -478,6 +487,7 @@
                     <canvas id="chart-radar-company" width="500" height="500"></canvas>
                 </div>
             </div>
+            <span class="finding-explanation" > Below 5 is worse than others in the industry. 5-7 is at parity with others in the industry. 8-10 is best-in-class.</span >
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -498,8 +508,8 @@
     <span class="counter"></span>
     <div>
         <h2 style="background: #165489; background-image: url(./images/165489_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
-            Report 3: <br>
-            @Model.CompanyName’s human capability score compared to 5,760 companies
+            Finding 3: <br>
+            @Model.CompanyName’s human capability score compared to SEC filing companies
         </h2>
         <div class="bg-white">
             <div class="chart-wrapper-outer">
@@ -507,6 +517,7 @@
                     <canvas id="chart-radar-all" width="500" height="500"></canvas>
                 </div>
             </div>
+            <span class="finding-explanation" > Below 5 is worse than others in the industry. 5-7 is at parity with others in the industry. 8-10 is best-in-class.</span >
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -527,7 +538,7 @@
     <span class="counter"></span>
     <div>
         <h2 style="background: #1c4c79; background-image: url(./images/1c4c79_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
-            Report 4: <br>
+            Finding 4: <br>
             @Model.CompanyName’s human capability score compared to 5,760 firms and your industry over time
         </h2>
         <span class="d-block blue mb-3 mt-4">
@@ -538,6 +549,8 @@
                 <canvas id="chart-radar-industry" width="500" height="500"></canvas>
             </div>
         </div>
+        <span class="finding-explanation" > Below 5 is worse than others in the industry. 5-7 is at parity with others in the industry. 8-10 is best-in-class.</span >
+	</div>
         <script type="text/javascript">
             $(document).ready(function() {
                 var dataRadarIndustry = {
@@ -551,13 +564,12 @@
                 });
             });
             </script>
-	</div>
 </section>
 <section id="page-16" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0e325c; background-image: url(./images/0e325c_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
-            Report 5: <br>
+            Finding 5: <br>
             @Model.CompanyName human capability score compared to 5,760 companies, your industry, and top 10%
         </h2>
         <div class="bg-white">
@@ -571,6 +583,7 @@
                     <canvas id="chart-radar-overall" width="500" height="500"></canvas>
                 </div>
             </div>
+            <span class="finding-explanation" > Below 5 is worse than others in the industry. 5-7 is at parity with others in the industry. 8-10 is best-in-class.</span >
         </div>
         <script type="text/javascript">
             $(document).ready(function() {
@@ -642,7 +655,7 @@
     <span class="counter"></span>
     <div>
         <h2 style="background: #021a3f; background-image: url(./images/021a3f_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
-            Report 6: <br>
+            Finding 6: <br>
             My Company Summary
         </h2>
         <div>
@@ -998,7 +1011,7 @@
         <ul>
             <li>Leadership Capital Index book … a list of over 50 indicators in 10 areas</li>
             <li>ISO 30414 (list of 50+ specific measures, but not a thorough or tested framework)</li>
-            <li>Brave New World, Conference Board (focuses mostly on board; great summary of groups working on this issue and some measures)</li>
+            <li><a href="https://www.conference-board.org/topics/human-capital-benchmarking/brave-new-world-creating-value-through-HCM">https://www.conference-board.org/topics/human-capital-benchmarking/brave-new-world-creating-value-through-HCM</a> (focuses mostly on board; great summary of groups working on this issue and some measures)</li>
             <li>
                 <a href="https://www.forbes.com/sites/shivaramrajgopal/2022/06/15/we-just-petitioned-the-sec-to-require-disclosure-of-labor-costs/?sh=2ff150c64ba1">https://www.forbes.com/sites/shivaramrajgopal/2022/06/15/we-just-petitioned-the-sec-to-require-disclosure-of-labor-costs/?sh=2ff150c64ba1</a>                            (workforce costs)
             </li>
@@ -1007,6 +1020,9 @@
             </li>
             <li>
                 <a href="https://www.forbes.com/sites/shivaramrajgopal/2021/05/17/labor-costs-are-the-most-pressing-human-capital-disclosure-the-sec-should-consider-mandating/?sh=d6542bb51923">https://www.forbes.com/sites/shivaramrajgopal/2021/05/17/labor-costs-are-the-most-pressing-human-capital-disclosure-the-sec-should-consider-mandating/?sh=d6542bb51923</a>
+            </li>
+            <li>
+                <a href="https://corpgov.law.harvard.edu/2021/04/19/how-boards-can-get-human-capital-management-right-in-five-not-so-easy-steps/">https://corpgov.law.harvard.edu/2021/04/19/how-boards-can-get-human-capital-management-right-in-five-not-so-easy-steps/</a>
             </li>
         </ul>
         <div class="text-center">
@@ -1059,8 +1075,8 @@
         <table class="table table-striped table-bordered custom">
             <tr>
                 <td>Initiative</td>
-                <td>RBL Institute</td>
-                <td>Dave LinkedIn</td>
+                <td>RBL Institute Articles/Playbooks</td>
+                <td>LinkedIn</td>
                 <td>Video</td>
                 <td>Metrics</td>
             </tr>
@@ -1637,10 +1653,10 @@
                         Initiative
                     </td>
                     <td>
-                        RBL Institute
+                        RBL Institute Articles/Playbooks
                     </td>
                     <td>
-                        Dave LinkedIn
+                        LinkedIn
                     </td>
                     <td>
                         Video
@@ -2499,8 +2515,8 @@
             <tbody>
                 <tr>
                     <td>Initiative</td>
-                    <td>RBL Institute</td>
-                    <td>Dave LinkedIn</td>
+                    <td>RBL Institute Articles/Playbooks</td>
+                    <td>LinkedIn</td>
                     <td>Video</td>
                     <td>Metrics</td>
                 </tr>
@@ -2875,8 +2891,8 @@
             <tbody>
                 <tr>
                     <td> Initiative </td>
-                    <td> RBL Institute </td>
-                    <td> Dave LinkedIn </td>
+                    <td> RBL Institute Articles/Playbooks</td>
+                    <td> LinkedIn </td>
                     <td> Video </td>
                     <td> Metrics </td>
                 </tr>
@@ -3550,7 +3566,7 @@
         }
 
     const datasetAll = {
-        label: "5,700 firms",
+        label: "SEC Filing Companies",
         lineTension: 0.1,
         backgroundColor: "rgba(170, 255, 0, 0.2)",
         borderColor: "rgba(170, 255, 0, 1)",

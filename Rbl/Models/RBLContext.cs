@@ -24,6 +24,7 @@ namespace Rbl.Models
         public virtual DbSet<ScoresByIndustry> ScoresByIndustry { get; set; }
         public virtual DbSet<ScoresByTicker> ScoresByTicker { get; set; }
         public virtual DbSet<ScoresTopTen> ScoresTopTen { get; set; }
+        public virtual DbSet<ScoresTotal> ScoresTotal { get; set; }
         public virtual DbSet<WordlistHr> WordlistHrs { get; set; }
         public virtual DbSet<WordlistLeadership> WordlistLeaderships { get; set; }
         public virtual DbSet<WordlistOrganization> WordlistOrganizations { get; set; }
@@ -55,6 +56,13 @@ namespace Rbl.Models
             modelBuilder.Entity<ScoresTopTen>(entity =>
             {
                 entity.ToView("ScoresTopTen");
+            });
+
+            modelBuilder.Entity<ScoresTotal>(entity =>
+            {
+                entity.ToView("ScoresTotal");
+                entity.Property(x => x.TotalScore).HasColumnName("total_score");
+                entity.Property(x => x.Ticker).HasColumnName("ticker");
             });
 
             modelBuilder.Entity<WordlistHr>(entity =>

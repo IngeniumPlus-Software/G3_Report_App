@@ -25,6 +25,7 @@ namespace Rbl.Pages
         public ScoresAll ScoresAll { get; set; }
         public ScoresByIndustry ScoresIndustry { get; set; }
         public ScoresTopTen ScoresTop10 { get; set; }
+        public ScoresTotal LastInTopTenTotal { get; set; }
 
         public string CompanyName { get; set; }
 
@@ -121,6 +122,7 @@ namespace Rbl.Pages
             ScoresAll = await _service.GetScoresAll();
             ScoresIndustry = await _service.GetScoresByIndustry(Organization.industry_code);
             ScoresTop10 = await _service.GetScoresTopTen();
+            LastInTopTenTotal = await _service.GetScoresTotalForLastInTopTen();
 
             IndustryScoreTotal = (decimal) (ScoresIndustry.HrScore + ScoresIndustry.LeadershipScore +
                                            ScoresIndustry.OrganizationScore + ScoresIndustry.TalentScore);
@@ -131,8 +133,7 @@ namespace Rbl.Pages
             AllScoreTotal = (decimal) (ScoresAll.HrScore + ScoresAll.LeadershipScore +
                                        ScoresAll.OrganizationScore + ScoresAll.TalentScore);
 
-            TopTenScoreTotal = (decimal) (ScoresTop10.HrScore + ScoresTop10.LeadershipScore +
-                                          ScoresTop10.OrganizationScore + ScoresTop10.TalentScore);
+            TopTenScoreTotal = (decimal) Math.Round((LastInTopTenTotal.TotalScore ?? 0), 2);
 
             TalentEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Talent, ScoresByTicker.TalentScore);
             OrganizationEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Organization, ScoresByTicker.OrganizationScore);
