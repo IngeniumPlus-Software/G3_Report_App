@@ -339,3 +339,4 @@ ASALocalRun/
 # BeatPulse healthcheck temp database
 healthchecksdb
 Rbl/wwwroot/pdfs/*.pdf
+Rbl/appsettings.json

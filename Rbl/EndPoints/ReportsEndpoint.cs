@@ -54,7 +54,7 @@ namespace Rbl.EndPoints
 
         [HttpGet]
         [Route("{code}")]
-        public async Task<IActionResult> Test(string code, bool? forceRegeneration = null)
+        public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null)
         {
             try
             {
@@ -117,6 +117,34 @@ namespace Rbl.EndPoints
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPost]
+        [Route("{key}/reset/{secret}")]
+        public IActionResult ClearCachedPdfs(string? key, string? secret)
+        {
+            if (string.IsNullOrEmpty(key) || string.IsNullOrEmpty(secret))
+                return BadRequest();
+
+            if (!key.Equals(_appSettings.ResetKey, StringComparison.CurrentCulture) || !secret.Equals(_appSettings.ResetSecret, StringComparison.CurrentCulture))
+                return BadRequest();
+
+            var allPdfs = System.IO.Directory.GetFiles(_appSettings.PdfLocation);
+            int cleared = 0, skipped = 0;
+            foreach(var pdfPath in allPdfs)
+            {
+                try
+                {
+                    System.IO.File.Delete(pdfPath);
+                    cleared++;
+                }
+                catch(Exception ex)
+                {
+                    skipped++;
+                }
+            }
+
+            return Ok($"PDFs deleted: {cleared}, Failed to Delete: {skipped}");
         }
 
         private string FooterHtml(string color)
