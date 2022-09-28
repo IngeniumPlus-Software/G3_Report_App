@@ -541,9 +541,6 @@
             Finding 4: <br>
             @Model.CompanyName’s human capability score compared to SEC filing companies and your industry over time
         </h2>
-        <span class="d-block blue mb-3 mt-4">
-            We can do an industry report to rank the best in each quadrant…
-        </span>
         <div class="chart-wrapper-outer">
             <div class="chart-wrapper-inner">
                 <canvas id="chart-radar-industry" width="500" height="500"></canvas>
@@ -573,11 +570,6 @@
             @Model.CompanyName human capability score compared to SEC filing companies, your industry, and top 10%
         </h2>
         <div class="bg-white">
-            <div class="ips-row">
-                <div class="col-md-6">
-                    <span class="d-block blue mb-3 mt-4">We could rank the top 10% in each of the four quadrants.</span>
-                </div>
-            </div>
             <div class="chart-wrapper-outer">
                 <div class="chart-wrapper-inner">
                     <canvas id="chart-radar-overall" width="500" height="500"></canvas>
@@ -796,18 +788,24 @@
                 Choices About What @Model.CompanyName Reports to Annual SEC Filings
             </span>
         </div>
-        <img class="embedded-graphic" src="./images/figure4_option.png">
-        <ul>
-            <li>Cell 4 are human capability initiatives that you currently invest in and have reported in your SEC filings (see Figure 3). You will likely keep reporting these efforts.</li>
+        <img class="embedded-graphic" src="./images/figure4_option2.png">
+        <p>
+            Footnotes:
+        </p>
+        <ol>
+            <li>Human capability initiatives that you currently invest in and have reported in your SEC filings. You will likely keep reporting these efforts.</li>
             <li>
-                Cell 3 are human capability initiatives that you are pursuing, but have not reported. If you believe that these initiatives give you proprietary competitive advantage and you do not want to share them for others to learn from,
-                under today’s regulations, you do not need to report them. If you believe that reporting these initiatives would signal your human capability commitment to others, you can start to report them (see below for what you might
-                report).
+                Human capability initiatives that you are pursuing but have not reported for one of two reasons. First, if you believe that these initiatives are proprietary and you do not want to share them
+                under today’s regulations, you do not need to report them. Second, if they are not proprietary and you believe that reporting these initiatives would better signal your human capability, you can
+                start to report them and these initiatives will positively impact your future scores.
             </li>
-            <li>Cell 2 are human capability initiatives you are not doing and should not report. Given that the regulatory reporting is a public disclosure, misrepresentations of what you are doing would not only be false, but also illegal.</li>
-            <li>Cell 1 are human capability initiatives that may be opportunities for @Model.CompanyName to innovate and report new ideas and actions.</li>
-        </ul>
-        <p>@Model.CompanyName can choose both what human capability initiatives to pursue and which ones to report. </p>
+            <li>Human capability initiatives that may be opportunities for @Model.CompanyName to innovate and report new ideas and actions</li>
+            <li>
+                Human capability initiatives you are not doing and should not report. Given that regulatory reporting is a 
+                public disclosure, misrepresentations of what you are doing would be false and illegal.
+            </li>
+        </ol>
+        <p>@Model.CompanyName can choose what human capability initiatives to pursue and which ones to report. </p>
     </div>
 </section>
 <section id="page-21" class="text-page">
