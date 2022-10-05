@@ -88,8 +88,9 @@ namespace Rbl.Pages
             var anyUpdates = false;
             foreach(var t in neededSentences)
             {
-                var tSentences = allSentences.GetRawHtml(t);
-                switch(t)
+                var tSentences = allSentences.GetRawHtml(t);  // LIVE
+                //var tSentences = allSentences.GetRawHtml(ticker, t);    // DEBUG
+                switch (t)
                 {
                     case WordTypesEnum.Talent:
                         cachedSentences.TalentSentences = string.Join("\\n\\n", tSentences);
