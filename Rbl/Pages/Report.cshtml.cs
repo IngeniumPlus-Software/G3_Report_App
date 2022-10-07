@@ -214,7 +214,7 @@ namespace Rbl.Pages
                 if (scores.LeadershipScore < 5)
                     below5.Add("<a href='#page-40' class='red'>Appendix 7 (Leadership)</a>");
                 if (scores.HrScore < 5)
-                    below5.Add("<a href='#page-43' class='red'>Appendix 8 (Hr)</a>");
+                    below5.Add("<a href='#page-43' class='red'>Appendix 8 (HR)</a>");
 
                 var appendixStr = string.Join(", ", below5);
                 var followup = $"Based on your results; we recommend you take some time to review {appendixStr}.";
