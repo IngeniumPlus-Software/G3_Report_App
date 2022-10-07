@@ -239,7 +239,7 @@ namespace Rbl.Pages
                 {
                     return (
                         "<b>Prioritize strengths</b>. Your business is already superior. You score at industry best/ <b>world class</b> in one or more pathways. Your focus should be on prioritizing your strengths. You can shift away from comparisons to others and work on “conceptual best”. Conceptual best is imagining ways to ensure your reputation for distinctiveness in this area. In very strong businesses we see intention away from optimizing an individual pathway to integrating across pathways to increase human capability and culture.  These businesses have a strong, positive reputation and are very attractive to employees, customers, investors, and communities",
-                        "Based on your results; we recommend you review our appendices.",
+                        "Based on your results; we recommend you review our G3HC Best Practices Library.",
                         ""
                         );
                 } 
@@ -248,7 +248,7 @@ namespace Rbl.Pages
                 {
                     return (
                         "<b>Build on strengths</b>.  You do not have any scores below parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts customers, employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
-                        "Based on your results; we recommend you review our appendices.",
+                        "Based on your results; we recommend you review our G3HC Best Practices Library.",
                         ""
                         );
                 }
