@@ -9,6 +9,7 @@ using System;
 using System.Linq;
 using Microsoft.Extensions.Options;
 using Rbl.Helpers;
+using System.Collections.Generic;
 
 namespace Rbl.EndPoints
 {
@@ -20,15 +21,17 @@ namespace Rbl.EndPoints
 
         private readonly IRblDataService _service;
         private readonly AppSettings _appSettings;
+        private readonly RBLContext _context;
 
         #endregion
 
         #region Constructor
 
-        public ReportsEndpoint(IRblDataService service, IOptions<AppSettings> appSettings)
+        public ReportsEndpoint(IRblDataService service, IOptions<AppSettings> appSettings, RBLContext context)
         {
             _service = service;
             _appSettings = appSettings.Value;
+            _context= context;
         }
 
         #endregion
@@ -54,7 +57,7 @@ namespace Rbl.EndPoints
 
         [HttpGet]
         [Route("{code}")]
-        public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null)
+        public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null, bool? shouldReturnPdf = true)
         {
             try
             {
@@ -68,8 +71,13 @@ namespace Rbl.EndPoints
                 {
                     if (System.IO.File.Exists(pdfPath))
                     {
-                        var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
-                        return new FileContentResult(pdfFile, "application/pdf");
+                        if (shouldReturnPdf ?? false)
+                        {
+                            var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
+                            return new FileContentResult(pdfFile, "application/pdf");
+                        }
+                        else
+                            return Ok(pdfPath);
                     }
                 }
 
@@ -111,12 +119,51 @@ namespace Rbl.EndPoints
                 _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
 
                 await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
-                return new FileContentResult(pdf.BinaryData, "application/pdf");
+                if(shouldReturnPdf ?? false)
+                    return new FileContentResult(pdf.BinaryData, "application/pdf");
+                return
+                    Ok(pdfPath);
             }
             catch(Exception ex)
             {
                 return BadRequest(ex.Message);
             }
+        }
+
+        [HttpPost]
+        [Route("{action}")]
+        public async Task<IActionResult> BatchGeneratePdfs([FromBody] BatchClass model)
+        {
+            var tasks = new List<Task>();
+
+            if(model.AllCodes)
+            {
+                if (string.IsNullOrEmpty(model.Key) || string.IsNullOrEmpty(model.Secret))
+                    return BadRequest();
+
+                if (!model.Key.Equals(_appSettings.ResetKey, StringComparison.CurrentCulture) || !model.Secret.Equals(_appSettings.ResetSecret, StringComparison.CurrentCulture))
+                    return BadRequest();
+
+                model.Codes = _context.OrganizationMaps.Select(x => x.Code).ToList();
+            }
+
+            foreach(var code in model.Codes)
+            {
+                tasks.Add(GeneratePdf(code, model.ForceRegenerate, false));
+            }
+
+            Task.WaitAll(tasks.ToArray());
+
+            return Ok($"{tasks.Select(x => x.IsCompletedSuccessfully).Count()} PDFs completed successfully");
+        }
+
+        public class BatchClass
+        {
+            public IList<string> Codes { get; set; } = new List<string>();
+            public bool ForceRegenerate { get; set; } = false;
+            public bool AllCodes { get; set; } = false;
+            public string Key { get; set; } = string.Empty;
+            public string Secret { get; set; } = string.Empty;
         }
 
         [HttpPost]

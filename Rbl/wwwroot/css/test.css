@@ -706,6 +706,10 @@ span.finding-explanation {
     left: 0;
 }
 
+#page-17 h2:before {
+    left: 0;
+}
+
 #\32-1-postlist-list {
     padding-left: 25px;
 }
@@ -719,7 +723,7 @@ span.finding-explanation {
 }
 
 .introduction p.sub-bold {
-    font-size: 11px;
+    line-height: 1.5em;
 }
 
 .footnote-block {
