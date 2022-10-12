@@ -57,72 +57,18 @@ namespace Rbl.EndPoints
 
         [HttpGet]
         [Route("{code}")]
-        public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null, bool? shouldReturnPdf = true)
+        public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null)
         {
             try
             {
-                var ticker = await _service.GetbfuscatedTicker(code);
                 if (string.IsNullOrEmpty(code))
                     return BadRequest("Invalid Code");
 
-                var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
-                forceRegeneration = forceRegeneration ?? false;
-                if (forceRegeneration.Value == false)
-                {
-                    if (System.IO.File.Exists(pdfPath))
-                    {
-                        if (shouldReturnPdf ?? false)
-                        {
-                            var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
-                            return new FileContentResult(pdfFile, "application/pdf");
-                        }
-                        else
-                            return Ok(pdfPath);
-                    }
-                }
+                var ticker = await _service.GetbfuscatedTicker(code);
+                if(ticker == null)
+                    return BadRequest("Invalid Code");
 
-                var schema = HttpContext.Request.Scheme;
-                var host = HttpContext.Request.Host;
-                var url = $"{schema}://{host}";
-
-                var blueFooterHtml = new HtmlHeaderFooter
-                {
-                    BaseUrl = new Uri($"{url}").AbsoluteUri,
-                    HtmlFragment = FooterHtml("#FFF"),
-                    MaxHeight = 15,
-                };
-
-                var whiteFooterHtml = new HtmlHeaderFooter
-                {
-                    BaseUrl = new Uri($"{url}").AbsoluteUri,
-                    HtmlFragment = FooterHtml("#101010"),
-                    MaxHeight = 15,
-
-                };
-
-                var renderer = new ChromePdfRenderer();
-                renderer.RenderingOptions = new ChromePdfRenderOptions
-                {
-                    FirstPageNumber = 2,
-                    PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
-                    CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
-                    MarginTop = 0,
-                    MarginBottom = 0,
-                    MarginLeft = 0,
-                    MarginRight = 0,
-                    ApplyMarginToHeaderAndFooter = false,
-                    EnableJavaScript = true,
-                    RenderDelay = 500
-                };
-                var pdf = renderer.RenderUrlAsPdf($"{url}/Report?ticker={ticker}");
-
-                _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
-
-                await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
-                if(shouldReturnPdf ?? false)
-                    return new FileContentResult(pdf.BinaryData, "application/pdf");
-                return
-                    Ok(pdfPath);
+                return await _PdfAction(ticker, forceRegeneration);
             }
             catch(Exception ex)
             {
@@ -136,6 +82,7 @@ namespace Rbl.EndPoints
         {
             var tasks = new List<Task>();
 
+            var tickers = new List<string>();
             if(model.AllCodes)
             {
                 if (string.IsNullOrEmpty(model.Key) || string.IsNullOrEmpty(model.Secret))
@@ -144,17 +91,83 @@ namespace Rbl.EndPoints
                 if (!model.Key.Equals(_appSettings.ResetKey, StringComparison.CurrentCulture) || !model.Secret.Equals(_appSettings.ResetSecret, StringComparison.CurrentCulture))
                     return BadRequest();
 
-                model.Codes = _context.OrganizationMaps.Select(x => x.Code).ToList();
+                tickers = _context.OrganizationMaps.Select(x => x.Ticker).ToList();
+            }
+            else
+            {
+                tickers = _context.OrganizationMaps.Where(x => model.Codes.Contains(x.Code)).Select(x => x.Ticker).ToList();
             }
 
-            foreach(var code in model.Codes)
+            foreach(var ticker in tickers)
             {
-                tasks.Add(GeneratePdf(code, model.ForceRegenerate, false));
+                tasks.Add(_PdfAction(ticker, model.ForceRegenerate, false));
             }
 
             Task.WaitAll(tasks.ToArray());
 
             return Ok($"{tasks.Select(x => x.IsCompletedSuccessfully).Count()} PDFs completed successfully");
+        }
+
+        private async Task<IActionResult> _PdfAction(string ticker, bool? forceRegeneration = null, bool? shouldReturnPdf = true)
+        {
+            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
+            forceRegeneration = forceRegeneration ?? false;
+            if (forceRegeneration.Value == false)
+            {
+                if (System.IO.File.Exists(pdfPath))
+                {
+                    if (shouldReturnPdf ?? false)
+                    {
+                        var pdfFile = await System.IO.File.ReadAllBytesAsync(pdfPath);
+                        return new FileContentResult(pdfFile, "application/pdf");
+                    }
+                    else
+                        return Ok(pdfPath);
+                }
+            }
+
+            var schema = HttpContext.Request.Scheme;
+            var host = HttpContext.Request.Host;
+            var url = $"{schema}://{host}";
+
+            var blueFooterHtml = new HtmlHeaderFooter
+            {
+                BaseUrl = new Uri($"{url}").AbsoluteUri,
+                HtmlFragment = FooterHtml("#FFF"),
+                MaxHeight = 15,
+            };
+
+            var whiteFooterHtml = new HtmlHeaderFooter
+            {
+                BaseUrl = new Uri($"{url}").AbsoluteUri,
+                HtmlFragment = FooterHtml("#101010"),
+                MaxHeight = 15,
+
+            };
+
+            var renderer = new ChromePdfRenderer();
+            renderer.RenderingOptions = new ChromePdfRenderOptions
+            {
+                FirstPageNumber = 2,
+                PaperSize = IronPdf.Rendering.PdfPaperSize.A4,
+                CssMediaType = IronPdf.Rendering.PdfCssMediaType.Print,
+                MarginTop = 0,
+                MarginBottom = 0,
+                MarginLeft = 0,
+                MarginRight = 0,
+                ApplyMarginToHeaderAndFooter = false,
+                EnableJavaScript = true,
+                RenderDelay = 500
+            };
+            var pdf = renderer.RenderUrlAsPdf($"{url}/Report?ticker={ticker}");
+
+            _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
+
+            await System.IO.File.WriteAllBytesAsync(pdfPath, pdf.BinaryData);
+            if (shouldReturnPdf ?? false)
+                return new FileContentResult(pdf.BinaryData, "application/pdf");
+            return
+                Ok(pdfPath);
         }
 
         public class BatchClass
