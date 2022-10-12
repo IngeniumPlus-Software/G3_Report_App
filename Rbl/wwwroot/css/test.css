@@ -713,3 +713,16 @@ span.finding-explanation {
 #\32-1-postlist-list li {
     line-height: 1.25em;
 }
+
+.introduction p.bold {
+    margin-bottom: 0;
+}
+
+.introduction p.sub-bold {
+    font-size: 11px;
+}
+
+.footnote-block {
+    font-size: 9px;
+    color: RGB(53,73,107);
+}
