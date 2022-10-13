@@ -384,82 +384,50 @@
                 /////////////////////
                 var dataKendo = [
                     {
-                        type: 'Company',
-                        category: "Overall",
-                        from: @Model.OrganizationScoreTotal
+                        name: 'Company',
+                        data: [@Model.OrganizationScoreTotal],
+                        color: 'rgb(242, 119, 122)'
                     },
                     {
-                        type: 'SEC Filing Companies',
-                        category: "Overall",
-                        from: @Model.AllScoreTotal
+                        name: 'SEC Filing Companies',
+                        data: [@Model.AllScoreTotal],
+                        color: 'rgb(170, 255, 0)'
                     },
                     {
-                        type: 'Top 10 %',
-                        category: "Overall",
-                        from: @Model.TopTenScoreTotal
+                        name: 'Top 10 %',
+                        data: [@Model.TopTenScoreTotal],
+                        color: 'rgb(255, 204, 102)',
                     },
                     {
-                        type: 'Industry',
-                        category: "Overall",
-                        from: @Model.IndustryScoreTotal
+                        name: 'Industry',
+                        data: [@Model.IndustryScoreTotal],
+                        color: 'rgb(102, 153, 204)'
                     }
                 ];
 
-                var sortedData = dataKendo.sort((a,b) => (a.from > b.from ? 1 : -1));
-                
-
-                var minRange = getMinRange(sortedData[0]);
-                var maxRange = getMaxRange(sortedData[sortedData.length-1]);
-
-                var width = (maxRange-minRange) * 0.025;
-                sortedData.forEach((x) => {
-                    x.to = x.from + width;
-                })
-
-                function getMinRange(minScoreObj) {
-                    return Math.floor((minScoreObj.from-2.5)/5)*5;
-                }
-
-                function getMaxRange(maxScoreObj) {
-                    return Math.ceil((maxScoreObj.from+1)/5)*5;
-                }
-
-                var colors = ['red', 'grey', 'blue', 'black'];
                 $("#chart-bar").kendoChart({
-                    dataSource:
-                    {
-                        data: sortedData,
-                        group:
-                        {
-                            field: "type",
-                            dir: "desc"
-                        }
+                    series: dataKendo,
+                    seriesDefaults: {
+                        type: "column"
                     },
-                    series:
-                    [
-                        {
-                            type: "rangeBar",
-                            fromField: "from",
-                            toField: "to",
-                            categoryField: "category",
-                            spacing: -1,
-                            visibleInLegend: true,
-                        }
-                    ],
-                    seriesColors: colors,
                     valueAxis: {
-                        min: minRange,
-                        max: maxRange,
                         majorUnit: 5,
                         labels: {
                             template: "#= value #",
                             rotation: "auto"
-                        }
+                        },
+                        axisCrossingValue: 0
                     },
                     legend: {
                         visible: true,
                         position: "bottom",
-                    }
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "#= value #",
+                        template: "#= series.name #: #= value #"
+                    },
+                    categories: [2021]
                 });
             });
         </script>
