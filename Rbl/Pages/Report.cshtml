@@ -32,10 +32,8 @@
                 
                 <p class="bold">Outcome:</p>
                 <p class="sub-bold">
-                    This report provides the rationale for why human capability is important as well as information about how YOUR COMPANY scores and how that score compares to others in your industry, all other companies in the SEC and to the top 10%. In addition, based on your scores, we direct you to our G3HC Best Practice Actionable Insights which provides specific ideas for what to invest in and what to report for next filing.  This service provides a standard framework for human capital reporting so that companies can measure and compare. 
+                    This report provides the rationale for why human capability is important as well as information about how @Model.CompanyName scores and how that score compares to others in your industry, all other companies in the SEC and to the top 10%. In addition, based on your scores, we direct you to our G3HC Best Practice Actionable Insights which provides specific ideas for what to invest in and what to report for next filing.  This service provides a standard framework for human capital reporting so that companies can measure and compare. 
                 </p>
-
-                <p><a class="bold" href="#">Link to @Model.CompanyName 10K</a></p>
 
                 <p>People and organization efforts have become central to every company’s success. As a result, the Securities Exchange Commission (SEC) mandated that @Model.CompanyName report your “human capital” in 2021 and subsequent filings.</p>
                 <p>
@@ -289,35 +287,24 @@
                 Human Capital Reporting in 2021 SEC Report in Human Capability Pathways
             </span>
         </div>
-        <!-- Adding dummy text to this table to better visualize the layout of the populated table -->
-        <table class="table table-striped table-bordered align-middle mt-2">
-            <tr>
-                <td><strong>Human Capability Pathway / Domain</strong></td>
-                <td style="width: 85%"><strong>Sentences</strong></td>
-            </tr>
-            <tr>
-                <td>TALENT</td>
-                <td style="width: 85%">
-                    <ul>
-                        @foreach(var s in Model.TalentSentences)
-                        {
-                            <li>@Html.Raw(s)</li>
-                        }
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>ORGANIZATION</td>
-                <td style="width: 85%">
-                    <ul>
-                        @foreach(var s in Model.OrganizationSentences)
-                        {
-                            <li>@Html.Raw(s)</li>
-                        }
-                    </ul>
-                </td>
-            </tr>
-        </table>
+        <p>
+            <span class="bold">Talent:</span> Evidence that @Model.CompanyName provides a way for employees to learn new skills, increase employee experience and engagement and help employees to find meaning in their work. <br/>Examples:
+        </p>
+        <ul>
+            <li>Acquire employees</li>
+            <li>Create a positive work environment</li>
+            <li>Ensure diversity, equity and inclusion</li>
+            <li>Manage employee performance</li>
+        </ul>
+        <p>
+            <span class="bold">Leadership:</span> Evidence that @Model.CompanyName has of strong quality of leadership that ensures right results delivered the right way<br/>Examples:
+        </p>
+        <ul>
+            <li>Invest in leadership development</li>
+            <li>Clear framework that defines what effective leaders do</li>
+            <li>Assessment of leaders and leadership</li>
+            <li>Articulate leadership implications of business growth strategy</li>
+        </ul>
     </div>
 </section>
 <section id="page-11" class="text-page-cont">
@@ -330,34 +317,20 @@
                 Human Capital Reporting in 2021 SEC Report in Human Capability Pathways
             </span>
         </div>
-        <table class="table table-striped table-bordered align-middle mt-2">
-            <tr>
-                <td><strong>Human Capability Pathway / Domain</strong></td>
-                <td style="width: 85%"><strong>Sentences</strong></td>
-            </tr>
-            <tr>
-                <td>LEADERSHIP</td>
-                <td style="width: 85%">
-                    <ul>
-                        @foreach(var s in Model.LeadershipSentences)
-                        {
-                            <li>@Html.Raw(s)</li>
-                        }
-                    </ul>
-                </td>
-            </tr>
-            <tr>
-                <td>HUMAN RESOURCES</td>
-                <td style="width: 85%">
-                    <ul>
-                        @foreach(var s in Model.HrSentences)
-                        {
-                            <li>@Html.Raw(s)</li>
-                        }
-                    </ul>
-                </td>
-            </tr>
-        </table>
+        <p><span class="bold">Organization:</span> Evidence that @Model.CompanyName has organizational capabilities such as agility, efficiency, customer connectivity and so on<br/>Examples:</p>
+        <ul>
+            <li>Reputation for capabilities that resonate with customers</li>
+            <li>Ability to align organization to deliver strategy</li>
+            <li>Employees deliver targeted customer experience</li>
+            <li>Distinctive culture</li>
+         </ul>
+        <p><span class="bold">HR:</span> Evidence that @Model.CompanyName HR operates efficiently and delivers value to the business<br/>Examples:
+        <ul>
+            <li>HR does foundational HR work well- hiring, onboarding, developing, retaining</li>
+            <li>HR reputation for impact on stakeholders</li>
+            <li>HR has clear purpose</li>
+            <li>HR impact on business</li>
+         </ul>
         <br>
         <br>
         <div class="ips-row">
@@ -366,12 +339,6 @@
                 <p>
                     Based on what you reported, you received an overall score (1 to 10) in each pathway. Using proprietary machine learning technology, we analyzed the report for evidence of these concepts in each pathway. 
                 </p>
-                <ol>
-                    <li>Talent = talent + employee + competence</li>
-                    <li>Leadership = leadership + management + develop</li>
-                    <li>Organization = organization + culture + agility + mission + vision + capability</li>
-                    <li>HR = human capital + human resources</li>
-                </ol>
                 <p>
                     This analysis of human capability reporting was used to create Procter & Gamble Co’s score on each of the four pathways with a normalized range from 1 to 10. This scoring enables an analysis of where Procter & Gamble Co stands in relation to others based on their human capability reporting. 
                 </p>
