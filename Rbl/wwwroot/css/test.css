@@ -666,7 +666,7 @@ span.finding-explanation {
     background-repeat: no-repeat;
 }
 
-#page-23 {
+#page-22 {
     background-image: url(/images/background_section_page5.jpg);
     background-repeat: no-repeat;
     padding-top: 15%;
@@ -675,7 +675,7 @@ span.finding-explanation {
     width: 100%;
 }
 
-#page-23 p {
+#page-22 p {
     color: white !important;
     width: 50%;
 }
@@ -733,4 +733,9 @@ span.finding-explanation {
 
 #page-10 ul, #page-11 ul {
     padding-left: 25px;
+}
+
+.report-page#page-12 table {
+    margin-top: 15px;
+    margin-bottom: 15px;
 }
