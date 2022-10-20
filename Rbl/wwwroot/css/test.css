@@ -735,3 +735,7 @@ span.finding-explanation {
     margin-top: 15px;
     margin-bottom: 15px;
 }
+
+p.report-6-narrative {
+    line-height: 1.5;
+}
