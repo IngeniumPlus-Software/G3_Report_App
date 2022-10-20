@@ -81,6 +81,12 @@ p {
     }
 }
 
+#page-2 h3 {
+    font-size: 16px;
+    margin-bottom: 20px;
+    margin-top: 20px;
+}
+
 body {
     font-family: "Timesnewroman";
 }
@@ -729,6 +735,10 @@ span.finding-explanation {
 
 #page-10 ul, #page-11 ul {
     padding-left: 25px;
+}
+
+#page-12 table.comp-table {
+    text-align: center;
 }
 
 .report-page#page-12 table {
