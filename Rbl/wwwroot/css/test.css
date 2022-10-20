@@ -722,10 +722,6 @@ span.finding-explanation {
     margin-bottom: 0;
 }
 
-.introduction p.sub-bold {
-    line-height: 1.5em;
-}
-
 .footnote-block {
     font-size: 9px;
     color: RGB(53,73,107);
