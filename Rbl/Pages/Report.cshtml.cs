@@ -208,13 +208,13 @@ namespace Rbl.Pages
             {
                 var below5 = new List<string>();
                 if (scores.TalentScore < 5)
-                    below5.Add("<a href='#page-31' class='red'>Section 5 (Talent)</a>");
+                    below5.Add("<a href='#page-30' class='red'>Section 5 (Talent)</a>");
                 if (scores.OrganizationScore < 5)
-                    below5.Add("<a href='#page-35' class='red'>Section 6 (Organization)</a>");
+                    below5.Add("<a href='#page-34' class='red'>Section 6 (Organization)</a>");
                 if (scores.LeadershipScore < 5)
-                    below5.Add("<a href='#page-40' class='red'>Section 7 (Leadership)</a>");
+                    below5.Add("<a href='#page-39' class='red'>Section 7 (Leadership)</a>");
                 if (scores.HrScore < 5)
-                    below5.Add("<a href='#page-43' class='red'>Section 8 (Human Resources)</a>");
+                    below5.Add("<a href='#page-42' class='red'>Section 8 (Human Resources)</a>");
 
                 var appendixStr = string.Join(", ", below5);
                 var followup = $"Based on your results; we recommend you take some time to review these links to G3HC Actionable Insights {appendixStr}.";
