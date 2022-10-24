@@ -6,14 +6,18 @@
 
 <div class="row content">
     <div class="col-md-8 left-content">
-        <p>Please enter your report code and click the Submit Button</p>
+        <p>Please enter a ticker and your admin password and click the Submit Button</p>
         <form onsubmit="event.preventDefault();handleSubmit()">
             <div class="field">
-                <label>Code</label>
-                <input type="text" class="input" id="code">
+                <label>Ticker</label>
+                <input class="input" type="text" id="code" />
+            </div>
+            <div class="field">
+                <label>Password</label>
+                <input type="password" class="input" id="password" />
             </div>
             <div class="button">
-                <input type="button" value="Submit" id="Submit">
+                <input type="button" value="Submit" id="Submit" />
             </div>
             <div id="error-msg"></div>
         </form>
@@ -35,14 +39,20 @@
         });
 
         function handleSubmit() {
-            var code = $("#code").val();
-            $.post('/api/Reports/' + code)
+            $.ajax({
+                url: '/api/reports/pdf',
+                type: 'POST',
+                contentType: 'application/json; charset=utf-8',
+                dataType: 'JSON',
+                data: JSON.stringify({Code: $('#code').val(), Password: $('#password').val()})
+            })
             .done((data) => {
-                if(!data) {
-                    handleError('Your code is invalid');
+                if(data.success) {
+                    window.location = data.redirect;
                 } else {
-                    window.location = '/api/Reports/' + code;
+                    handleError(data.message);
                 }
+                console.log(data);
             }).fail((jqXHR, textStatus, errorThrown) => {
                 handleError('A server error occurred; please try again later or contact and admin');
             });
