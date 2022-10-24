@@ -136,6 +136,10 @@ span {
     width: 100%;
 }
 
+.blue-text {
+    color: #0086d6 !important;
+}
+
 .blue {
     position: relative;
 }
@@ -447,6 +451,17 @@ section.red-border-line h6:before {
     padding-top: 15%;
 }
 
+    #title-page div div {
+        display: flex;
+        justify-content: center;
+    }
+
+    #title-page div div img {
+        width: 75%;
+        height: 75%;
+        padding-top: 50px;
+    }
+
     #title-page h1, #title-page h3 {
         color: white;
     }
@@ -474,6 +489,10 @@ section.red-border-line h6:before {
 
 #page-3 h1:before {
     left: 0;
+}
+
+#page-8 table {
+    text-align: center;
 }
 
 #page-10 table ul li,
@@ -726,11 +745,6 @@ span.finding-explanation {
 
 .introduction p.bold {
     margin-bottom: 0;
-}
-
-.footnote-block {
-    font-size: 9px;
-    color: RGB(53,73,107);
 }
 
 #page-10 ul, #page-11 ul {
