@@ -34,18 +34,18 @@ namespace Rbl.Models.Report
             }
         }
 
-        public string[] GetRawHtml(WordTypesEnum type, int count = 4)   // LIVE
+        public string[] GetRawHtml(string ticker, WordTypesEnum type, int count = 4)   // LIVE
         //public string[] GetRawHtml(string ticker, WordTypesEnum type, int count = 4)  // DEBUG
         {
-            var top = Scores.OrderByDescending(x => x.Scores[type]).Take(count);  // LIVE
-            //var top = Scores.Where(x => x.Scores[type] > 0).OrderByDescending(x => x.Scores[type]);  //DEBUG
+            //var top = Scores.OrderByDescending(x => x.Scores[type]).Take(count);  // LIVE
+            var top = Scores.Where(x => x.Scores[type] > 0).OrderByDescending(x => x.Scores[type]);  //DEBUG
 
-            var results = top.Select(x => x.GetSentenceRawHtml(type)).ToArray();    // LIVE
-            //var sb = new StringBuilder();   // DEBUG
-            //var results = top.Select(x => x.GetSentenceRawHtml(type, int.MaxValue, sb)).ToArray();    // DEBUG
+            //var results = top.Select(x => x.GetSentenceRawHtml(type)).ToArray();    // LIVE
+            var sb = new StringBuilder();   // DEBUG
+            var results = top.Select(x => x.GetSentenceRawHtml(type, int.MaxValue, sb)).ToArray();    // DEBUG
             
-            //if(sb != null)    // DEBUG
-            //    System.IO.File.WriteAllText($"C:\\Users\\mrobb\\Desktop\\g3_top\\{ticker}_{type}.txt", sb.ToString());    // DEBUG
+            if(sb != null)    // DEBUG
+                System.IO.File.WriteAllText($"C:\\Users\\mrobb\\Desktop\\g3_top\\{ticker}_{type}.txt", sb.ToString());    // DEBUG
 
             return results;
         }

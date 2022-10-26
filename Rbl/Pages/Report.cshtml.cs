@@ -65,59 +65,15 @@ namespace Rbl.Pages
                 return NotFound("Could not find the company's SEC name");
 
             var neededSentences = new List<WordTypesEnum> { WordTypesEnum.Talent, WordTypesEnum.Leadership, WordTypesEnum.Organization, WordTypesEnum.Hr };
-            var cachedSentences = await _service.GetCachedSentences(ticker);
-            if(cachedSentences == null)
-                cachedSentences = new DfSentence { Ticker = ticker };
-            else
-            {
-                if (!string.IsNullOrEmpty(cachedSentences.TalentSentences))
-                    neededSentences.Remove(WordTypesEnum.Talent);
-
-                if (!string.IsNullOrEmpty(cachedSentences.LeadershipSentences))
-                    neededSentences.Remove(WordTypesEnum.Leadership);
-
-                if (!string.IsNullOrEmpty(cachedSentences.OrganizationSentences))
-                    neededSentences.Remove(WordTypesEnum.Organization);
-
-                if (!string.IsNullOrEmpty(cachedSentences.HrSentences))
-                    neededSentences.Remove(WordTypesEnum.Hr);
-            }
+            
 
             var importantWords = await _service.GetImportantWords(neededSentences.ToArray());
             var allSentences = await _service.GetSentenceResponse(ticker, importantWords);
-            var anyUpdates = false;
             foreach(var t in neededSentences)
             {
-                var tSentences = allSentences.GetRawHtml(t);  // LIVE
-                //var tSentences = allSentences.GetRawHtml(ticker, t);    // DEBUG
-                switch (t)
-                {
-                    case WordTypesEnum.Talent:
-                        cachedSentences.TalentSentences = string.Join("\\n\\n", tSentences);
-                        anyUpdates = true;
-                        break;
-                    case WordTypesEnum.Leadership:
-                        cachedSentences.LeadershipSentences = string.Join("\\n\\n", tSentences);
-                        anyUpdates = true;
-                        break;
-                    case WordTypesEnum.Organization:
-                        cachedSentences.OrganizationSentences = string.Join("\\n\\n", tSentences);
-                        anyUpdates = true;
-                        break;
-                    case WordTypesEnum.Hr:
-                        cachedSentences.HrSentences = string.Join("\\n\\n", tSentences);
-                        anyUpdates = true;
-                        break;
-                }
+                //var tSentences = allSentences.GetRawHtml(t);  // LIVE
+                var tSentences = allSentences.GetRawHtml(ticker, t);    // DEBUG
             }
-
-            if(anyUpdates)
-                await _service.SaveCachedSentences(cachedSentences);
-
-            TalentSentences = cachedSentences.TalentSentences.Split("\\n\\n");
-            LeadershipSentences = cachedSentences.LeadershipSentences.Split("\\n\\n");
-            OrganizationSentences = cachedSentences.OrganizationSentences.Split("\\n\\n");
-            HrSentences = cachedSentences.HrSentences.Split("\\n\\n");
 
             ScoresByTicker = await _service.GetOrganizationScoresByTicker(ticker);
             ScoresAll = await _service.GetScoresAll();
