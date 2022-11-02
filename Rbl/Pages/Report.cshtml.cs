@@ -247,7 +247,7 @@ namespace Rbl.Pages
                 else
                 {
                     return (
-                        "<b>Build on strengths</b>.  You do not have any scores below parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts customers, employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
+                        "<b>Build on strengths</b>.  You do not have any scores below parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
                         "Based on your results; we recommend you review our G3HC Actionable Insights.",
                         ""
                         );
