@@ -216,7 +216,7 @@ namespace Rbl.EndPoints
         private void _ApplyFooters(PdfDocument pdf, HtmlHeaderFooter whiteBg, HtmlHeaderFooter blueBg)
         {
             var allpageNumbers = Enumerable.Range(0, pdf.PageCount);
-            var blueBgPageNumbers = allpageNumbers.Intersect(new int[] { 3, 4, 8, 10, 20, 24, }.Select(x => x-1));
+            var blueBgPageNumbers = allpageNumbers.Intersect(new int[] { 3, 4, 8, 10, 19, 23, }.Select(x => x-1));
             var restPageNumbers = allpageNumbers.Except(blueBgPageNumbers).Except(new[] { 0 });
 
             pdf.AddHtmlFooters(blueBg, 2, blueBgPageNumbers);

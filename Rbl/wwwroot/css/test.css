@@ -346,10 +346,23 @@ table.table-striped.custom tr td:nth-child(4) {
 table.table-striped.custom tr td:nth-child(5) {
     width: 150px;
 }
-
-.appendices {
-    color: #071d49;
+#page-19 .embedded-graphic {
+    margin-top: 0;
+    margin-bottom: 0;
 }
+
+#page-21 .table {
+    margin-top: 0;
+}
+
+#page-21 table td li {
+    line-height: 1.5;
+    font-size: 11px;
+}
+
+    .appendices {
+        color: #071d49;
+    }
 
 .col-md-6 p {
     margin-top: 10px;
@@ -453,13 +466,14 @@ section.red-border-line h6:before {
 
     #title-page div div {
         display: flex;
-        justify-content: center;
+        justify-content: flex-end;
+        flex-direction: row;
     }
 
     #title-page div div img {
-        width: 75%;
-        height: 75%;
-        padding-top: 50px;
+        width: 45%;
+        height: 45%;
+        padding-top:300px;
     }
 
     #title-page h1, #title-page h3 {
@@ -507,6 +521,10 @@ section.red-border-line h6:before {
 
 .report-page h2:before {
     left: 50px;
+}
+
+#page-19 ol {
+    padding-left: 25px;
 }
 
 .report-page table {
@@ -705,13 +723,31 @@ span.finding-explanation {
     width: 50%;
 }
 
-    .section-page h1,
-    .section-page h2 {
-        display: inline-block;
-        position: relative;
-        color: #fff;
-        width: 100%;
-    }
+#page-23 .table {
+    margin-top: 10px;
+    margin-bottom:10px;
+}
+
+#page-23 .table li {
+    line-height: 1.5;
+    font-size: 11px;
+}
+
+.stand-alone-ul {
+    padding-left: 25px;
+}
+
+.stand-alone-ul li {
+    line-height: 1;
+}
+
+.section-page h1,
+.section-page h2 {
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    width: 100%;
+}
 
     .section-page h2 {
         width: 50%;
