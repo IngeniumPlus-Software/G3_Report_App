@@ -351,6 +351,10 @@ table.table-striped.custom tr td:nth-child(5) {
     margin-bottom: 0;
 }
 
+#page-20 img {
+    margin-top: 10px;
+}
+
 #page-21 .table {
     margin-top: 0;
 }
@@ -724,21 +728,16 @@ span.finding-explanation {
 }
 
 #page-23 .table {
-    margin-top: 10px;
-    margin-bottom:10px;
+    margin-top: 15px;
+    margin-bottom:15px;
 }
 
-#page-23 .table li {
-    line-height: 1.5;
-    font-size: 11px;
+#page-44 img {
+    margin-top: 10px;
 }
 
 .stand-alone-ul {
     padding-left: 25px;
-}
-
-.stand-alone-ul li {
-    line-height: 1;
 }
 
 .section-page h1,
