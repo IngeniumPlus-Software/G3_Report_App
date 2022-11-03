@@ -5,5 +5,6 @@
         public string PdfLocation { get; set; }
         public string ResetKey { get; set; }
         public string ResetSecret { get; set; }
+        public string AdminPassword { get; set; }
     }
 }

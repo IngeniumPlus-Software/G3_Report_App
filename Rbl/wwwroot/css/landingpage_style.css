@@ -33,12 +33,14 @@ html, body {
 }
 
 form .field{
-    display: flex; 
+    display: flex;
     justify-content: space-between;
+    margin-top: 15px;
 }
 
 form .field label {
     padding-left: 70px;
+    width: 100px;
 }
 
 form div.button input {
@@ -51,6 +53,7 @@ form div.button {
 
 form .field > input {
     margin-right: 65px;
+    width: 250px;
 }
 
 form .input{

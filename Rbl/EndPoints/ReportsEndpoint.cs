@@ -1,5 +1,4 @@
 ﻿using System.Threading.Tasks;
-using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Rbl.Models;
@@ -39,21 +38,50 @@ namespace Rbl.EndPoints
         #region Methods
 
         [HttpPost]
-        [Route("{code}")]
-        public async Task<bool> CheckCode(string code)
+        [Route("pdf")]
+        public async Task<PdfResponse> GetPdf([FromBody]PdfModel model)
         {
-            try
-            {
-                if (code.Equals("mdr"))
-                    throw new Exception("MDR Exception");
+            if (!_appSettings.AdminPassword.Equals(model.Password, StringComparison.InvariantCulture))
+                return new PdfResponse
+                {
+                    Success = false,
+                    Message = "Invalid password",
+                    Redirect = string.Empty
+                };
 
-                var ticker = await _service.GetbfuscatedTicker(code);
-                return !string.IsNullOrEmpty(ticker);
-            } catch(ApplicationException exception)
+            await _PdfAction(model.Code, false, false);
+
+            return new PdfResponse
             {
-                return false;
-            }
+                Success = true,
+                Message = "Redirecting",
+                Redirect = $"/api/reports/{model.Code}"
+            };
         }
+
+        public class PdfResponse
+        {
+            public bool Success { get; set; }
+            public string Message { get; set; }
+            public string Redirect { get; set; }
+        }
+
+        //[HttpPost]
+        //[Route("{code}")]
+        //public async Task<bool> CheckCode(string code)
+        //{
+        //    try
+        //    {
+        //        if (code.Equals("mdr"))
+        //            throw new Exception("MDR Exception");
+
+        //        var ticker = await _service.GetbfuscatedTicker(code);
+        //        return !string.IsNullOrEmpty(ticker);
+        //    } catch(ApplicationException exception)
+        //    {
+        //        return false;
+        //    }
+        //}
 
         [HttpGet]
         [Route("{code}")]
@@ -61,14 +89,7 @@ namespace Rbl.EndPoints
         {
             try
             {
-                if (string.IsNullOrEmpty(code))
-                    return BadRequest("Invalid Code");
-
-                var ticker = await _service.GetbfuscatedTicker(code);
-                if(ticker == null)
-                    return BadRequest("Invalid Code");
-
-                return await _PdfAction(ticker, forceRegeneration);
+                return await _PdfAction(code, forceRegeneration);
             }
             catch(Exception ex)
             {
@@ -177,6 +198,12 @@ namespace Rbl.EndPoints
             public bool AllCodes { get; set; } = false;
             public string Key { get; set; } = string.Empty;
             public string Secret { get; set; } = string.Empty;
+        }
+
+        public class PdfModel
+        {
+            public string Code { get; set; }
+            public string Password { get; set; }
         }
 
         [HttpPost]
