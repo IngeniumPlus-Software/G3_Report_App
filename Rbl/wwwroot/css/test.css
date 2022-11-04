@@ -555,6 +555,7 @@ section.red-border-line h6:before {
     .report-page h2:before,
     .text-page h2:first-child::before,
     .appendix-page h2:first-child::before,
+    .appendix-intro-page h2:first-child::before,
     .appendix h1:before {
         content: "";
         position: absolute;
@@ -566,10 +567,35 @@ section.red-border-line h6:before {
         border-bottom: 5px solid #0086d6;
     }
 
+.appendix-intro-page ol {
+    padding-left: 25px;
+}
+
+.appendix-intro-page strong {
+    margin-left: 15px;
+}
+
+.appendix-intro-page p i {
+    padding-left: 35px;
+    display: block;
+}
+
+.appendix-intro-page ol p {
+    display: block;
+    padding-left: 25px;
+}
+
+#page-27 ol li {
+   font-style: italic;
+}
+
+.indent {
+    padding-left: 30px;
+}
+
 .introduction h1:before,
 #title-page h1:before,
-.appendix h1:before
-{
+.appendix h1:before {
     left: 60px;
 }
 
@@ -631,16 +657,17 @@ section.report-page {
 }
 
 .text-page,
-.appendix-page {
+.appendix-page,
+.appendix-intro-page {
     padding-top: 15%;
 }
 
-.text-page h2,
-.appendix-page h2
-{
-    position: relative;
-    color: #071d49;
-}
+    .text-page h2,
+    .appendix-page h2,
+    .appendix-intro-page h2{
+        position: relative;
+        color: #071d49;
+    }
 
     .appendix-page table p,
     .appendix-page table ul li {
@@ -732,8 +759,12 @@ span.finding-explanation {
     margin-bottom:15px;
 }
 
-#page-44 img {
+#page-52 img {
     margin-top: 10px;
+}
+
+.footnotes, .footnotes li {
+    font-size: 10px;
 }
 
 .stand-alone-ul {
