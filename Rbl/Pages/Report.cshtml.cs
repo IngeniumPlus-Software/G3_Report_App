@@ -37,10 +37,10 @@ namespace Rbl.Pages
         public string HrEoReport5 { get; set; }
         public string Report6Narrative { get; set; }
         public string Report6FollowUp { get; set; }
-        public int G3HCAI_TalentPageNumber = 26;
-        public int G3HCAI_LeadershipPageNumber = 32;
-        public int G3HCAI_OrganizationPageNumber = 37;
-        public int G3HCAI_HrPageNumber = 44;
+        public int G3HCAI_TalentPageNumber = 27;
+        public int G3HCAI_LeadershipPageNumber = 33;
+        public int G3HCAI_OrganizationPageNumber = 38;
+        public int G3HCAI_HrPageNumber = 45;
 
 
         public async Task<IActionResult> OnGetAsync(string ticker)

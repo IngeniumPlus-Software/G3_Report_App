@@ -53,7 +53,160 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-2" class="blue-bg toc red-border-line">
+<section id="executive-summary" class="text-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Executive Summary
+        </h2>
+        <p class="es-top-text">
+            In ﬁscal year 2021, @Model.CompanyName reported your Human Capital as part of your SEC ﬁlings. We used a standard framework of four pathways (talent + organization + leadership + human resources) to look beyond Human Capital for all references to <b>Human Capability</b> anywhere in your 10k. . Using proprietary machine learning technology that delivers far stronger predictions of business results than previous studies using surveys, we analyzed your 10K for evidence of these concepts in each pathway. Our approach allowed for measurement and comparison across companies in same way that is done for ﬁnancial reporting.
+        </p>
+        <p class="es-top-text">
+            Based on what you reported, @Model.CompanyName received an overall score (1 to 10) in each pathway and compared with your industry, all companies filing with the SEC and the top 10% as shown in the bar chart and table below.  This scoring enables an analysis of where @Model.CompanyName stands in relation to others based on their Human Capability reporting.
+        </p>
+        <div class="es-split" style="display: flex;">
+            <div class="es-finding-1">
+                <div>
+                    <table id="es-comp-table" class="table table-striped table-bordered align-middle comp-table">
+                        <tr>
+                            <td></td>
+                            <td colspan="3" style="text-align: center;">Comparison Groups</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.CompanyName</td>
+                            <td>SEC Filing Companies</td>
+                            <td>Industry</td>
+                            <td>Top 10%</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.OrganizationScoreTotal</td>
+                            <td>@Model.AllScoreTotal</td>
+                            <td>@Model.IndustryScoreTotal</td>
+                            <td>@Model.TopTenScoreTotal</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="bg-white">
+                    <div id="es-chart-bar" style="width: 490px; height: 175px; margin-left: auto; margin-right: auto;"></div>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">
+                                    <p>Talent</p>
+                                </th>
+                                <th scope="col">
+                                    <p>Organization</p>
+                                </th>
+                                <th scope="col">
+                                    <p>Leadership</p>
+                                </th>
+                                <th scope="col">
+                                    <p>Human Resources</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>@Model.CompanyName</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.TalentScore, true))">@Model.ScoresByTicker.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrganizationScore, true))">@Model.ScoresByTicker.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.LeadershipScore, true))">@Model.ScoresByTicker.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.HrScore, true))">@Model.ScoresByTicker.HrScore</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Your Industry</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.TalentScore))">@Model.ScoresIndustry.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrganizationScore))">@Model.ScoresIndustry.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.LeadershipScore))">@Model.ScoresIndustry.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.HrScore))">@Model.ScoresIndustry.HrScore</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>SEC Average</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.TalentScore))">@Model.ScoresAll.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrganizationScore))">@Model.ScoresAll.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.LeadershipScore))">@Model.ScoresAll.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.HrScore))">@Model.ScoresAll.HrScore</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Top 10% SEC</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.TalentScore))">@Model.ScoresTop10.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrganizationScore))">@Model.ScoresTop10.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.LeadershipScore))">@Model.ScoresTop10.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.HrScore))">@Model.ScoresTop10.HrScore</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td class="legend" colspan="4">
+                                    <label><span class="below-parity"></span> = Below Parity (5.0)</label>
+                                    <label><span class="high-parity"></span> = Excellent Score (8.0)</label>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="es-side-links">
+                <p>For a closer look at your data, use these hyperlinks to:</p>
+                <p><a href="#page-16">A plot of your individual scores in each Pathways (Finding 3)</a></p>
+                <p><a href="#page-17">A plot or your company Pathway scores versus the overall SEC average (finding 4)</a></p>
+                <p><a href="#page-18">A plot of your company Pathway scores versus your industry average (Finding 5)</a></p>
+            </div>
+        </div>
+        <p class="es-bottom-text">
+            Interpretation and Implications: @Html.Raw(Model.Report6Narrative)
+        </p>
+        <p class="es-bottom-text">
+            As @Model.CompanyName updates its annual Human Capital report to the SEC, you can include a discussion of talent, organization, leadership, and HR initiatives from your prioritized action plan that includes ideas from in the G3HC Actionable Insights. Your updated annual SEC report will demonstrate progress in @(Model.CompanyName)’s commitment to building Human Capability. Just as financial metrics offer a number of insights about financial performance that are tailored to a company’s business, @(Model.CompanyName)’s Human Capability reporting should focus on those initiatives that give others greater confidence in your Human Capability agenda, i.e., that your Human Capability agenda is targeted to increasing business outcomes. Each year, the quality of Human Capability reporting to the SEC will increase, so @Model.CompanyName should have an annual Human Capability reporting process to track your performance.
+        </p>
+    </div>
+</section>
+<section id="page-3" class="blue-bg toc red-border-line">
     <span class="counter"></span>
     <div>
         <h2 class="mb-5 pe-5">This report enables you to upgrade your Human Capability investments by answering 4 questions.</h2>
@@ -101,14 +254,14 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-3" class="blue-bg section-page">
+<section id="page-4" class="blue-bg section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 1:</h1>
         <h2>Why does Human Capability matter in general and for @Model.CompanyName?</h2>
     </div>
 </section>
-<section id="page-4" class="text-page">
+<section id="page-5" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -136,7 +289,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-5" class="text-page-cont">
+<section id="page-6" class="text-page-cont">
     <span class="counter"></span>
     <div>
         <h3 class="mb-4">Internal stakeholders </h3>
@@ -169,7 +322,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-6" class="text-page-cont">
+<section id="page-7" class="text-page-cont">
     <span class="counter"></span>
     <div>
         <p>
@@ -185,14 +338,14 @@ score compares to others in your industry, all other companies in the SEC and to
         <img class="embedded-graphic" src="/images/figure2.png">
     </div>
 </section>
-<section id="page-7" class="section-page">
+<section id="page-8" class="section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 2:</h1>
         <h2>How to approach and advance @Model.CompanyName’s Human Capability agenda?</h2>
     </div>
 </section>
-<section id="page-8" class="text-page">
+<section id="page-9" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -246,14 +399,14 @@ score compares to others in your industry, all other companies in the SEC and to
         </p>
     </div>
 </section>
-<section id="page-9" class="section-page">
+<section id="page-10" class="section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 3:</h1>
         <h2>What is @Model.CompanyName’s current Human Capability?</h2>
     </div>
 </section>
-<section id="page-10" class="text-page">
+<section id="page-11" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -303,7 +456,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ul>
     </div>
 </section>
-<section id="page-11" class="text-page-cont">
+<section id="page-12" class="text-page-cont">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4"></h2>
@@ -346,7 +499,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-12" class="report-page">
+<section id="page-13" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0086d6; background-image: url(./images/0086d6_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -543,11 +696,37 @@ score compares to others in your industry, all other companies in the SEC and to
                     },
                     categories: [2021]
                 });
+
+                $("#es-chart-bar").kendoChart({
+                    series: dataKendo,
+                    seriesDefaults: {
+                        type: "column"
+                    },
+                    valueAxis: {
+                        majorUnit: 5,
+                        labels: {
+                            template: "#= value #",
+                            rotation: "auto"
+                        },
+                        axisCrossingValue: 0,
+                        narrowRange: false,
+                    },
+                    legend: {
+                        visible: true,
+                        position: "bottom",
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "#= value #",
+                        template: "#= series.name #: #= value #"
+                    },
+                    categories: [2021]
+                });
             });
         </script>
     </div>
 </section>
-<section id="page-13" class="report-page">
+<section id="page-14" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0f6aaf; background-image: url(./images/0f6aaf_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -588,7 +767,7 @@ score compares to others in your industry, all other companies in the SEC and to
             </script>
     </div>
 </section>
-<section id="page-14" class="text-page">
+<section id="page-15" class="text-page">
     <span class="counter"></span>
     <div>
         <h2></h2>
@@ -634,7 +813,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-15" class="report-page">
+<section id="page-16" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #165489; background-image: url(./images/165489_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -664,7 +843,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </script>
     </div>
 </section>
-<section id="page-16" class="report-page">
+<section id="page-17" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #1c4c79; background-image: url(./images/1c4c79_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -694,7 +873,7 @@ score compares to others in your industry, all other companies in the SEC and to
             </script>
     </div>
 </section>
-<section id="page-17" class="report-page">
+<section id="page-18" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0e325c; background-image: url(./images/0e325c_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -722,14 +901,14 @@ score compares to others in your industry, all other companies in the SEC and to
             });
             </script>
 </section>
-<section id="page-18" class="section-page">
+<section id="page-19" class="section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 4:</h1>
         <h2>What can be done to improve @Model.CompanyName’s Human Capability?</h2>
     </div>
 </section>
-<section id="page-19" class="text-page">
+<section id="page-20" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -766,7 +945,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ol>
     </div>
 </section>
-<section id="page-20" class="text-page">
+<section id="page-21" class="text-page">
     <span class="counter"></span>
     <div>
         <p>After interpreting your results in Section 3, you and your team should identify which pathways are the most critical priorities in the near term.  Strenthening your scores in these pathways will be derived from two choices.</p>
@@ -790,7 +969,7 @@ score compares to others in your industry, all other companies in the SEC and to
         <img class="embedded-graphic" src="./images/figure5.png">
     </div>
 </section>
-<section id="page-21" class="text-page">
+<section id="page-22" class="text-page">
     <span class="counter"></span>
     <div>
         <p>In the G3HC Actionable Insights are definitions, resources, and metrics for each of these thirty-seven initiatives.</p>
@@ -805,14 +984,14 @@ score compares to others in your industry, all other companies in the SEC and to
         <p>As @Model.CompanyName updates its annual Human Capital report to the SEC, you can enhance the discussion of talent, leadership, organization and HR initiatives with the “low hanging fruit” and new “opportunities” that you are implementing. This updated annual SEC report will demonstrate progress in @(Model.CompanyName)’s commitment to building Human Capability. Just as financial metrics offer a number of insights about financial performance that are tailored to a company’s business, @(Model.CompanyName)’s Human Capability reporting should focus on those initiatives that give others greater confidence in your Human Capability agenda, i.e., that your Human Capability agenda is targeted to increasing business outcomes. Each year, the quality of Human Capability reporting to the SEC will increase, so @Model.CompanyName should have an annual Human Capability reporting process to track your performance.</p>
     </div>
 </section>
-<section id="page-22" class="blue-bg section-page">
+<section id="page-23" class="blue-bg section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 5:<br> What’s next?</h1>
         <h2>Who are the key stakeholders and what should we communicate?</h2>
     </div>
 </section>
-<section id="page-23" class="text-page">
+<section id="page-24" class="text-page">
     <span class="counter"></span>
     <div>
         <p>
@@ -917,7 +1096,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ul>
     </div>
 </section>
-<section id="page-24" class="text-page">
+<section id="page-25" class="text-page">
     <span class="counter"></span>
     <div>
         <p>
@@ -937,7 +1116,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </p>
     </div>
 </section>
-<section id="page-25" class="appendix red-border-line">
+<section id="page-26" class="appendix red-border-line">
     <span class="counter"></span>
     <div class="ips-row">
         <div class="col-md-8">
@@ -986,7 +1165,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-26" class="appendix-intro-page">
+<section id="page-27" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -1022,7 +1201,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ol>
     </div>
 </section>
-<section id="page-27" class="appendix-intro-page">
+<section id="page-28" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <p><strong>C.	Identify one or two elements for improving @Model.CompanyName Talent pathway</strong></p>
@@ -1053,7 +1232,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </p>
     </div>
 </section>
-<section id="page-28" class="appendix-page">
+<section id="page-29" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -1214,7 +1393,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-29" class="appendix-page">
+<section id="page-30" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1375,7 +1554,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-30" class="appendix-page">
+<section id="page-31" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1495,7 +1674,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-31" class="appendix-page">
+<section id="page-32" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1629,7 +1808,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-32" class="appendix-intro-page">
+<section id="page-33" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -1663,7 +1842,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ol>
     </div>
 </section>
-<section id="page-33" class="appendix-intro-page">
+<section id="page-34" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <p><strong>C. Identify one or two elements for improving @Model.CompanyName Leadership pathway</strong></p>
@@ -1695,7 +1874,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </p>
     </div>
 </section>
-<section id="page-34" class="appendix-page">
+<section id="page-35" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">G3HC Actionable Insights 2: Resources and metrics on leadership (6 steps)</h2>
@@ -1816,7 +1995,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-35" class="appendix-page">
+<section id="page-36" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1944,7 +2123,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-36" class="appendix-page">
+<section id="page-37" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2071,7 +2250,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-37" class="appendix-intro-page">
+<section id="page-38" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -2109,7 +2288,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ol>
     </div>
 </section>
-<section id="page-38" class="appendix-intro-page">
+<section id="page-39" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <p><strong>C.	Identify one or two elements for improving @Model.CompanyName Organization pathway</strong></p>
@@ -2148,7 +2327,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </p>
     </div>
 </section>
-<section id="page-39" class="appendix-page">
+<section id="page-40" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">G3HC Actionable Insights 3: Resources and metrics on organization (12 capabilities)</h2>
@@ -2277,7 +2456,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </table>
     </div>
 </section>
-<section id="page-40" class="appendix-page">
+<section id="page-41" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2509,7 +2688,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </table>
     </div>
 </section>
-<section id="page-41" class="appendix-page">
+<section id="page-42" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2720,7 +2899,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </table>
     </div>
 </section>
-<section id="page-42" class="appendix-page">
+<section id="page-43" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2881,7 +3060,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </table>
     </div>
 </section>
-<section id="page-43" class="appendix-page">
+<section id="page-44" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3014,7 +3193,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
     </div>
 </section>
 
-<section id="page-44" class="appendix-intro-page">
+<section id="page-45" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -3050,7 +3229,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </ol>
     </div>
 </section>
-<section id="page-45" class="appendix-intro-page">
+<section id="page-46" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <p><strong>C.	Identify one or two elements for improving @Model.CompanyName HR</strong></p>
@@ -3086,7 +3265,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </p>
     </div>
 </section>
-<section id="page-46" class="appendix-page">
+<section id="page-47" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">G3HC Actionable Insights 4: Resources and metrics on human resources (9 elements)</h2>
@@ -3238,7 +3417,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </table>
     </div>
 </section>
-<section id="page-47" class="appendix-page">
+<section id="page-48" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3404,7 +3583,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </table>
     </div>
 </section>
-<section id="page-48" class="appendix-page">
+<section id="page-49" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3527,7 +3706,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </table>
     </div>
 </section>
-<section id="page-49" class="appendix-page">
+<section id="page-50" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3646,7 +3825,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </table>
     </div>
 </section>
-<section id="page-50" class="appendix-page">
+<section id="page-51" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -3691,7 +3870,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </ul>
     </div>
 </section>
-<section id="page-51" class="appendix-page">
+<section id="page-52" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -3706,7 +3885,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </p>
     </div>
 </section>
-<section id="page-52" class="appendix-page">
+<section id="page-53" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -3732,7 +3911,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </ul>
     </div>
 </section>
-<section id="page-53" class="appendix-page">
+<section id="page-54" class="appendix-page">
     <span class="counter"></span>
     <div>
         <ul>
@@ -3748,7 +3927,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </p>
     </div>
 </section>
-<section id="page-54" class="appendix-page">
+<section id="page-55" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -3770,7 +3949,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         <p>All of these studies are based on surveys from key informants which give insight into how an organization operates, but often focus on single initiatives, have response biases, and are difficult to scale.</p>
     </div>
 </section>
-<section id="page-55" class="appendix-page">
+<section id="page-56" class="appendix-page">
     <span class="counter"></span>
     <div>
         <p>Metrics in these 37 initiatives come from</p>
@@ -3800,7 +3979,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         <img class="embedded-graphic" src="/images/figure6.png">
     </div>
 </section>
-<section id="page-56" class="appendix-page">
+<section id="page-57" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
