@@ -66,23 +66,6 @@ namespace Rbl.EndPoints
             public string Redirect { get; set; }
         }
 
-        //[HttpPost]
-        //[Route("{code}")]
-        //public async Task<bool> CheckCode(string code)
-        //{
-        //    try
-        //    {
-        //        if (code.Equals("mdr"))
-        //            throw new Exception("MDR Exception");
-
-        //        var ticker = await _service.GetbfuscatedTicker(code);
-        //        return !string.IsNullOrEmpty(ticker);
-        //    } catch(ApplicationException exception)
-        //    {
-        //        return false;
-        //    }
-        //}
-
         [HttpGet]
         [Route("{code}")]
         public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null)
@@ -103,23 +86,7 @@ namespace Rbl.EndPoints
         {
             var tasks = new List<Task>();
 
-            var tickers = new List<string>();
-            if(model.AllCodes)
-            {
-                if (string.IsNullOrEmpty(model.Key) || string.IsNullOrEmpty(model.Secret))
-                    return BadRequest();
-
-                if (!model.Key.Equals(_appSettings.ResetKey, StringComparison.CurrentCulture) || !model.Secret.Equals(_appSettings.ResetSecret, StringComparison.CurrentCulture))
-                    return BadRequest();
-
-                tickers = _context.OrganizationMaps.Select(x => x.Ticker).ToList();
-            }
-            else
-            {
-                tickers = _context.OrganizationMaps.Where(x => model.Codes.Contains(x.Code)).Select(x => x.Ticker).ToList();
-            }
-
-            foreach(var ticker in tickers)
+            foreach(var ticker in model.Codes)
             {
                 tasks.Add(_PdfAction(ticker, model.ForceRegenerate, false));
             }
@@ -195,7 +162,6 @@ namespace Rbl.EndPoints
         {
             public IList<string> Codes { get; set; } = new List<string>();
             public bool ForceRegenerate { get; set; } = false;
-            public bool AllCodes { get; set; } = false;
             public string Key { get; set; } = string.Empty;
             public string Secret { get; set; } = string.Empty;
         }

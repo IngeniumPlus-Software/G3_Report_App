@@ -25,13 +25,6 @@ namespace Rbl.Models
         public virtual DbSet<ScoresByTicker> ScoresByTicker { get; set; }
         public virtual DbSet<ScoresTopTen> ScoresTopTen { get; set; }
         public virtual DbSet<ScoresTotal> ScoresTotal { get; set; }
-        public virtual DbSet<WordlistHr> WordlistHrs { get; set; }
-        public virtual DbSet<WordlistLeadership> WordlistLeaderships { get; set; }
-        public virtual DbSet<WordlistOrganization> WordlistOrganizations { get; set; }
-        public virtual DbSet<WordlistTalent> WordlistTalents { get; set; }
-        public virtual DbSet<DfAllRatiosAvailable> DfAllRatiosAvailables { get; set; }
-        public virtual DbSet<DfRanking> DfRankings { get; set; }
-        public virtual DbSet<OrganizationMap> OrganizationMaps { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -39,220 +32,29 @@ namespace Rbl.Models
 
             modelBuilder.Entity<ScoresAll>(entity =>
             {
-                entity.ToView("ScoresAll");
+                entity.ToView("ScoresAll_2021");
             });
 
             modelBuilder.Entity<ScoresByIndustry>(entity =>
             {
-                entity.ToView("ScoresByIndustry");
+                entity.ToView("ScoresByIndustry_2021");
             });
 
             modelBuilder.Entity<ScoresByTicker>(entity =>
             {
-                entity.ToView("ScoresByTicker");
+                entity.ToView("ScoresByTicker_2021");
             });
 
             modelBuilder.Entity<ScoresTopTen>(entity =>
             {
-                entity.ToView("ScoresTopTen");
+                entity.ToView("ScoresTopTen_2021");
             });
 
             modelBuilder.Entity<ScoresTotal>(entity =>
             {
-                entity.ToView("ScoresTotal");
+                entity.ToView("ScoresTotal_2021");
                 entity.Property(x => x.TotalScore).HasColumnName("total_score");
                 entity.Property(x => x.Ticker).HasColumnName("ticker");
-            });
-
-            modelBuilder.Entity<WordlistHr>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("wordlist_hr");
-
-                entity.Property(e => e.Column1)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("column1");
-
-                entity.Property(e => e.Word)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<WordlistLeadership>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("wordlist_leadership");
-
-                entity.Property(e => e.Column1)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("column1");
-
-                entity.Property(e => e.Word)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<WordlistOrganization>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("wordlist_organization");
-
-                entity.Property(e => e.Column1)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("column1");
-
-                entity.Property(e => e.Word)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<WordlistTalent>(entity =>
-            {
-                entity.HasNoKey();
-
-                entity.ToTable("wordlist_talent");
-
-                entity.Property(e => e.Column1)
-                    .IsRequired()
-                    .HasMaxLength(50)
-                    .HasColumnName("column1");
-
-                entity.Property(e => e.Word)
-                    .IsRequired()
-                    .HasMaxLength(50);
-            });
-
-            modelBuilder.Entity<DfAllRatiosAvailable>(entity =>
-            {
-                entity.ToTable("df_all_ratios_available");
-
-                entity.HasIndex(e => e.Ticker, "idx_ticker");
-
-                entity.Property(e => e.AccessionNumber)
-                    .HasMaxLength(255)
-                    .HasColumnName("accession_number");
-
-                entity.Property(e => e.Agility).HasColumnName("agility");
-
-                entity.Property(e => e.Beta).HasColumnName("beta");
-
-                entity.Property(e => e.BookValue).HasColumnName("bookValue");
-
-                entity.Property(e => e.Capability).HasColumnName("capability");
-
-                entity.Property(e => e.Cik).HasColumnName("cik");
-
-                entity.Property(e => e.Competence).HasColumnName("competence");
-
-                entity.Property(e => e.Culture).HasColumnName("culture");
-
-                entity.Property(e => e.CurrentPrice).HasColumnName("currentPrice");
-
-                entity.Property(e => e.DebtToEquity).HasColumnName("debtToEquity");
-
-                entity.Property(e => e.Develop).HasColumnName("develop");
-
-                entity.Property(e => e.EbitdaMargins).HasColumnName("ebitdaMargins");
-
-                entity.Property(e => e.Embedding).HasColumnName("embedding");
-
-                entity.Property(e => e.Employee).HasColumnName("employee");
-
-                entity.Property(e => e.FilingDate)
-                    .HasColumnType("datetime")
-                    .HasColumnName("filing_date");
-
-                entity.Property(e => e.ForwardPe).HasColumnName("forwardPE");
-
-                entity.Property(e => e.Fraud).HasColumnName("fraud");
-
-                entity.Property(e => e.FullTimeEmployees).HasColumnName("fullTimeEmployees");
-
-                entity.Property(e => e.Hc).HasColumnName("hc");
-
-                entity.Property(e => e.HcParagraphs).HasColumnName("hc_paragraphs");
-
-                entity.Property(e => e.HcSentences).HasColumnName("hc_sentences");
-
-                entity.Property(e => e.HeldPercentInstitutions).HasColumnName("heldPercentInstitutions");
-
-                entity.Property(e => e.Hr).HasColumnName("hr");
-
-                entity.Property(e => e.Leadership).HasColumnName("leadership");
-
-                entity.Property(e => e.Litigious).HasColumnName("litigious");
-
-                entity.Property(e => e.Management).HasColumnName("management");
-
-                entity.Property(e => e.MarketCap).HasColumnName("marketCap");
-
-                entity.Property(e => e.Mdna).HasColumnName("mdna");
-
-                entity.Property(e => e.Mission).HasColumnName("mission");
-
-                entity.Property(e => e.NumberOfAnalystOpinions).HasColumnName("numberOfAnalystOpinions");
-
-                entity.Property(e => e.Organization).HasColumnName("organization");
-
-                entity.Property(e => e.PegRatio).HasColumnName("pegRatio");
-
-                entity.Property(e => e.PriceToBook).HasColumnName("priceToBook");
-
-                entity.Property(e => e.RecommendationKey)
-                    .HasMaxLength(255)
-                    .HasColumnName("recommendationKey");
-
-                entity.Property(e => e.RecommendationMean).HasColumnName("recommendationMean");
-
-                entity.Property(e => e.ReturnOnEquity).HasColumnName("returnOnEquity");
-
-                entity.Property(e => e.RevenueGrowth).HasColumnName("revenueGrowth");
-
-                entity.Property(e => e.RevenuePerEmployee).HasColumnName("revenuePerEmployee");
-
-                entity.Property(e => e.Talent).HasColumnName("talent");
-
-                entity.Property(e => e.Text).HasColumnName("text");
-
-                entity.Property(e => e.Ticker)
-                    .HasMaxLength(255)
-                    .HasColumnName("ticker");
-
-                entity.Property(e => e.TotalRevenue).HasColumnName("totalRevenue");
-
-                entity.Property(e => e.TrailingEps).HasColumnName("trailingEps");
-
-                entity.Property(e => e.Vision).HasColumnName("vision");
-            });
-
-            modelBuilder.Entity<DfRanking>(entity =>
-            {
-                entity.ToTable("df_ranking");
-
-                entity.HasIndex(e => e.Ticker, "idx_ticker");
-
-                entity.Property(e => e.HcParagraphs).HasColumnName("hc_paragraphs");
-            });
-
-            modelBuilder.Entity<OrganizationMap>(entity =>
-            {
-                entity.ToTable("OrganizationMap");
-
-                entity.HasIndex(x => x.Ticker, "IX_OrganizationMap_ticker");
-
-                entity.Property(x => x.Code)
-                    .HasMaxLength(50)
-                    .HasColumnName("Code");
-
-                entity.Property(e => e.Ticker)
-                    .HasMaxLength(255)
-                    .HasColumnName("Ticker");
             });
 
             OnModelCreatingPartial(modelBuilder);
