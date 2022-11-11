@@ -37,6 +37,10 @@ namespace Rbl.Pages
         public string HrEoReport5 { get; set; }
         public string Report6Narrative { get; set; }
         public string Report6FollowUp { get; set; }
+        public int G3HCAI_TalentPageNumber = 27;
+        public int G3HCAI_LeadershipPageNumber = 33;
+        public int G3HCAI_OrganizationPageNumber = 38;
+        public int G3HCAI_HrPageNumber = 45;
 
 
         public async Task<IActionResult> OnGetAsync(string ticker)
@@ -98,7 +102,7 @@ namespace Rbl.Pages
                         if (range1)
                             result = $"{companyName} scores low in talent. Businesses that score low in talent tend to underinvest in people programs and are reactive to talent challenges. You likely have difficulty attracting and retaining the talent you need to win. We recommend that you take a more aggressive approach to ensuring that your employees have both the skills and commitment to deliver your business results. In the G3HC Actionable Insights framework for Talent, there are 10 talent initiatives (such as acquiring talent, developing employees, encouraging diversity, and creating a positive employee experience) that you can choose from that have high impact on business outcomes.";
                         if (range2)
-                            result = $"Congratulations!  {companyName} scores moderately in talent. You are a solid choice for  to work, but not distinctive.  Your talent initiatives are adequate, but not best in class.  We recommend that you choose one or two high impact talent initiatives in the G3HC Actionable Insights where you can become best in class. When you excel in targeted talent initiatives, your people will be more able to deliver results that matter to your company.";
+                            result = $"{companyName} scores moderately in talent. You are a solid choice for  to work, but not distinctive.  Your talent initiatives are adequate, but not best in class.  We recommend that you choose one or two high impact talent initiatives in the G3HC Actionable Insights where you can become best in class. When you excel in targeted talent initiatives, your people will be more able to deliver results that matter to your company.";
                         if (range3)
                             result = $"Congratulations! {companyName} scores high in the talent pathway. {companyName} is a talent magnet and the quality of your talent helps you achieve your business outcomes. Businesses that score high in talent tend to have competent employees (through acquiring talent, managing employee performance, and developing employees) who are committed (by tracking employee engagement and having a positive employee experience). We recommend you continue to invest in innovative talent initiatives to continue to have talent strengths.";
                         break;
@@ -127,7 +131,7 @@ namespace Rbl.Pages
                         if (range2)
                             result = $"{companyName} has a moderate score for the HR pathway meaning that HR tends to be efficient at the essential elements of managing how people-related work is done.  In addition, HR is functionally excellent by offering accepted HR practices and responding to the needs of the business.   HR professionals are credible because they execute projects that support internal business stakeholders (line managers and employees) through a variety of HR practices. In the G3HC Actionable Insights, you will find a framework for HR that includes 9 initiatives. You should pick one or two of these initiatives where you want to excel in HR.";
                         if (range3)
-                            result = $"{companyName} scores high in HR. HR does the essential work of HR efficiently and offers innovative HR practices.  In addition, HR also has a strong and positive reputation for creating value for the business. HR offers Human Capability (talent, leadership, organization) solutions that create value for all stakeholders.  HR professionals have positive relationships with each other and with line managers as the work together to meet business needs.  HR work also aligns with customers and investors and helps to deliver the strategic intent of the business.  We recommend you continue to innovate HR work listed in the G3HC Actionable Insights to meet the needs of all stakeholders.";
+                            result = $"Congratulations! {companyName} scores high in HR. HR does the essential work of HR efficiently and offers innovative HR practices.  In addition, HR also has a strong and positive reputation for creating value for the business. HR offers Human Capability (talent, leadership, organization) solutions that create value for all stakeholders.  HR professionals have positive relationships with each other and with line managers as the work together to meet business needs.  HR work also aligns with customers and investors and helps to deliver the strategic intent of the business.  We recommend you continue to innovate HR work listed in the G3HC Actionable Insights to meet the needs of all stakeholders.";
                         break;
 
                     default:
@@ -147,13 +151,13 @@ namespace Rbl.Pages
             {
                 var below5 = new List<string>();
                 if (scores.TalentScore < 5)
-                    below5.Add("<a href='#page-30' class='red'>Section 5 (Talent)</a>");
-                if (scores.OrganizationScore < 5)
-                    below5.Add("<a href='#page-34' class='red'>Section 6 (Organization)</a>");
+                    below5.Add($"<a href='#page-{G3HCAI_TalentPageNumber}' class='red'>Section 1 (Talent)</a>");
                 if (scores.LeadershipScore < 5)
-                    below5.Add("<a href='#page-39' class='red'>Section 7 (Leadership)</a>");
+                    below5.Add($"<a href='#page-{G3HCAI_LeadershipPageNumber}' class='red'>Section 2 (Leadership)</a>");
+                if (scores.OrganizationScore < 5)
+                    below5.Add($"<a href='#page-{G3HCAI_OrganizationPageNumber}' class='red'>Section 3 (Organization)</a>");
                 if (scores.HrScore < 5)
-                    below5.Add("<a href='#page-42' class='red'>Section 8 (Human Resources)</a>");
+                    below5.Add($"<a href='#page-{G3HCAI_HrPageNumber}' class='red'>Section 4 (Human Resources)</a>");
 
                 var appendixStr = string.Join(", ", below5);
                 var followup = $"Based on your results; we recommend you take some time to review these links to G3HC Actionable Insights {appendixStr}.";
@@ -186,7 +190,7 @@ namespace Rbl.Pages
                 else
                 {
                     return (
-                        "<b>Build on strengths</b>.  You do not have any scores below parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts customers, employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
+                        "<b>Build on strengths</b>.  You do not have any scores below parity. Your scores do not show any scores at <b>industry best or world class</b> level. Your business should strive to be industry best or world class in one pathway. When this occurs, your company has a distinctive reputation which attracts employees, customers, investors, and communities. Based on your business strategy, identify which pathway should be at industry best and then invest there. ",
                         "Based on your results; we recommend you review our G3HC Actionable Insights.",
                         ""
                         );

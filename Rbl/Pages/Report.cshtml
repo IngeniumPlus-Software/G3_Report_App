@@ -53,7 +53,160 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-2" class="blue-bg toc red-border-line">
+<section id="executive-summary" class="text-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Executive Summary
+        </h2>
+        <p class="es-top-text">
+            In 2021, @Model.CompanyName reported your Human Capital as part of your SEC ﬁlings. We used a standard framework of four pathways (talent + leadership + organization + human resources) to look beyond Human Capital for all references to <b>Human Capability</b> anywhere in your 10k. Using proprietary machine learning technology that delivers far stronger predictions of business results than previous studies using surveys, we analyzed your 10K for evidence of these concepts in each pathway. Our approach allowed for measurement and comparison across companies in same way that is done for ﬁnancial reporting.
+        </p>
+        <p class="es-top-text">
+            Based on what you reported, @Model.CompanyName received an overall score (1 to 10) in each pathway and compared with your industry, all companies filing with the SEC and the top 10% as shown in the bar chart and table below.  This scoring enables an analysis of where @Model.CompanyName stands in relation to others based on their Human Capability reporting.
+        </p>
+        <div class="es-split" style="display: flex;">
+            <div class="es-finding-1">
+                <div>
+                    <table id="es-comp-table" class="table table-striped table-bordered align-middle comp-table">
+                        <tr>
+                            <td></td>
+                            <td colspan="3" style="text-align: center;">Comparison Groups</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.CompanyName</td>
+                            <td>SEC Filing Companies</td>
+                            <td>Industry</td>
+                            <td>Top 10%</td>
+                        </tr>
+                        <tr>
+                            <td>@Model.OrganizationScoreTotal</td>
+                            <td>@Model.AllScoreTotal</td>
+                            <td>@Model.IndustryScoreTotal</td>
+                            <td>@Model.TopTenScoreTotal</td>
+                        </tr>
+                    </table>
+                </div>
+                <div class="bg-white">
+                    <div id="es-chart-bar" style="width: 490px; height: 175px; margin-left: auto; margin-right: auto;"></div>
+                </div>
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th scope="col"></th>
+                                <th scope="col">
+                                    <p>Talent</p>
+                                </th>
+                                <th scope="col">
+                                    <p>Organization</p>
+                                </th>
+                                <th scope="col">
+                                    <p>Leadership</p>
+                                </th>
+                                <th scope="col">
+                                    <p>Human Resources</p>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>
+                                    <p>@Model.CompanyName</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.TalentScore, true))">@Model.ScoresByTicker.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrganizationScore, true))">@Model.ScoresByTicker.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.LeadershipScore, true))">@Model.ScoresByTicker.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.HrScore, true))">@Model.ScoresByTicker.HrScore</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Your Industry</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.TalentScore))">@Model.ScoresIndustry.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrganizationScore))">@Model.ScoresIndustry.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.LeadershipScore))">@Model.ScoresIndustry.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.HrScore))">@Model.ScoresIndustry.HrScore</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>SEC Average</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.TalentScore))">@Model.ScoresAll.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrganizationScore))">@Model.ScoresAll.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.LeadershipScore))">@Model.ScoresAll.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.HrScore))">@Model.ScoresAll.HrScore</p>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <p>Top 10% SEC</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.TalentScore))">@Model.ScoresTop10.TalentScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrganizationScore))">@Model.ScoresTop10.OrganizationScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.LeadershipScore))">@Model.ScoresTop10.LeadershipScore</p>
+                                </td>
+                                <td>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.HrScore))">@Model.ScoresTop10.HrScore</p>
+                                </td>
+                            </tr>
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <td></td>
+                                <td class="legend" colspan="4">
+                                    <label><span class="below-parity"></span> = Below Parity (5.0)</label>
+                                    <label><span class="high-parity"></span> = Excellent Score (8.0)</label>
+                                </td>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+            <div class="es-side-links">
+                <p>For a closer look at your data, use these hyperlinks to:</p>
+                <p><a href="#page-16">A plot of your individual scores in each Pathways (Finding 3)</a></p>
+                <p><a href="#page-17">A plot or your company Pathway scores versus the overall SEC average (finding 4)</a></p>
+                <p><a href="#page-18">A plot of your company Pathway scores versus your industry average (Finding 5)</a></p>
+            </div>
+        </div>
+        <p class="es-bottom-text">
+            Interpretation and Implications: @Html.Raw(Model.Report6Narrative)
+        </p>
+        <p class="es-bottom-text">
+            As @Model.CompanyName updates its annual Human Capital report to the SEC, you can include a discussion of talent, leadership, organization, and HR initiatives from your prioritized action plan that includes ideas from in the G3HC Actionable Insights. Your updated annual SEC report will demonstrate progress in @(Model.CompanyName)’s commitment to building Human Capability. Just as financial metrics offer a number of insights about financial performance that are tailored to a company’s business, @(Model.CompanyName)’s Human Capability reporting should focus on those initiatives that give others greater confidence in your Human Capability agenda, i.e., that your Human Capability agenda is targeted at increasing business outcomes. Each year, the quality of Human Capability reporting to the SEC will increase, so @Model.CompanyName should have an annual Human Capability reporting process to track your performance.
+        </p>
+    </div>
+</section>
+<section id="page-3" class="blue-bg toc red-border-line">
     <span class="counter"></span>
     <div>
         <h2 class="mb-5 pe-5">This report enables you to upgrade your Human Capability investments by answering 4 questions.</h2>
@@ -88,10 +241,10 @@ score compares to others in your industry, all other companies in the SEC and to
                     </p>
                 </div>
                 <div class="detail">
-                    <h3>Section 5: Ideas for improving: G3HC Actionable Insights</h3>
+                    <h3>Section 5: Communicating with Stakeholders </h3>
                     <p>
-                        What’s next? <br> How can the Human Capability framework help you create a rigorous roadmap that will shape your Human Capability agenda and deliver results? Action: Take targeted action, improve your disclosures and track your progress, and you will see increased employee, financial, and community results.
-
+                        Who are the key stakeholders and what should we communicate?<br/>
+                        Action: Create an intentional plan to communicate and engage stakdeholders (SEC, Board, investors, employees, community)  in your Human Capability roadmap and build confidence in future business results.
                     </p>
                 </div>
             </div>
@@ -101,14 +254,14 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-3" class="blue-bg section-page">
+<section id="page-4" class="blue-bg section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 1:</h1>
         <h2>Why does Human Capability matter in general and for @Model.CompanyName?</h2>
     </div>
 </section>
-<section id="page-4" class="text-page">
+<section id="page-5" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -136,7 +289,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-5" class="text-page-cont">
+<section id="page-6" class="text-page-cont">
     <span class="counter"></span>
     <div>
         <h3 class="mb-4">Internal stakeholders </h3>
@@ -150,7 +303,7 @@ score compares to others in your industry, all other companies in the SEC and to
         <div class="data mb-2">
             <p><strong>1.2 What the government (SEC) requests.</strong></p>
             <p>
-                Because Human Capability is increasingly material to all stakeholders, the SEC mandated Human Capital reporting (see G3HC Actionable Insights section 1 for legal requirement). The response to the SEC Human Capital requirement in 2021 varies dramatically in length (ranging from under 200 words to over 2,000); in content covered (from safety to unions to broad axioms to specific quantitative data); and in location in the report (a separate section, risk, or management and discussion
+                Because Human Capability is increasingly material to all stakeholders, the SEC mandated Human Capital reporting (see Appendix 1 for legal requirement). The response to the SEC Human Capital requirement in 2021 varies dramatically in length (ranging from under 200 words to over 2,000); in content covered (from safety to unions to broad axioms to specific quantitative data); and in location in the report (a separate section, risk, or management and discussion
                 analysis). There is currently a lack of agreement for standard logic for the report. Today’s Human Capital reporting is analogous to a single financial measure (e.g., inventory turnover or free cash flow) as a complete indicator
                 of financial performance. Clearly, this doesn’t make sense. The acceptance of standardized and accepted people and organization frameworks and metrics allows integration of Human Capability initiatives and comparison across
                 companies.
@@ -169,13 +322,13 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-6" class="text-page-cont">
+<section id="page-7" class="text-page-cont">
     <span class="counter"></span>
     <div>
         <p>
             The Human Capability column in Figure 1 can be further defined with a comprehensive and standardized framework that offers a compelling way to organize and discuss @Model.CompanyName’s numerous initiatives in talent, organization, leadership,
             and HR. The Human Capability framework in Figure 2 offers a simple and robust way to organize the array of people and organization activities into four pathways that can be discussed both inside @Model.CompanyName as well as shared and
-            compared with those outside @Model.CompanyName. G3HC Actionable Insights sections 5 through 8 show items that can be included in each of the four pathways of Figure 2. In G3HC Actionable Insights there are 37 initiatives and over 100 playbooks, articles and videos in each of the four domains identified.
+            compared with those outside @Model.CompanyName. G3HC Actionable Insights sections 1 through 4 show items that can be included in each of the four pathways of Figure 2. In G3HC Actionable Insights there are 37 initiatives and over 100 playbooks, articles and videos in each of the four domains identified.
         </p>
         <div class="text-center"><span>Figure 2: <br>Four Pathways for Human Capability</span></div>
         <ul>
@@ -185,14 +338,14 @@ score compares to others in your industry, all other companies in the SEC and to
         <img class="embedded-graphic" src="/images/figure2.png">
     </div>
 </section>
-<section id="page-7" class="section-page">
+<section id="page-8" class="section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 2:</h1>
         <h2>How to approach and advance @Model.CompanyName’s Human Capability agenda?</h2>
     </div>
 </section>
-<section id="page-8" class="text-page">
+<section id="page-9" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -246,14 +399,14 @@ score compares to others in your industry, all other companies in the SEC and to
         </p>
     </div>
 </section>
-<section id="page-9" class="section-page">
+<section id="page-10" class="section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 3:</h1>
         <h2>What is @Model.CompanyName’s current Human Capability?</h2>
     </div>
 </section>
-<section id="page-10" class="text-page">
+<section id="page-11" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -303,7 +456,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </ul>
     </div>
 </section>
-<section id="page-11" class="text-page-cont">
+<section id="page-12" class="text-page-cont">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4"></h2>
@@ -346,7 +499,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-12" class="report-page">
+<section id="page-13" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0086d6; background-image: url(./images/0086d6_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -543,11 +696,37 @@ score compares to others in your industry, all other companies in the SEC and to
                     },
                     categories: [2021]
                 });
+
+                $("#es-chart-bar").kendoChart({
+                    series: dataKendo,
+                    seriesDefaults: {
+                        type: "column"
+                    },
+                    valueAxis: {
+                        majorUnit: 5,
+                        labels: {
+                            template: "#= value #",
+                            rotation: "auto"
+                        },
+                        axisCrossingValue: 0,
+                        narrowRange: false,
+                    },
+                    legend: {
+                        visible: true,
+                        position: "bottom",
+                    },
+                    tooltip: {
+                        visible: true,
+                        format: "#= value #",
+                        template: "#= series.name #: #= value #"
+                    },
+                    categories: [2021]
+                });
             });
         </script>
     </div>
 </section>
-<section id="page-13" class="report-page">
+<section id="page-14" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0f6aaf; background-image: url(./images/0f6aaf_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -588,30 +767,14 @@ score compares to others in your industry, all other companies in the SEC and to
             </script>
     </div>
 </section>
-<section id="page-14" class="text-page">
+<section id="page-15" class="text-page">
     <span class="counter"></span>
     <div>
         <h2></h2>
         <div class="bg-white">
             <div class="ips-row">
                 <div class="col-md-11">
-                    <p><strong>Leadership</strong></p>
-                    <p>
-                        @Model.LeadershipEoReport5
-                    </p>
-                </div>
-            </div>
-            <div class="ips-row">
-                <div class="col-md-11">
-                    <p><strong>Organization</strong></p>
-                    <p>
-                        @Model.OrganizationEoReport5
-                    </p>
-                </div>
-            </div>
-            <div class="ips-row">
-                <div class="col-md-11">
-                    <p><strong>Talent</strong></p>
+                    <p><strong>Talent</strong> - <a href="#page-@Model.G3HCAI_TalentPageNumber">click here for Actionable Insights for Talent</a></p>
                     <p>
                         @Model.TalentEoReport5
                     </p>
@@ -619,7 +782,23 @@ score compares to others in your industry, all other companies in the SEC and to
             </div>
             <div class="ips-row">
                 <div class="col-md-11">
-                    <p><strong>HR</strong></p>
+                    <p><strong>Leadership</strong> - <a href="#page-@Model.G3HCAI_LeadershipPageNumber">click here for Actionable Insights for Leadership</a></p>
+                    <p>
+                        @Model.LeadershipEoReport5
+                    </p>
+                </div>
+            </div>
+            <div class="ips-row">
+                <div class="col-md-11">
+                    <p><strong>Organization</strong> - <a href="#page-@Model.G3HCAI_OrganizationPageNumber">click here for Actionable Insights for Organization</a></p>
+                    <p>
+                        @Model.OrganizationEoReport5
+                    </p>
+                </div>
+            </div>
+            <div class="ips-row">
+                <div class="col-md-11">
+                    <p><strong>HR</strong> - <a href="#page-@Model.G3HCAI_HrPageNumber">click here for Actionable Insights for HR</a></p>
                     <p>
                         @Model.HrEoReport5
                     </p>
@@ -634,7 +813,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </div>
     </div>
 </section>
-<section id="page-15" class="report-page">
+<section id="page-16" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #165489; background-image: url(./images/165489_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -664,7 +843,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </script>
     </div>
 </section>
-<section id="page-16" class="report-page">
+<section id="page-17" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #1c4c79; background-image: url(./images/1c4c79_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -694,7 +873,7 @@ score compares to others in your industry, all other companies in the SEC and to
             </script>
     </div>
 </section>
-<section id="page-17" class="report-page">
+<section id="page-18" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #0e325c; background-image: url(./images/0e325c_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -722,20 +901,27 @@ score compares to others in your industry, all other companies in the SEC and to
             });
             </script>
 </section>
-<section id="page-18" class="section-page">
+<section id="page-19" class="section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 4:</h1>
         <h2>What can be done to improve @Model.CompanyName’s Human Capability?</h2>
     </div>
 </section>
-<section id="page-19" class="text-page">
+<section id="page-20" class="text-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
             Action: Improve reporting and investing in Human Capability to create value for all stakeholders.
         </h2>
-        <p>To improve your Human Capability reporting, You can choose what to report in future SEC filings and where to invest to upgrade your scores. Figure 4 provides four choices to consider (see footnotes).</p>
+        <p>This section provides a guide to improving Human Capability at @Model.CompanyName. Figure 4 provides a decision tree of four choices to consider as you create an action plan for next year and beyond.  Use the decision tree and draw upon the resources in Actionable Insights sections 1 through 4 as well as the video resources on the G3HumanCapability website to strengthen your organizations Human Capability and improve your reporting.</p>
+        <p>The decision tree depicts four choices on where to invest and what to report in future SEC filings to upgrade your scores.</p>
+        <ol>
+            <li><strong>Keep reporting –</strong> continue to report your current investments and activities across all four of the Human Capability pathways in your SEC filings</li>
+            <li><strong>Low Hanging Fruit –</strong> start reporting activities you do but have not previously reported</li>
+            <li><strong>Opportunties –</strong> invest in new ways to strengthen and improve your Human Capability</li>
+            <li><strong>Misreporting –</strong> ensure that your report is true and accurate</li>
+        </ol>
         <div class="text-center">
             <span>
                 Figure 4<br />
@@ -743,29 +929,37 @@ score compares to others in your industry, all other companies in the SEC and to
             </span>
         </div>
         <img class="embedded-graphic" src="./images/figure4_option2.png">
-        <p>
+        <p class="footnotes">
             Footnotes:
         </p>
-        <ol>
-            <li><b>Keep Reporting:</b> Human Capability initiatives that you currently invest in and have reported in your SEC filings. You will likely keep reporting these efforts.</li>
-            <li>
+        <ol class="footnotes">
+            <li value="2">
                 <b>Low Hanging Fruit:</b> Human Capability initiatives that you are pursuing but have not reported for one of two reasons. First, if you believe that these initiatives are proprietary and you do not want to share them
                 under today’s regulations, you do not need to report them. Second, if they are not proprietary and you believe that reporting these initiatives would better signal your Human Capability, you can
                 start to report them and these initiatives will positively impact your future scores.
             </li>
-            <li><b>Opportunity:</b> Human Capability initiatives that may be opportunities for @Model.CompanyName to innovate and report new ideas and actions</li>
-            <li>
+            <li value="4">
                 <b>Misreporting:</b> Human Capability initiatives you are not doing and should not report. Given that regulatory reporting is a 
                 public disclosure, misrepresentations of what you are doing would be false and illegal.
             </li>
         </ol>
     </div>
 </section>
-<section id="page-20" class="text-page">
+<section id="page-21" class="text-page">
     <span class="counter"></span>
     <div>
-        <p><strong>4.1 Recommendations for improving Human Capability reporting</strong></p>
-        <p>If you chose to report Human Capability initiatives, you can find an overview of 37 initiatives and over 100 playbooks, videos and articles that you can invest in and report in each of the four pathways (see Figure 5)</p>
+        <p>After interpreting your results in Section 3, you and your team should identify which pathways are the most critical priorities in the near term.  Strenthening your scores in these pathways will be derived from two choices.</p>
+        <ol>
+            <li>Low hanging fruit:<br/> You have been rated as either low, medium or high in the pathway. Read through the list of Actionable Insights for the specific pathway. Ask yourself if any of these ideas are currently beign done in your organization but not reported. If yes, make some notes about what you “could have” reported but didn’t. 
+            </li>
+            <li>Opportunities:<br/>The Actionable Insights section for each pathway begins with an overview of what are the highest impact actions within the pathway that will improve your score.  You will also find hints on selecting your investment priorities depending on your score in the pathway. 
+            </li>
+        </ol>
+        <p>Select your priority actions based on a balance of need and value.  Based on your Human Capability score in each pathway and after considering what you have done but did not report (low hanging fruit), rank order the priority of the four pathways in terms of improvement.   Improve upon weaknesses if pathways score below parity.   Build upon strengths in pathways where you strive to be, or maintain, a world class capability level.</p>
+        
+        <p><strong>4.1 Leveraging the Actionable Insights for each pathway</strong></p>
+        <p>Our Human Capability Framework (see figure 5) will help @Model.CompanyName business and HR leaders define, invest in, prioritize, measure, and improve Human Capability much like the SEC required financial disclosures (income statement, balance sheet, cash flow) to guide financial decisions. In the Actionable Insights you can find the 37 initiatives and over 100 playbooks, videos and articles that can comprise your plan to invest in and report in each of the four pathways.</p>
+        
         <div class="text-center">
             <span>
                 Figure 5<br />
@@ -773,51 +967,156 @@ score compares to others in your industry, all other companies in the SEC and to
             </span>
         </div>
         <img class="embedded-graphic" src="./images/figure5.png">
-        <p>
-            In the G3HC Actionable Insights are definitions, resources, and metrics for each of these thirty-seven initiatives.
-        </p>
-        <p>
-            G3HC Actionable Insights 5: Resources and metrics on talent (10 initiatives)<br> G3HC Actionable Insights 6: Resources and metrics on organization (12 capabilities)<br> G3HC Actionable Insights 7: Resources and metrics on leadership (6 steps)
-            <br> G3HC Actionable Insights 8: Resources and metrics on human resources (9 elements)
-        </p>
-        <p>
-            In reviewing the initiatives in each of the four Human Capability pathways, you can identify those that you believe enable @Model.CompanyName to deliver results. You can also disclose measures for each of those initiatives that will help others increase confidence in your Human Capability investments.
-        </p>
     </div>
 </section>
-<section id="page-21" class="text-page">
+<section id="page-22" class="text-page">
     <span class="counter"></span>
-    <div class="ips-row">
-        <div class="col-md-8">
-            <p><strong>4.2 Reporting to the SEC</strong></p>
-            <p>
-                As @Model.CompanyName updates its annual Human Capital report to the SEC, you can include discussion of talent, organization, leadership, and HR initiatives from the information in the G3HC Actionable Insights that @Model.CompanyName has invested in. This updated
-                annual SEC report will demonstrate progress in @Model.CompanyName’s commitment to building Human Capability. Just as financial metrics offer a number of insights about financial performance that are tailored to a company’s business,
-                @Model.CompanyName’s Human Capability reporting should focus on those initiatives that give others greater confidence in your Human Capability agenda, i.e., that your Human Capability agenda is targeted to increasing business outcomes.
-            </p>
-            <p>Each year, the quality of Human Capability reporting to the SEC will increase, so @Model.CompanyName should have an annual Human Capability reporting process to track your performance.</p>
-        </div>
-        <div class="col-md-4">
-            <img src="./images/picture_4_2.jpg" class="img-fluid mt-2" />
-        </div>
+    <div>
+        <p>In the G3HC Actionable Insights are definitions, resources, and metrics for each of these thirty-seven initiatives.</p>
+        <p>G3HC Actionable Insights 1: Resources and metrics on talent (10 initiatives)<br/>
+        G3HC Actionable Insights 2: Resources and metrics on leadership (6 steps)<br/>
+        G3HC Actionable Insights 3: Resources and metrics on organization (12 capabilities)<br/>
+        G3HC Actionable Insights 4: Resources and metrics on human resources (9 elements)</p>
+        <p>In reviewing the initiatives in each of the four Human Capability pathways, you can identify those that you believe enable @Model.CompanyName to deliver results. You can also disclose measures for each of those initiatives that will help others increase confidence in your Human Capability investments.</p>
+        <p><strong>4.2 Validating your plan</strong></p>
+        <p>As a final step in completing your plan, cross check that it is targeted at the stakeholder results (strategy, customer, employee, investor, community) that are most critical to your organization.  These result areas should be aligned with the metrics that you create to track plan progress and impact.  Where possible validate your plan with these key stakeholder groups.  This validation step may offer new insights about communicating your plan that will be covered in section 5 of this report.</p>
+        <p><strong>4.3 Improve reporting to the SEC</strong></p>
+        <p>As @Model.CompanyName updates its annual Human Capital report to the SEC, you can enhance the discussion of talent, leadership, organization and HR initiatives with the “low hanging fruit” and new “opportunities” that you are implementing. This updated annual SEC report will demonstrate progress in @(Model.CompanyName)’s commitment to building Human Capability. Just as financial metrics offer a number of insights about financial performance that are tailored to a company’s business, @(Model.CompanyName)’s Human Capability reporting should focus on those initiatives that give others greater confidence in your Human Capability agenda, i.e., that your Human Capability agenda is targeted to increasing business outcomes. Each year, the quality of Human Capability reporting to the SEC will increase, so @Model.CompanyName should have an annual Human Capability reporting process to track your performance.</p>
     </div>
 </section>
-<section id="page-22" class="blue-bg section-page">
+<section id="page-23" class="blue-bg section-page">
     <span class="counter"></span>
     <div>
         <h1>Section 5:<br> What’s next?</h1>
-        <h2>Conclusion and next steps</h2>
-        <div>
-            <p>This report allows @Model.CompanyName to better report Human Capability governance to key stakeholders, through the annual SEC filings.</p>
-            <p>As you take targeted action, improve your disclosures and track your progress, you will see increased employee, financial, and community results.</p>
-            <p>
-                By using the Human Capability framework with four pathways, 37 initiatives, and over 100 playbooks, videos and articles, you have a standardized and rigorous roadmap that will shape your Human Capability agenda and in a manner that allows you to benchmark others in your industry - as well as the top companies reporting - on similar indicators.
-            </p>
-            <p>In this governance report, @Model.CompanyName can now focus on four pathways and initiatives that will deliver employee, financial, and community results.</p>
-        </div>
+        <h2>Who are the key stakeholders and what should we communicate?</h2>
     </div>
 </section>
-<section id="page-23" class="appendix red-border-line">
+<section id="page-24" class="text-page">
+    <span class="counter"></span>
+    <div>
+        <p>
+            A critical step in engaging stakeholders to understand and support your plan is to decide how and what to communicate about your Human Capability roadmap and investments.
+        </p>
+        <p>
+            First select what information to share.  Consider how to build stakeholder understanding of what Human Capability is, why it matters, where you score, what are the desired future targets based on strategy and your competitive peers, and what actions comprise your plan.
+        </p>
+        <p>
+            Second, engage key stakeholders and show the value impact of your plan.   Figure 6, shows some of the key messages and settings to consider when engaging each stakeholder group. 
+        </p>
+        <table class="table table-striped table-bordered align-middle extra-margin">
+            <tr style="font-weight: bold; text-align: center">
+                <td style="width:180px">Stakeholder</td>
+                <td>Key messages</td>
+                <td>Setting</td>
+            </tr>
+            <tr>
+                <td>Investor (equity, debt, analyst)</td>
+                <td>
+                    <ul>
+                        <li>Communicate human capability to have confidence in future earnings</li>
+                        <li>Connect human capability to intangible value</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Earnings calls</li>
+                        <li>Investor days or road shows</li>
+                        <li>Investor visits</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Board of Directors</td>
+                <td>
+                    <ul>
+                        <li>Review human capability (talent, leadership, organization, HR) investments and actions</li>
+                        <li>Include human capability as part of risk</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Quarterly board metings</li>
+                        <li>Compensation and governance committee</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Senior Executive Team</td>
+                <td>
+                    <ul>
+                        <li>Audit, prioritize, and monitor human capability initiatives to meet strategic goals</li>
+                        <li>Spend time on building human capability (20% of time)</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Regular senior executive meetings (weekly, monthly, quarterly)</li>
+                        <li>Training and development efforts</li>
+                        <li>Tie to compensation</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Finance</td>
+                <td>
+                    <ul>
+                        <li>Build human capability into auditing and risk management activities</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Weave human capability into financial audits</li>
+                    </ul>
+                </td>
+            </tr>
+            <tr>
+                <td>Human Resources</td>
+                <td>
+                    <ul>
+                        <li>Architect human capability agenda for organization</li>
+                        <li>Create / transformation HR function to deliver human capability to all stakeholders</li>
+                    </ul>
+                </td>
+                <td>
+                    <ul>
+                        <li>Regular HR staff meetings</li>
+                        <li>Upgrades of HR practices and HR professional</li>
+                    </ul>
+                </td>
+            </tr>
+        </table>
+        <p>
+            Third, step into a leadership role and engage in learning communities.  Consider different communities (consulting organizations, trade associations, professional associations) and what they can deliver for you.  Some keys to learning that you might consider include:
+        </p>
+        <ul class="stand-alone-ul">
+            <li>Adapt don’t adopt</li>
+            <li>Share ideas to learn and transfer learning</li>
+            <li>Develop a reputation as a thought leader</li>
+            <li>Have clear outcomes for these activities</li>
+        </ul>
+    </div>
+</section>
+<section id="page-25" class="text-page">
+    <span class="counter"></span>
+    <div>
+        <p>
+            The Human Capability framework and reporting requirements will evolve over time.  Be proactive to help shape that evolution.  You will find more on the topic of enagaging stakeholders on the G3HumanCapability website including a video and presentation materials.  Actionable Insights section 5 also provides a detailed list of Internal and External stakleholders and ideas on how to engage them.
+        </p>
+        <p>
+            <strong>Conclusion</strong><br/>This report allows @Model.CompanyName to better report Human Capability governance to key stakeholders, through the annual SEC filings.
+        </p>
+        <p>
+            As you take targeted action, improve your disclosures and track your progress, you will see increased employee, financial, and community results.
+        </p>
+        <p>
+            By using the Human Capability framework with four pathways, 37 initiatives, and over 100 playbooks, videos and articles, you have a standardized and rigorous roadmap that will shape your Human Capability agenda and in a manner that allows you to benchmark others in your industry - as well as the top companies reporting - on similar indicators.
+        </p>
+        <p>
+            In this governance report, @Model.CompanyName can now focus on four pathways and initiatives that will deliver employee, financial, and community results.
+        </p>
+    </div>
+</section>
+<section id="page-26" class="appendix red-border-line">
     <span class="counter"></span>
     <div class="ips-row">
         <div class="col-md-8">
@@ -827,190 +1126,117 @@ score compares to others in your industry, all other companies in the SEC and to
             <h2>
                 G3HC Actionable Insights 1
             </h2>
-            <h3>SEC Human Capital Requirement</h3>
+            <h3>Resources and metrics on talent (10 initiatives)</h3>
             <h2>
                 G3HC Actionable Insights 2
             </h2>
-            <h3>Human Capability Framework and Initiatives </h3>
+            <h3>Resources and metrics on leadership (6 steps)</h3>
             <h2>
                 G3HC Actionable Insights 3
             </h2>
-            <h3>Research on Human Capability </h3>
+            <h3>Resources and metrics on organization (12 capabilities) </h3>
             <h2>
                 G3HC Actionable Insights 4
             </h2>
-            <h3>Innovative Human Capability research using machine learning </h3>
+            <h3>Resources and metrics on human resources (9 elements)</h3>
             <h2>
                 G3HC Actionable Insights 5
             </h2>
-            <h3>Resources and metrics on talent (10 initiatives)</h3>
-            <h2>
-                G3HC Actionable Insights 6
-            </h2>
-            <h3>Resources and metrics on organization (12 capabilities) </h3>
-            <h2>
-                G3HC Actionable Insights 7
-            </h2>
-            <h3>Resources and metrics on leadership (6 steps)</h3>
-            <h2>
-                G3HC Actionable Insights 8
-            </h2>
-            <h3>Resources and metrics on human resources (9 elements)</h3>
-            <h2>
-                G3HC Actionable Insights 9
-            </h2>
             <h3>Sharing @Model.CompanyName Human Capability report and improvement with all stakeholders </h3>
+            <h2>
+                Appendix 1
+            </h2>
+            <h3>SEC Reporting Requirement</h3>
+            <h2>
+                Appendix 2
+            </h2>
+            <h3>Human Capability Framework and Initiatives</h3>
+            <h2>
+                Appendix 3
+            </h2>
+            <h3>Research on Human Capability</h3>
+            <h2>
+                Appendix 4
+            </h2>
+            <h3>Innovative Human Capability research using Machine Learning</h3>
         </div>
         <div class="col-md-4">
             <img src="./images/appendix_support_photo.jpg" class="img-fluid mt-2" />
         </div>
     </div>
 </section>
-<section id="page-24" class="appendix-page">
+<section id="page-27" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            G3HC Actionable Insights 1: SEC Human Capital Requirement
+            Improving Talent
         </h2>
         <p>
-            The SEC report on Human Capital comes via the Federal Register - Final Rule: Modernization of Regulation S-K Items 101, 103, and 105; Release Nos. 33-10825; 34-89670; File No. S7-11-19 on November 9, 2020. These rules modernize the requirements of Regulation S-K applicable to disclosure of the description of the business (Item 101), legal proceedings (Item 103) and risk factors (Item 105). This greatly expands Human Capability management disclosures. Today, reporting structure is not detailed, so companies are free to report Human Capital items in any way they choose. The wording of the rule is as follows:
+            You have been directed to this section to help you figure out what to focus on in Talent to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for Talent will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your Talent pathway that you can implement and report in the future. 
+        </p>
+        <p><strong>A. Defining Talent:</strong></p>
+        <p>
+            There are 10 elements for building your Talent capability. Resources in this section provide practical ways to improve each Talent element including videos, white papers, and tools. 
+        </p>
+        <p>Talent Elements: </p>
+        <ol>
+            <li>Acquiring talent: Set criteria, source, screen, secure, orient</li>
+            <li>Managing employee performance: Goals, measure, consequence, conversation</li>
+            <li>Developing employees: Training, on the job, life experiences</li>
+            <li>Managing employee careers and promotions: Manage stages, build high potentials</li>
+            <li>Communicating with employees: Share information down, up, sideways</li>
+            <li>Encouraging diversity, equity, inclusion: Move from numbers to programs to assumptions</li>
+            <li>Retaining the best employees: keep high performers, tailor incentives, conduct stay interviews</li>
+            <li>Managing departing employees: Manage performance, remove boldly and fairly</li>
+            <li>Improving and tracking employee engagement: Measure sentiment, take personal responsibility</li>
+            <li>Creating a positive employee experience: Encourage belief, become, and belong</li>
+        </ol>
+        <p><strong>B.	5 hints on building strong Talent:  </strong></p>
+        <ol>
+            <li>The 10 elements of Talent can be grouped into three buckets: Competence (Skills), Commitment (Engagement) and Contribution (Meaning)</li>
+            <li>The best companies for talent pay attention to all 10 elements </li>
+            <li>Talent can be stratified based on expectations for how people contribute to the business - this is necessary for resource allocation</li>
+            <li>Talent acquisition - getting the “right” talent has highest impact on business outcomes</li>
+            <li>Your employee population must be as diverse as your customer base and community</li>
+        </ol>
+    </div>
+</section>
+<section id="page-28" class="appendix-intro-page">
+    <span class="counter"></span>
+    <div>
+        <p><strong>C.	Identify one or two elements for improving @Model.CompanyName Talent pathway</strong></p>
+        <p>
+            <i>Low hanging fruit: what we are already doing that we could report but didn’t?<br/>Opportunities: what we could do that that we aren’t that will increase our talent capability?</i>
+        </p>
+        <ol>
+            <li>Low hanging fruit: </li>
+        </ol>
+            <p class="indent">Ask yourself if your Talent score resonates with what you are actually doing. As you review the information in the Actionable Insights list, make notes about what you “could have” reported but didn’t. Reporting what you are already doing creates an important baseline. </p>
+        <ol start="2">
+            <li>Opportunities:</li>
+        </ol>
+        <p>
+            Give yourself a “high, medium, low” score for each of the 10 elements of talent. What haven’t you done at all or haven’t done well? Look for Actionable Insights in this section that correspond to ideas you could implement. 
         </p>
         <p>
-            Item 101(c)(2)(ii): Provide “A description of the registrant’s Human Capital resources, including the number of persons employed by the registrant, and any Human Capital measures or objectives that the registrant focuses on in managing
-            the business (such as, depending on the nature of the registrant’s business and workforce, measures or objectives that address the development, attraction and retention of personnel).”
+            Read hints for building strong Talent capability. Make note about hints that suggest areas for improvement and future investment for @Model.CompanyName
         </p>
-    </div>
-</section>
-<section id="page-25" class="appendix-page">
-    <span class="counter"></span>
-    <div>
-        <h2 class="mb-4">
-            G3HC Actionable Insights 2: Human Capability Framework and Initiatives
-        </h2>
-        <p>With this Human Capability framework, a host of initiatives can be clustered into one of the four pathways (see Figure 5 for overview).</p>
-        <div class="text-center">
-            <span>
-                Figure 5<br />
-                37 Initiatives In Four Human Capability Pathways
-            </span>
-        </div>
-        <img class="embedded-graphic" src="./images/figure5.png">
-        <p>Some of the latest trends in each of these four pathways are briefly reviewed below.</p>
-        <ul>
-            <li>
-                Talent (also called Human Capital) deals with initiatives to ensure the right individual competence, workforce, or people: Improving how employees work through hiring based on cultural fit, orienting new employees to their job, hybrid work that determines where and how employees work, focusing on worktasks and skills more than roles, creating total reward systems to motivate employees, attending to employee physical health and psychological well-being, reskilling the workforce, managing employee careers, using digital communications, creating a DEI agenda, managing employee mobility through retention and removal efforts, building a better employee experience, and so forth.
-            </li>
-            <li>
-                Leadership emphasizes initiatives improving the quality of both individual leaders and collective leadership by: Building a business case for leadership, defining what makes an effective leader, assessing quality of leaders and
-                leadership, investing in leadership development training and coaching, measuring leadership results, and ensuring leadership reputation.
-            </li>
-        </ul>
-    </div>
-</section>
-<section id="page-26" class="appendix-page">
-    <span class="counter"></span>
-    <div>
-        <ul>
-            <li>
-                Organization (structure, governance, or culture) focuses on initiatives that define and ensure the right organization capabilities such as: Agility (moving quickly to adapt to change), strategic clarity (having a compelling purpose or mission), technology adoption (accessing digital information to reinvent work), culture (having the right values that create value for stakeholders), social responsibility (being a good social citizen), customer focus (increasing customer intimacy), innovation (discovering and delivering new ways to work), collaboration (working in networks or ecosystems), and so forth.
-            </li>
-            <li>
-                Human Resources refers to the HR function or department and how to accomplish HR work by: Upgrading the HR department by ensuring the right reputation, serving customers, having a clear purpose, governing and organizing to deliver HR work, doing HR analytics, improving HR professionals, building positive work relationships, and so forth.
-            </li>
-        </ul>
         <p>
-            This Human Capability framework in Figure 2 and 37 initiatives in Figure 5 helps @Model.CompanyName business and HR leaders define, invest in, prioritize, measure, and improve Human Capability much like the SEC required financial disclosures (income statement, balance sheet, cash flow) to guide financial decisions.
+            Based on your notes about these potential areas of opportunity, identify in which of the 10 elements of talent you should target
         </p>
-    </div>
-</section>
-<section id="page-27" class="appendix-page">
-    <span class="counter"></span>
-    <div>
-        <h2 class="mb-4">
-            G3HC Actionable Insights 3: Research on Human Capability
-        </h2>
-        <p>Studies of Human Capability are not new. Thousands of studies have provided insights into each of the four pathways. @Model.CompanyName report draws on legacy and incorporates innovative research to give you confidence in your results.</p>
-        <p>This report draws on extensive research that defines initiatives in each of the four pathways as shown in Figure 5.1</p>
-        <div class="text-center">
-            <span>
-                Figure 5.1<br />
-                Background Research on Human Capability as Foundation for @Model.CompanyName Report
-            </span>
-        </div>
-        <img class="embedded-graphic" src="./images/figure5_1.png">
         <p>
-            These research studies help identify the extent to which specific initiatives in each pathway are deployed. Further, this research links the Human Capability initiatives in each pathway to stakeholder outcomes by asking “so that” or
-            “because of” to ensure the linkages. Figure 6 shows the logic of creating value through Human Capability investments. This research confirms that Human Capability initiatives impact firm performance across industries and geographies.
+            Go to the specific element where you have identified potential opportunities (e.g talent acquisition) and review the videos, white papers and other tools to help you focus your talent investments in the coming year. 
         </p>
-        <p>All of these studies are based on surveys from key informants which give insight into how an organization operates, but often focus on single initiatives, have response biases, and are difficult to scale.</p>
-    </div>
-</section>
-<section id="page-28" class="appendix-page">
-    <span class="counter"></span>
-    <div>
-        <p>Metrics in these 37 initiatives come from</p>
-        <ul>
-            <li>Leadership Capital Index book … a list of over 50 indicators in 10 areas</li>
-            <li>ISO 30414 (list of 50+ specific measures, but not a thorough or tested framework)</li>
-            <li><a href="https://www.conference-board.org/topics/human-capital-benchmarking/brave-new-world-creating-value-through-HCM">https://www.conference-board.org/topics/human-capital-benchmarking/brave-new-world-creating-value-through-HCM</a> (focuses mostly on board; great summary of groups working on this issue and some measures)</li>
-            <li>
-                <a href="https://www.forbes.com/sites/shivaramrajgopal/2022/06/15/we-just-petitioned-the-sec-to-require-disclosure-of-labor-costs/?sh=2ff150c64ba1">https://www.forbes.com/sites/shivaramrajgopal/2022/06/15/we-just-petitioned-the-sec-to-require-disclosure-of-labor-costs/?sh=2ff150c64ba1</a>                            (workforce costs)
-            </li>
-            <li>
-                <a href="https://corpgov.law.harvard.edu/2022/06/29/disclosure-of-the-extent-to-which-firms-invest-in-their-workforce/#more-147168">https://corpgov.law.harvard.edu/2022/06/29/disclosure-of-the-extent-to-which-firms-invest-in-their-workforce/#more-147168</a>                            (workforce costs)
-            </li>
-            <li>
-                <a href="https://www.forbes.com/sites/shivaramrajgopal/2021/05/17/labor-costs-are-the-most-pressing-human-capital-disclosure-the-sec-should-consider-mandating/?sh=d6542bb51923">https://www.forbes.com/sites/shivaramrajgopal/2021/05/17/labor-costs-are-the-most-pressing-human-capital-disclosure-the-sec-should-consider-mandating/?sh=d6542bb51923</a>
-            </li>
-            <li>
-                <a href="https://corpgov.law.harvard.edu/2021/04/19/how-boards-can-get-human-capital-management-right-in-five-not-so-easy-steps/">https://corpgov.law.harvard.edu/2021/04/19/how-boards-can-get-human-capital-management-right-in-five-not-so-easy-steps/</a>
-            </li>
-        </ul>
-        <div class="text-center">
-            <span>
-                Figure 6<br />
-                Human Capability Pathways and Stakeholder Results
-            </span>
-        </div>
-        <img class="embedded-graphic" src="/images/figure6.png">
+        <p>
+            Note: You can use these resources to not only build a plan but also to develop your talent and your leaders 
+        </p>
     </div>
 </section>
 <section id="page-29" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            G3HC Actionable Insights 4: Innovative Human Capability research using machine learning
-        </h2>
-        <p>
-            To overcome survey limitations, this report uses information reported in the mandated 10-K SEC disclosures. Results in this report come from extracting all sentences related to Human Capability for each of the SEC filing companies who reported to the SEC in 2021 by using the Human Capability definitions for the four pathways in Figure 2.
-        </p>
-        <p>Then, using proprietary machine learning technology, seed words for each of the four pathways were identified and word lists for each of the four pathways were created. </p>
-        <ol>
-            <li>Talent = talent + employee + competence</li>
-            <li>Leadership = leadership + management + develop</li>
-            <li>Organization = organization + culture + agility + mission + vision + capability</li>
-            <li>HR = Human Capital + human resources</li>
-        </ol>
-        <p>
-            Using these word lists, the fraction of the Human Capability text that contains the words in a given list were used to create @Model.CompanyName’s score on each of the four pathways with a normalized range from 1 to 10. This scoring enables
-            an analysis of how @Model.CompanyName stands in relation to others based on their Human Capability reporting.
-        </p>
-        <p>
-            The benefit of applying this Human Capability framework to SEC reports is that these reports are for regulatory compliance where firms are accountable for integrity. This is not the case for media reports, ratings, or earnings calls,
-            which may be more promotional. Further, manual processing and interpretation of surveys does not scale, whereas machine learning processing of SEC filings enables scaling to all companies disclosing public data.
-        </p>
-        <p>
-            The Human Capability framework and machine learning analytics has limitations. The Human Capability framework is based on extensive research but could miss some elements of how your organization attends to talent, leadership, organization,
-            and HR. The information analyzed came from company reports to the SEC and companies had few requirements on what to report. The data are a single point in time since 2021 was the first year of required Human Capital disclosures.
-            Over time, this baseline framework and assessment will evolve to offer an increasingly accurate portrayal of @Model.CompanyName’s Human Capability.
-        </p>
-    </div>
-</section>
-<section id="page-30" class="appendix-page">
-    <span class="counter"></span>
-    <div>
-        <h2 class="mb-4">
-            G3HC Actionable Insights 5: Resources and metrics on talent (10 initiatives)
+            G3HC Actionable Insights 1: Resources and metrics on talent (10 initiatives)
         </h2>
         <table class="table table-striped table-bordered custom">
             <tr>
@@ -1167,7 +1393,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-31" class="appendix-page">
+<section id="page-30" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1328,7 +1554,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-32" class="appendix-page">
+<section id="page-31" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1448,7 +1674,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-33" class="appendix-page">
+<section id="page-32" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1582,10 +1808,529 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-34" class="appendix-page">
+<section id="page-33" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
-        <h2 class="mb-4">G3HC Actionable Insights 6: Resources and metrics on organization (12 capabilities)</h2>
+        <h2 class="mb-4">
+            Improving Leadership
+        </h2>
+        <p>
+            You have been directed to this section to help you figure out what to focus on in Leadership to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for Leadership will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your Leadership pathway that you can implement and report in the future. 
+        </p>
+        <p><strong>A. Defining Leadership:</strong></p>
+        <p>
+            There are 6 elements of leadership capability that increase investor confidence in the future. Resources in this section provide practical ways to improve each Leadership element including videos, white papers, and tools.
+        </p>
+        <p>Leadership Elements: </p>
+        <ol>
+            <li>Clarifying the Business Case for Leadership - have a strong business rationale for why leadership matters for business success</li>
+            <li>Defining What Leaders Know and Do - have a leadership competency model that defines expectations as a leader moves up the hierarchy</li>
+            <li>Assessing Leaders and Leadership - rigorously assess the quality of individual leaders and identify gaps in our leadership pipeline</li>
+            <li>Developing Leaders and Leadership - appropriately invest in ways to develop leaders throughout the organization through training, development experiences, non-work experiences, coaching, and so forth (individual development plan, leadership academy, career development)</li>
+            <li>Measuring Impact - measure the impact of the business case for leadership as well as leaders’ personal competencies </li>
+            <li>Ensuring Reputation - make sure that leadership reputation is managed with internal and external stakeholders (annual report, investor and analyst communication)</li>
+        </ol>
+        <p><strong>B.	7 hints on building strong Leadership:  </strong></p>
+        <ol>
+            <li>The best companies for leadership have a culture of leadership.</li>
+            <li>This culture of leadership occurs because they integrate all 6 elements - it’s not about optimizing one or two elements such as leadership assessment and education </li>
+            <li>Leadership development education is the most visible element. If you are not doing enough, you should do some - it’s necessary but not sufficient </li>
+            <li>You can only grow as fast as your leadership pipeline allows - leaders create conditions for ideal customer and employee experience</li>
+            <li>Most companies focus primarily on elements 2, 3 and 4 which primarily impact internal stakeholders</li>
+            <li>Elements 1, 5 and 6 have more impact on external stakeholders </li>
+            <li>Clarifying business case for leadership has greatest impact on business outcomes. </li>
+        </ol>
+    </div>
+</section>
+<section id="page-34" class="appendix-intro-page">
+    <span class="counter"></span>
+    <div>
+        <p><strong>C. Identify one or two elements for improving @Model.CompanyName Leadership pathway</strong></p>
+        <p>
+            <i>Low hanging fruit: what we are already doing that we could report but didn’t?<br/>
+            Opportunities: what we could do that that we aren’t that will increase our leadership capability?</i>
+        </p>
+        <ol>
+            <li>Low hanging fruit:</li>
+        </ol>
+            <p class="indent">Ask yourself if your leadership score resonates with what you are actually doing. As you review the information in the Actionable Insights list, make notes about what you “could have” reported but didn’t. Reporting what you are already doing creates an important baseline.</p>
+        <ol start="2">
+            <li>Opportunities:</li>
+        </ol>
+        <p>
+            Give yourself a “high, medium, low” score for each of the 6 elements of leadership. What haven’t you done at all or haven’t done well? In our experience for many companies that do lots of leadership development work the answer will be elements 1, 5, and 6, business case, measuring impact of the business case and building reputation for leadership. Look for Actionable Insights in this section that correspond to ideas you could implement. 
+        </p>
+        <p>
+            Read hints for building stronger leadership capability. Make note about hints that suggest areas for improvement and future investment for @Model.CompanyName
+        </p>
+        <p>
+            Based on your notes about these potential areas of opportunity, identify in which of the 6 elements of leadership you believe you should target.
+        </p>
+        <p>
+            Go to the specific element where you have identified potential opportunities (e.g business case for leadership) and review the videos, white papers and other tools to help you focus your leadership investments in the coming year. 
+        </p>
+        <p>
+            Note: You can use these resources to not only build a plan but also to develop your leaders 
+        </p>
+    </div>
+</section>
+<section id="page-35" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">G3HC Actionable Insights 2: Resources and metrics on leadership (6 steps)</h2>
+        <table class="table table-striped table-bordered custom">
+            <tbody>
+                <tr>
+                    <td>Initiative</td>
+                    <td>RBL Institute Articles/Playbooks</td>
+                    <td>LinkedIn</td>
+                    <td>Video</td>
+                    <td>Metrics</td>
+                </tr>
+                <tr>
+                    <td>Overall: Leadership pathway</td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
+                                Leadership:
+                                Emerging Leadership Trends Playbook_PB
+                            </a>
+                        </p>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2014.4/Leadership%20Capital%20playbook.pdf">
+                                Leadership
+                                Capital Index (playbook)_PB
+                            </a>
+                        </p>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2017.4/Leadership%20Playbook%20Nov%202017.pdf">
+                                Leadership:
+                                Leadership Code 2.0 (playbook)_PB
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2010.4%20NY/Leadership%20Bench%20Playbook.pdf">
+                                Leadership
+                                Bench (playbook)_PB
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2012.4/Leadership%20Sustainability%20Playbook.pdf">
+                                Leadership
+                                Sustainability (playbook)_PB
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/How%20HR%20Creates%20Leadership%20Capital.pdf">
+                                How
+                                HR Creates Leadership Capital (white paper)_WP
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/now-time-offer-guidance-how-improve-leadership-dave-ulrich/">https://www.linkedin.com/pulse/now-time-offer-guidance-how-improve-leadership-dave-ulrich/</a>
+                        </p>
+                    </td>
+                    <td></td>
+                    <td></td>
+                </tr>
+                <tr>
+                    <td>Clarifying business case for leadership</td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2014.4/Leadership%20Capital%20playbook.pdf">
+                                Leadership
+                                Capital Index (playbook)_PB
+                            </a>
+                        </p>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2010.4%20NY/Leadership%20Bench%20Playbook.pdf">
+                                Leadership
+                                Bench (playbook)_PB
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
+                                Leadership:
+                                Emerging Leadership Trends Playbook_PB
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/how-lead-without-contextual-clarity-become-leader-dave-ulrich/">https://www.linkedin.com/pulse/how-lead-without-contextual-clarity-become-leader-dave-ulrich/</a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Why-Leadership-Matters_1.mp4" target="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Why-Leadership-Matters_1.mp4">
+                                Leadership
+                                Capital Index: Why Leadership Matters (short video)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                Look at employee survey data on quality of leadership
+                            </li>
+                            <li>
+                                Strength of leadership pipeline/bench
+                            </li>
+                            <li>
+                                Compare price/earnings ratios with competitors for a decade
+                            </li>
+                            <li>
+                                Review percent of senior leader time building leadership
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section id="page-36" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <table class="table table-striped table-bordered custom">
+            <tbody>
+                <tr>
+                    <td>Defining what leaders know and do</td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
+                                Leadership:
+                                Emerging Leadership Trends Playbook_PB
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Toolkits/Nov+2017/RBL+Toolkits+Emerging+Leadership+Overview.pdf">
+                                Leadership:
+                                Leadership Code 2.0 Overview (short slide deck)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich-1c/">https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich-1c/</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/how-leaders-lead-post-pandemic-explore-mysteries-more-dave-ulrich/">https://www.linkedin.com/pulse/how-leaders-lead-post-pandemic-explore-mysteries-more-dave-ulrich/</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/posts/daveulrichpro_humanresources-empathy-leadership-activity-6775067696393519105-Whfy">https://www.linkedin.com/posts/daveulrichpro_humanresources-empathy-leadership-activity-6775067696393519105-Whfy</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/personalization-leadership-hr-takeaway-from-20202021-crises-ulrich/">https://www.linkedin.com/pulse/personalization-leadership-hr-takeaway-from-20202021-crises-ulrich/</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich">https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/leadership-confidence-times-uncertainty-dave-ulrich/">https://www.linkedin.com/pulse/leadership-confidence-times-uncertainty-dave-ulrich/</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/leadership-soft-skills-required-business-personal-success-dave-ulrich/">https://www.linkedin.com/pulse/leadership-soft-skills-required-business-personal-success-dave-ulrich/</a>
+                        </p>
+
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/you-need-become-leadership-anthropologist-dave-ulrich/">https://www.linkedin.com/pulse/you-need-become-leadership-anthropologist-dave-ulrich/</a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Paris%202012/leadership-sustainability-overview.mp4" target="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Paris%202012/leadership-sustainability-overview.mp4">
+                                Leadership
+                                Sustainability: Overview (short video)_TK
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Atlanta+2017/emerging-leadership-expectations-overview.mp4">
+                                Leadership:
+                                Leadership Code 2.0 Overview (short video)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                Percent of leadership positions filled using competency model
+                            </li>
+                            <li>
+                                Extent to which leadership competency model matches brand promises to customers
+                            </li>
+                            <li>
+                                % of leaders who have industry experience
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Assessing leaders and leadership </td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/6.12Practices%20of%20Top%20Companies%20for%20Leaders.pdf">
+                                Practices
+                                of top company for leaders (white paper)_WP
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
+                                Leadership:
+                                Emerging Leadership Trends Playbook_PB
+                            </a>
+                        </p>
+                    </td>
+                    <td></td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Individual-Domains_1.mp4">
+                                Leadership
+                                Capital Index: Individual Domains of Leadership (short video)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                Perform leadership 360
+                            </li>
+                            <li>
+                                Percent of leaders ready or next move
+                            </li>
+                            <li>
+                                Back up ratio of leaders fully prepared for key positions
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section id="page-37" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <table class="table table-striped table-bordered custom">
+            <tbody>
+                <tr>
+                    <td>Developing leaders and leadership </td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/10.19%20Preparing%20Future%20Leaders.pdf">
+                                Preparing
+                                Future Leaders (white paper)_WP
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/10.17%20C-Suite%20Development.pdf">
+                                C-suite
+                                leadership development (white paper)_WP
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/10.13%20Next%20Generation%20Leaders.pdf">
+                                Next
+                                generations leadership: What works in their development (white paper)_WP
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <p>
+                            <a href="https://www.linkedin.com/pulse/you-ready-some-coaching-4-self-coaching-questions-dave-ulrich/">https://www.linkedin.com/pulse/you-ready-some-coaching-4-self-coaching-questions-dave-ulrich/</a>
+                        </p>
+
+                    </td>
+                    <td></td>
+                    <td>
+                        <ul>
+                            <li>
+                                Percent of leaders who have individual development plans and conversations
+                            </li>
+                            <li>
+                                Budget of training/employee
+                            </li>
+                            <li>
+                                Impact of training on business results
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Measuring leader impact </td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2014.4/Leadership%20Capital%20playbook.pdf">
+                                Leadership
+                                Capital Index (playbook)_PB
+                            </a>
+                        </p>
+
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Toolkits/Nov%202014/Leadership%20Index%202014%20-%20Individual%20Domains.pdf">
+                                Leadership
+                                Capital Index: Individual Domains of Leadership (short slide deck)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td></td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Individual-Domains_1.mp4">
+                                Leadership
+                                Capital Index: Individual Domains of Leadership (short video)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                Create a leadership capital index for investors to follow
+                            </li>
+                            <li>
+                                Measure strength of leadership pipeline
+                            </li>
+                            <li>
+                                Retain key leaders
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Ensuring reputation</td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Toolkits/Toolkit%20June%202011%20ThinkTank%20-%20Leader%20Brand.pdf">
+                                Reputation:
+                                Personal leadership brand (short slide deck)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td></td>
+                    <td>
+                        <p>
+                            <a href="https://df42wlfgor5mw.cloudfront.net/Videos/Ulrich-Change/change-personal-leader-brand.mp4" target="https://df42wlfgor5mw.cloudfront.net/Videos/Ulrich-Change/change-personal-leader-brand.mp4">
+                                Reputation:
+                                Personal leadership brand (short video)_TK
+                            </a>
+                        </p>
+                    </td>
+                    <td>
+                        <ul>
+                            <li>
+                                Examine communication of leadership in public documents (annual report)
+                            </li>
+                            <li>
+                                Share stories of leadership excellence in social media
+                            </li>
+                            <li>
+                                Track leadership reputation in social media
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</section>
+<section id="page-38" class="appendix-intro-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Improving Organization
+        </h2>
+        <p>
+            You have been directed to this section to help you figure out what to focus on in Organization to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for Organization will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your Organization pathway that you can implement and report in the future.
+        </p>
+        <p><strong>A. Defining Organization:</strong></p>
+        <p>
+            There are 12 elements for building your Organization capability. Resources in this section provide practical ways to improve each Organization element including videos, white papers, and tools. 
+        </p>
+        <p>Organization Elements:</p>
+        <ol>
+            <li>Hiring, developing and managing people: Build competence, commitment and contribution (See Talent)</li>
+            <li>Acting with agility: Define agility indices, apply to all stakeholders, make change happen</li>
+            <li>Establishing strategic clarity: Understand contextual opportunity, define where to win and how to play</li>
+            <li>Delivering customer centricity: Identify customer customers and their value criteria, connect with them</li>
+            <li>Establishing the right culture: Define right (outside in) culture, build intellectual, behavioral, process agenda</li>
+            <li>Advancing collaboration: Increase skills for personal collaboration; build organization collaboration </li>
+            <li>Promoting social responsibility: Shape commitment to planet, people, philanthropy, and political processes</li>
+            <li>Expanding Innovation: Increase individual innovation DNA and organization innovative systems</li>
+            <li>Ensuring accountability: Ensure clear expectations and measures; have positive conversations</li>
+            <li>Sharing information/analytics: Acquire, analyze, and apply information to improve decision making</li>
+            <li>Leveraging technology: Create a digital agenda for the business and for human capability processes</li>
+        </ol>
+        <p><strong>B.	6 hints on building stronger Organization:</strong></p>
+        <ol>
+            <li>Think of culture as organization capability. Build a culture that resonates with your target customers</li>
+            <li>Company reputation is directly linked to world class organization capabilities- apple is innovation; Zappos is customer centricity etc.</li>
+            <li>Don’t have to be great at all organization capabilities- aim to be very high in one or possibly two; then industry parity at the rest. None below industry parity </li>
+            <li>Organization structure is a means to target, group, build and measure distinctive capabilities</li>
+            <li>Organization has 4 times more impact on business results than talent, so critical to build culture and capabilities</li>
+            <li>Strategic Clarity has most impact on business results</li>
+        </ol>
+    </div>
+</section>
+<section id="page-39" class="appendix-intro-page">
+    <span class="counter"></span>
+    <div>
+        <p><strong>C.	Identify one or two elements for improving @Model.CompanyName Organization pathway</strong></p>
+        <p>
+            <i>
+                Low hanging fruit: what we are already doing that we could report but didn’t?<br/>
+Opportunities: what we could do that that we aren’t that will increase our organization?
+            </i>
+        </p>
+        <ol>
+            <li>Low hanging fruit:</li>
+        </ol>
+            <p class="indent">
+                Ask yourself if your organization score resonates with what you are actually doing. As you review the information in the Actionable Insights list, make notes about what you “could have” reported but didn’t. Reporting what you are already doing creates an important baseline. 
+            </p>
+        <ol start="2">
+            <li>Opportunities:</li>
+        </ol>
+        <p>
+            Give yourself a “high, medium, low” score for each of the 12 elements of organization. What haven’t you done at all or haven’t done well? Look for Actionable Insights in this section that correspond to ideas you could implement.
+        </p>
+        <p>
+            If you are below industry parity in any organization element, you should get that element to parity before trying to improve other elements. Below parity in any of these elements creates disadvantage. These organization elements are interdependent so need to have basics covered. 
+        </p>
+        <p>
+            Read hints for building a strong Organization capability. Make note about hints that suggest areas for improvement and future investment for @Model.CompanyName
+        </p>
+        <p>
+            Based on your notes about these potential areas of opportunity, identify in which of the 12 elements of organization you should target
+        </p>
+        <p>
+            Go to the specific element where you have identified potential opportunities (e.g agility) and review the videos, white papers and other tools to help you focus your talent investments in the coming year. 
+        </p>
+        <p>
+            Note: You can use these resources to not only build a plan but also to develop your talent and your leaders 
+        </p>
+    </div>
+</section>
+<section id="page-40" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">G3HC Actionable Insights 3: Resources and metrics on organization (12 capabilities)</h2>
         <table class="table table-striped table-bordered custom">
             <tbody>
                 <tr>
@@ -1711,7 +2456,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-35" class="appendix-page">
+<section id="page-41" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1943,7 +2688,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-36" class="appendix-page">
+<section id="page-42" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2154,7 +2899,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-37" class="appendix-page">
+<section id="page-43" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2315,7 +3060,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-38" class="appendix-page">
+<section id="page-44" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2447,386 +3192,83 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-39" class="appendix-page">
+
+<section id="page-45" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
-        <h2 class="mb-4">G3HC Actionable Insights 7: Resources and metrics on leadership (6 steps)</h2>
-        <table class="table table-striped table-bordered custom">
-            <tbody>
-                <tr>
-                    <td>Initiative</td>
-                    <td>RBL Institute Articles/Playbooks</td>
-                    <td>LinkedIn</td>
-                    <td>Video</td>
-                    <td>Metrics</td>
-                </tr>
-                <tr>
-                    <td>Overall: Leadership pathway</td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
-                                Leadership:
-                                Emerging Leadership Trends Playbook_PB
-                            </a>
-                        </p>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2014.4/Leadership%20Capital%20playbook.pdf">
-                                Leadership
-                                Capital Index (playbook)_PB
-                            </a>
-                        </p>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2017.4/Leadership%20Playbook%20Nov%202017.pdf">
-                                Leadership:
-                                Leadership Code 2.0 (playbook)_PB
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2010.4%20NY/Leadership%20Bench%20Playbook.pdf">
-                                Leadership
-                                Bench (playbook)_PB
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2012.4/Leadership%20Sustainability%20Playbook.pdf">
-                                Leadership
-                                Sustainability (playbook)_PB
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/How%20HR%20Creates%20Leadership%20Capital.pdf">
-                                How
-                                HR Creates Leadership Capital (white paper)_WP
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/now-time-offer-guidance-how-improve-leadership-dave-ulrich/">https://www.linkedin.com/pulse/now-time-offer-guidance-how-improve-leadership-dave-ulrich/</a>
-                        </p>
-                    </td>
-                    <td></td>
-                    <td></td>
-                </tr>
-                <tr>
-                    <td>Clarifying business case for leadership</td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2014.4/Leadership%20Capital%20playbook.pdf">
-                                Leadership
-                                Capital Index (playbook)_PB
-                            </a>
-                        </p>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2010.4%20NY/Leadership%20Bench%20Playbook.pdf">
-                                Leadership
-                                Bench (playbook)_PB
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
-                                Leadership:
-                                Emerging Leadership Trends Playbook_PB
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/how-lead-without-contextual-clarity-become-leader-dave-ulrich/">https://www.linkedin.com/pulse/how-lead-without-contextual-clarity-become-leader-dave-ulrich/</a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Why-Leadership-Matters_1.mp4" target="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Why-Leadership-Matters_1.mp4">
-                                Leadership
-                                Capital Index: Why Leadership Matters (short video)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                Look at employee survey data on quality of leadership
-                            </li>
-                            <li>
-                                Strength of leadership pipeline/bench
-                            </li>
-                            <li>
-                                Compare price/earnings ratios with competitors for a decade
-                            </li>
-                            <li>
-                                Review percent of senior leader time building leadership
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <h2 class="mb-4">
+            Improving HR
+        </h2>
+        <p>
+            You have been directed to this section to help you figure out what to focus on in HR to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for HR will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your HR pathway that you can implement and report in the future. 
+        </p>
+        <p><strong>A.  Defining HR:</strong></p>
+        <p>
+            There are 9 elements to building your HR capability. Resources in this section provide practical ways to improve each HR element including videos, white papers, and tools. 
+        </p>
+        <p>HR Elements:</p>
+        <ol>
+            <li>Establishing HR Reputation: What HR is known for</li>
+            <li>Serving HR customers: Who are HR’s customers </li>
+            <li>Determining HR Purpose: Mission and purpose of HR</li>
+            <li>Governing HR Design: How HR is organized</li>
+            <li>Growing Human Capability: How HR targets, builds and measures Human Capability</li>
+            <li>Using HR Analytics: How HR accesses information to make better decisions</li>
+            <li>Refining HR Practices: How HR creates and deploys people and organization practices</li>
+            <li>Advancing HR Professionals: What HR professionals need to be, know and do to be effective</li>
+            <li>Strengthening HR Relationships: How and with who HR does it’s work</li>
+        </ol>
+        <p><strong>B.	6 hints on building strong HR:</strong></p>
+        <ol>
+            <li>The Human Capability framework in this report describes what great HR is about- building a strong HR Department that enables strong talent, leadership and organization for your business</li>
+            <li>The purpose of HR is to optimize the business it supports, not HR</li>
+            <li>Doing foundational HR work (hiring, compensating, firing, benefits…) gets you to neutral in the eyes of your internal clients, so do this work well and as efficiently as possible (centralize, outsource, technology enable)</li>
+            <li>Doing work that impacts the business creates a reputation for HR in the eyes of your internal clients- so find ways to do more of it by organizing and creating accountability for foundational and strategic work</li>
+            <li>HR reputation and HR purpose have the highest impact on business results</li>
+            <li>Be sure to have ongoing investments in your HR professionals and leaders so that they have common language, frameworks and tools to add value</li>
+        </ol>
     </div>
 </section>
-<section id="page-40" class="appendix-page">
+<section id="page-46" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
-        <table class="table table-striped table-bordered custom">
-            <tbody>
-                <tr>
-                    <td>Defining what leaders know and do</td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
-                                Leadership:
-                                Emerging Leadership Trends Playbook_PB
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Toolkits/Nov+2017/RBL+Toolkits+Emerging+Leadership+Overview.pdf">
-                                Leadership:
-                                Leadership Code 2.0 Overview (short slide deck)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich-1c/">https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich-1c/</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/how-leaders-lead-post-pandemic-explore-mysteries-more-dave-ulrich/">https://www.linkedin.com/pulse/how-leaders-lead-post-pandemic-explore-mysteries-more-dave-ulrich/</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/posts/daveulrichpro_humanresources-empathy-leadership-activity-6775067696393519105-Whfy">https://www.linkedin.com/posts/daveulrichpro_humanresources-empathy-leadership-activity-6775067696393519105-Whfy</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/personalization-leadership-hr-takeaway-from-20202021-crises-ulrich/">https://www.linkedin.com/pulse/personalization-leadership-hr-takeaway-from-20202021-crises-ulrich/</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich">https://www.linkedin.com/pulse/crises-opportunities-lead-dave-ulrich</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/leadership-confidence-times-uncertainty-dave-ulrich/">https://www.linkedin.com/pulse/leadership-confidence-times-uncertainty-dave-ulrich/</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/leadership-soft-skills-required-business-personal-success-dave-ulrich/">https://www.linkedin.com/pulse/leadership-soft-skills-required-business-personal-success-dave-ulrich/</a>
-                        </p>
-
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/you-need-become-leadership-anthropologist-dave-ulrich/">https://www.linkedin.com/pulse/you-need-become-leadership-anthropologist-dave-ulrich/</a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Paris%202012/leadership-sustainability-overview.mp4" target="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Paris%202012/leadership-sustainability-overview.mp4">
-                                Leadership
-                                Sustainability: Overview (short video)_TK
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Atlanta+2017/emerging-leadership-expectations-overview.mp4">
-                                Leadership:
-                                Leadership Code 2.0 Overview (short video)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                Percent of leadership positions filled using competency model
-                            </li>
-                            <li>
-                                Extent to which leadership competency model matches brand promises to customers
-                            </li>
-                            <li>
-                                % of leaders who have industry experience
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Assessing leaders and leadership </td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/6.12Practices%20of%20Top%20Companies%20for%20Leaders.pdf">
-                                Practices
-                                of top company for leaders (white paper)_WP
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2020.2/Emerging%20Trends%20in%20Leadership%20PLAYBOOK%202020.pdf">
-                                Leadership:
-                                Emerging Leadership Trends Playbook_PB
-                            </a>
-                        </p>
-                    </td>
-                    <td></td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Individual-Domains_1.mp4">
-                                Leadership
-                                Capital Index: Individual Domains of Leadership (short video)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                Perform leadership 360
-                            </li>
-                            <li>
-                                Percent of leaders ready or next move
-                            </li>
-                            <li>
-                                Back up ratio of leaders fully prepared for key positions
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
+        <p><strong>C.	Identify one or two elements for improving @Model.CompanyName HR</strong></p>
+        <p>
+            <i>
+                Low hanging fruit: what we are already doing that we could report but didn’t?<br/>
+Opportunities: what we could do that that we aren’t that will increase our HR?
+            </i>
+        </p>
+        <ol>
+            <li>Low hanging fruit: </li>
+        </ol>
+            <p class="indent">
+                Ask yourself if your HR score resonates with what you are actually doing. As you review the information in the Actionable Insights list, make notes about what you “could have” reported but didn’t. Reporting what you are already doing creates an important baseline. 
+            </p>
+        <ol start="2">
+            <li>Opportunities:</li>
+        </ol>
+        <p>
+            Give yourself a “high, medium, low” score for each of the 9 elements of HR. What haven’t you done at all or haven’t done well? Look for Actionable Insights in this section that correspond to ideas you could implement. 
+        </p>
+        <p>
+            Read hints for building stronger HR capability. Make note about hints that suggest areas for improvement and future investment for @Model.CompanyName
+        </p>
+        <p>
+            Based on your notes about these potential areas of opportunity, identify in which of the 9 elements of HR you believe you should target
+        </p>
+        <p>
+            Go to the specific element where you have identified potential opportunities (e.g Establish HR Reputation) and review the videos, white papers and other tools to help you focus your leadership investments in the coming year. 
+        </p>
+        <p>
+            Note: You can use these resources to not only build a plan but also to develop your HR professionals and leaders 
+        </p>
     </div>
 </section>
-<section id="page-41" class="appendix-page">
+<section id="page-47" class="appendix-page">
     <span class="counter"></span>
     <div>
-        <table class="table table-striped table-bordered custom">
-            <tbody>
-                <tr>
-                    <td>Developing leaders and leadership </td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/10.19%20Preparing%20Future%20Leaders.pdf">
-                                Preparing
-                                Future Leaders (white paper)_WP
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/10.17%20C-Suite%20Development.pdf">
-                                C-suite
-                                leadership development (white paper)_WP
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/institute_white_papers/10.13%20Next%20Generation%20Leaders.pdf">
-                                Next
-                                generations leadership: What works in their development (white paper)_WP
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <p>
-                            <a href="https://www.linkedin.com/pulse/you-ready-some-coaching-4-self-coaching-questions-dave-ulrich/">https://www.linkedin.com/pulse/you-ready-some-coaching-4-self-coaching-questions-dave-ulrich/</a>
-                        </p>
-
-                    </td>
-                    <td></td>
-                    <td>
-                        <ul>
-                            <li>
-                                Percent of leaders who have individual development plans and conversations
-                            </li>
-                            <li>
-                                Budget of training/employee
-                            </li>
-                            <li>
-                                Impact of training on business results
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Measuring leader impact </td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Playbooks/2014.4/Leadership%20Capital%20playbook.pdf">
-                                Leadership
-                                Capital Index (playbook)_PB
-                            </a>
-                        </p>
-
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Toolkits/Nov%202014/Leadership%20Index%202014%20-%20Individual%20Domains.pdf">
-                                Leadership
-                                Capital Index: Individual Domains of Leadership (short slide deck)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td></td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/Zurich%202014/Individual-Domains_1.mp4">
-                                Leadership
-                                Capital Index: Individual Domains of Leadership (short video)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                Create a leadership capital index for investors to follow
-                            </li>
-                            <li>
-                                Measure strength of leadership pipeline
-                            </li>
-                            <li>
-                                Retain key leaders
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-                <tr>
-                    <td>Ensuring reputation</td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Institute/Toolkits/Toolkit%20June%202011%20ThinkTank%20-%20Leader%20Brand.pdf">
-                                Reputation:
-                                Personal leadership brand (short slide deck)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td></td>
-                    <td>
-                        <p>
-                            <a href="https://df42wlfgor5mw.cloudfront.net/Videos/Ulrich-Change/change-personal-leader-brand.mp4" target="https://df42wlfgor5mw.cloudfront.net/Videos/Ulrich-Change/change-personal-leader-brand.mp4">
-                                Reputation:
-                                Personal leadership brand (short video)_TK
-                            </a>
-                        </p>
-                    </td>
-                    <td>
-                        <ul>
-                            <li>
-                                Examine communication of leadership in public documents (annual report)
-                            </li>
-                            <li>
-                                Share stories of leadership excellence in social media
-                            </li>
-                            <li>
-                                Track leadership reputation in social media
-                            </li>
-                        </ul>
-                    </td>
-                </tr>
-            </tbody>
-        </table>
-    </div>
-</section>
-<section id="page-42" class="appendix-page">
-    <span class="counter"></span>
-    <div>
-        <h2 class="mb-4">G3HC Actionable Insights 8: Resources and metrics on human resources (9 elements)</h2>
+        <h2 class="mb-4">G3HC Actionable Insights 4: Resources and metrics on human resources (9 elements)</h2>
         <table class="table table-striped table-bordered custom">
             <tbody>
                 <tr>
@@ -2975,7 +3417,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-43" class="appendix-page">
+<section id="page-48" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3141,7 +3583,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-44" class="appendix-page">
+<section id="page-49" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3264,7 +3706,7 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-45" class="appendix-page">
+<section id="page-50" class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -3383,11 +3825,11 @@ score compares to others in your industry, all other companies in the SEC and to
         </table>
     </div>
 </section>
-<section id="page-46" class="appendix-page">
+<section id="page-51" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            G3HC Actionable Insights 9: Sharing Human Capability with other stakeholders
+            G3HC Actionable Insights 5: Sharing Human Capability with other stakeholders
         </h2>
         <p>The Human Capability report you share with the SEC can also be shared with other key groups to increase confidence that business results will occur.</p>
         <h3 class="mb-4">
@@ -3426,6 +3868,146 @@ score compares to others in your industry, all other companies in the SEC and to
             </li>
             <li>Current employees. Through sharing @Model.CompanyName’s Human Capability agenda, your current employees should be able to feel a personal connection to @Model.CompanyName that will help them give their best efforts. </li>
         </ul>
+    </div>
+</section>
+<section id="page-52" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Appendix 1: SEC Human Capital Requirement
+        </h2>
+        <p>
+            The SEC report on Human Capital comes via the Federal Register - Final Rule: Modernization of Regulation S-K Items 101, 103, and 105; Release Nos. 33-10825; 34-89670; File No. S7-11-19 on November 9, 2020. These rules modernize the requirements of Regulation S-K applicable to disclosure of the description of the business (Item 101), legal proceedings (Item 103) and risk factors (Item 105). This greatly expands Human Capability management disclosures. Today, reporting structure is not detailed, so companies are free to report Human Capital items in any way they choose. The wording of the rule is as follows:
+        </p>
+        <p>
+            Item 101(c)(2)(ii): Provide “A description of the registrant’s Human Capital resources, including the number of persons employed by the registrant, and any Human Capital measures or objectives that the registrant focuses on in managing
+            the business (such as, depending on the nature of the registrant’s business and workforce, measures or objectives that address the development, attraction and retention of personnel).”
+        </p>
+    </div>
+</section>
+<section id="page-53" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Appendix 2: Human Capability Framework and Initiatives
+        </h2>
+        <p>With this Human Capability framework, a host of initiatives can be clustered into one of the four pathways (see Figure 5 for overview).</p>
+        <div class="text-center">
+            <span>
+                Figure 5<br />
+                37 Initiatives In Four Human Capability Pathways
+            </span>
+        </div>
+        <img class="embedded-graphic" src="./images/figure5.png">
+        <p>Some of the latest trends in each of these four pathways are briefly reviewed below.</p>
+        <ul>
+            <li>
+                Talent (also called Human Capital) deals with initiatives to ensure the right individual competence, workforce, or people: Improving how employees work through hiring based on cultural fit, orienting new employees to their job, hybrid work that determines where and how employees work, focusing on worktasks and skills more than roles, creating total reward systems to motivate employees, attending to employee physical health and psychological well-being, reskilling the workforce, managing employee careers, using digital communications, creating a DEI agenda, managing employee mobility through retention and removal efforts, building a better employee experience, and so forth.
+            </li>
+            <li>
+                Leadership emphasizes initiatives improving the quality of both individual leaders and collective leadership by: Building a business case for leadership, defining what makes an effective leader, assessing quality of leaders and
+                leadership, investing in leadership development training and coaching, measuring leadership results, and ensuring leadership reputation.
+            </li>
+        </ul>
+    </div>
+</section>
+<section id="page-54" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <ul>
+            <li>
+                Organization (structure, governance, or culture) focuses on initiatives that define and ensure the right organization capabilities such as: Agility (moving quickly to adapt to change), strategic clarity (having a compelling purpose or mission), technology adoption (accessing digital information to reinvent work), culture (having the right values that create value for stakeholders), social responsibility (being a good social citizen), customer focus (increasing customer intimacy), innovation (discovering and delivering new ways to work), collaboration (working in networks or ecosystems), and so forth.
+            </li>
+            <li>
+                Human Resources refers to the HR function or department and how to accomplish HR work by: Upgrading the HR department by ensuring the right reputation, serving customers, having a clear purpose, governing and organizing to deliver HR work, doing HR analytics, improving HR professionals, building positive work relationships, and so forth.
+            </li>
+        </ul>
+        <p>
+            This Human Capability framework in Figure 2 and 37 initiatives in Figure 5 helps @Model.CompanyName business and HR leaders define, invest in, prioritize, measure, and improve Human Capability much like the SEC required financial disclosures (income statement, balance sheet, cash flow) to guide financial decisions.
+        </p>
+    </div>
+</section>
+<section id="page-55" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Appendix 3: Research on Human Capability
+        </h2>
+        <p>Studies of Human Capability are not new. Thousands of studies have provided insights into each of the four pathways. @Model.CompanyName report draws on legacy and incorporates innovative research to give you confidence in your results.</p>
+        <p>This report draws on extensive research that defines initiatives in each of the four pathways as shown in Figure 5.1</p>
+        <div class="text-center">
+            <span>
+                Figure 5.1<br />
+                Background Research on Human Capability as Foundation for @Model.CompanyName Report
+            </span>
+        </div>
+        <img class="embedded-graphic" src="./images/figure5_1.png">
+        <p>
+            These research studies help identify the extent to which specific initiatives in each pathway are deployed. Further, this research links the Human Capability initiatives in each pathway to stakeholder outcomes by asking “so that” or
+            “because of” to ensure the linkages. Figure 6 shows the logic of creating value through Human Capability investments. This research confirms that Human Capability initiatives impact firm performance across industries and geographies.
+        </p>
+        <p>All of these studies are based on surveys from key informants which give insight into how an organization operates, but often focus on single initiatives, have response biases, and are difficult to scale.</p>
+    </div>
+</section>
+<section id="page-56" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <p>Metrics in these 37 initiatives come from</p>
+        <ul>
+            <li>Leadership Capital Index book … a list of over 50 indicators in 10 areas</li>
+            <li>ISO 30414 (list of 50+ specific measures, but not a thorough or tested framework)</li>
+            <li><a href="https://www.conference-board.org/topics/human-capital-benchmarking/brave-new-world-creating-value-through-HCM">https://www.conference-board.org/topics/human-capital-benchmarking/brave-new-world-creating-value-through-HCM</a> (focuses mostly on board; great summary of groups working on this issue and some measures)</li>
+            <li>
+                <a href="https://www.forbes.com/sites/shivaramrajgopal/2022/06/15/we-just-petitioned-the-sec-to-require-disclosure-of-labor-costs/?sh=2ff150c64ba1">https://www.forbes.com/sites/shivaramrajgopal/2022/06/15/we-just-petitioned-the-sec-to-require-disclosure-of-labor-costs/?sh=2ff150c64ba1</a>                            (workforce costs)
+            </li>
+            <li>
+                <a href="https://corpgov.law.harvard.edu/2022/06/29/disclosure-of-the-extent-to-which-firms-invest-in-their-workforce/#more-147168">https://corpgov.law.harvard.edu/2022/06/29/disclosure-of-the-extent-to-which-firms-invest-in-their-workforce/#more-147168</a>                            (workforce costs)
+            </li>
+            <li>
+                <a href="https://www.forbes.com/sites/shivaramrajgopal/2021/05/17/labor-costs-are-the-most-pressing-human-capital-disclosure-the-sec-should-consider-mandating/?sh=d6542bb51923">https://www.forbes.com/sites/shivaramrajgopal/2021/05/17/labor-costs-are-the-most-pressing-human-capital-disclosure-the-sec-should-consider-mandating/?sh=d6542bb51923</a>
+            </li>
+            <li>
+                <a href="https://corpgov.law.harvard.edu/2021/04/19/how-boards-can-get-human-capital-management-right-in-five-not-so-easy-steps/">https://corpgov.law.harvard.edu/2021/04/19/how-boards-can-get-human-capital-management-right-in-five-not-so-easy-steps/</a>
+            </li>
+        </ul>
+        <div class="text-center">
+            <span>
+                Figure 6<br />
+                Human Capability Pathways and Stakeholder Results
+            </span>
+        </div>
+        <img class="embedded-graphic" src="/images/figure6.png">
+    </div>
+</section>
+<section id="page-57" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">
+            Appendix 4: Innovative Human Capability research using machine learning
+        </h2>
+        <p>
+            To overcome survey limitations, this report uses information reported in the mandated 10-K SEC disclosures. Results in this report come from extracting all sentences related to Human Capability for each of the SEC filing companies who reported to the SEC in 2021 by using the Human Capability definitions for the four pathways in Figure 2.
+        </p>
+        <p>Then, using proprietary machine learning technology, seed words for each of the four pathways were identified and word lists for each of the four pathways were created. </p>
+        <ol>
+            <li>Talent = talent + employee + competence</li>
+            <li>Leadership = leadership + management + develop</li>
+            <li>Organization = organization + culture + agility + mission + vision + capability</li>
+            <li>HR = Human Capital + human resources</li>
+        </ol>
+        <p>
+            Using these word lists, the fraction of the Human Capability text that contains the words in a given list were used to create @Model.CompanyName’s score on each of the four pathways with a normalized range from 1 to 10. This scoring enables
+            an analysis of how @Model.CompanyName stands in relation to others based on their Human Capability reporting.
+        </p>
+        <p>
+            The benefit of applying this Human Capability framework to SEC reports is that these reports are for regulatory compliance where firms are accountable for integrity. This is not the case for media reports, ratings, or earnings calls,
+            which may be more promotional. Further, manual processing and interpretation of surveys does not scale, whereas machine learning processing of SEC filings enables scaling to all companies disclosing public data.
+        </p>
+        <p>
+            The Human Capability framework and machine learning analytics has limitations. The Human Capability framework is based on extensive research but could miss some elements of how your organization attends to talent, leadership, organization,
+            and HR. The information analyzed came from company reports to the SEC and companies had few requirements on what to report. The data are a single point in time since 2021 was the first year of required Human Capital disclosures.
+            Over time, this baseline framework and assessment will evolve to offer an increasingly accurate portrayal of @Model.CompanyName’s Human Capability.
+        </p>
     </div>
 </section>
 

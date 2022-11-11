@@ -81,7 +81,7 @@ p {
     }
 }
 
-#page-2 h3 {
+#page-3 h3 {
     font-size: 16px;
     margin-bottom: 20px;
     margin-top: 20px;
@@ -347,6 +347,24 @@ table.table-striped.custom tr td:nth-child(5) {
     width: 150px;
 }
 
+#page-20 .embedded-graphic {
+    margin-top: 0;
+    margin-bottom: 0;
+}
+
+#page-21 img {
+    margin-top: 10px;
+}
+
+#page-22 .table {
+    margin-top: 0;
+}
+
+#page-22 table td li {
+    line-height: 1.5;
+    font-size: 11px;
+}
+
 .appendices {
     color: #071d49;
 }
@@ -356,20 +374,20 @@ table.table-striped.custom tr td:nth-child(5) {
 }
 
 
-    .footer h4 {
-        position: absolute;
-        left: 20px;
-        bottom: 40px;
-        font-size: 7px;
-        font-weight: bold;
-    }
+.footer h4 {
+    position: absolute;
+    left: 20px;
+    bottom: 40px;
+    font-size: 7px;
+    font-weight: bold;
+}
 
-    .footer img {
-        position: absolute;
-        right: 100px;
-        bottom: 15px;
-        width: 4%;
-    }
+.footer img {
+    position: absolute;
+    right: 100px;
+    bottom: 15px;
+    width: 4%;
+}
 
 .table-note {
     font-style: italic;
@@ -451,34 +469,35 @@ section.red-border-line h6:before {
     padding-top: 15%;
 }
 
-    #title-page div div {
-        display: flex;
-        justify-content: center;
-    }
+#title-page div div {
+    display: flex;
+    justify-content: flex-end;
+    flex-direction: row;
+}
 
-    #title-page div div img {
-        width: 75%;
-        height: 75%;
-        padding-top: 50px;
-    }
+#title-page div div img {
+    width: 45%;
+    height: 45%;
+    padding-top: 300px;
+}
 
-    #title-page h1, #title-page h3 {
-        color: white;
-    }
+#title-page h1, #title-page h3 {
+    color: white;
+}
 
-        #title-page h1:before {
-            border-bottom: 5px solid #FFFFFF;
-        }
+#title-page h1:before {
+    border-bottom: 5px solid #FFFFFF;
+}
 
-        #page-4 h2:before {
-            left: 0;
-        }
-
-#page-2 h2:before {
+#page-5 h2:before {
     left: 0;
 }
 
-#page-3 {
+#page-3 h2:before {
+    left: 0;
+}
+
+#page-4 {
     padding-top: 15%;
     background: #071d49;
     background-image: url(../images/pattern_page4.png);
@@ -487,16 +506,16 @@ section.red-border-line h6:before {
     background-repeat: no-repeat;
 }
 
-#page-3 h1:before {
+#page-4 h1:before {
     left: 0;
 }
 
-#page-8 table {
+#page-9 table {
     text-align: center;
 }
 
-#page-10 table ul li,
-#page-11 table ul li {
+#page-11 table ul li,
+#page-12 table ul li {
     font-size: 11px;
     line-height: 1.5em;
 }
@@ -507,6 +526,10 @@ section.red-border-line h6:before {
 
 .report-page h2:before {
     left: 50px;
+}
+
+#page-20 ol {
+    padding-left: 25px;
 }
 
 .report-page table {
@@ -533,6 +556,7 @@ section.red-border-line h6:before {
     .report-page h2:before,
     .text-page h2:first-child::before,
     .appendix-page h2:first-child::before,
+    .appendix-intro-page h2:first-child::before,
     .appendix h1:before {
         content: "";
         position: absolute;
@@ -544,17 +568,42 @@ section.red-border-line h6:before {
         border-bottom: 5px solid #0086d6;
     }
 
+.appendix-intro-page ol {
+    padding-left: 25px;
+}
+
+.appendix-intro-page strong {
+    margin-left: 15px;
+}
+
+.appendix-intro-page p i {
+    padding-left: 35px;
+    display: block;
+}
+
+.appendix-intro-page ol p {
+    display: block;
+    padding-left: 25px;
+}
+
+#page-28 ol li {
+    font-style: italic;
+}
+
+.indent {
+    padding-left: 30px;
+}
+
 .introduction h1:before,
 #title-page h1:before,
-.appendix h1:before
-{
+.appendix h1:before {
     left: 60px;
 }
 
 .report-page h2:before {
     border-bottom-color: white;
     left: 50px;
-    top:80px;
+    top: 80px;
 }
 
 .report-page > div {
@@ -609,16 +658,17 @@ section.report-page {
 }
 
 .text-page,
-.appendix-page {
+.appendix-page,
+.appendix-intro-page {
     padding-top: 15%;
 }
 
-.text-page h2,
-.appendix-page h2
-{
-    position: relative;
-    color: #071d49;
-}
+    .text-page h2,
+    .appendix-page h2,
+    .appendix-intro-page h2 {
+        position: relative;
+        color: #071d49;
+    }
 
     .appendix-page table p,
     .appendix-page table ul li {
@@ -626,7 +676,7 @@ section.report-page {
         font-size: 11px;
     }
 
-#page-5 {
+#page-6 {
     line-height: .9em;
 }
 
@@ -673,7 +723,7 @@ a.red {
     font-weight: bolder;
 }
 
-#page-5 img {
+#page-6 img {
     width: 100%;
 }
 
@@ -691,7 +741,7 @@ span.finding-explanation {
     background-repeat: no-repeat;
 }
 
-#page-22 {
+#page-23 {
     background-image: url(/images/background_section_page5.jpg);
     background-repeat: no-repeat;
     padding-top: 15%;
@@ -700,22 +750,88 @@ span.finding-explanation {
     width: 100%;
 }
 
-#page-22 p {
+#es-comp-table {
+    text-align: center;
+}
+
+.es-top-text {
+    font-size: 11px;
+}
+
+.es-split {
+    display: flex;
+    margin-top: 25px;
+}
+
+.es-bottom-text {
+    font-size: 11px;
+    line-height: 1.5;
+}
+
+.es-finding-1 table.table td {
+    font-size: 11px !important;
+    line-height: 1.5 !important;
+}
+
+.es-finding-1 table.table td p {
+    font-size: 11px !important;
+    line-height: 1.25 !important;
+}
+
+.es-finding-1 {
+    width: 70%;
+}
+
+.es-side-links {
+    width: 20%;
+    display: inline-block;
+    margin: auto;
+}
+
+.es-side-links p {
+    margin: 25px auto;
+}
+
+.es-side-links p,
+.es-side-links p a {
+    color: #0086d6;
+    text-decoration: none;
+    height: 20%;
+}
+
+#page-23 p {
     color: white !important;
     width: 50%;
 }
 
-    .section-page h1,
-    .section-page h2 {
-        display: inline-block;
-        position: relative;
-        color: #fff;
-        width: 100%;
-    }
+#page-24 .table {
+    margin-top: 15px;
+    margin-bottom: 15px;
+}
 
-    .section-page h2 {
-        width: 50%;
-    }
+#page-53 img {
+    margin-top: 10px;
+}
+
+.footnotes, .footnotes li {
+    font-size: 10px;
+}
+
+.stand-alone-ul {
+    padding-left: 25px;
+}
+
+.section-page h1,
+.section-page h2 {
+    display: inline-block;
+    position: relative;
+    color: #fff;
+    width: 100%;
+}
+
+.section-page h2 {
+    width: 50%;
+}
 
 .appendix {
     color: #071d49;
@@ -727,11 +843,11 @@ span.finding-explanation {
     width: 100%;
 }
 
-#page-17 h2:before {
+#page-18 h2:before {
     left: 0;
 }
 
-#page-17 h2:before {
+#page-18 h2:before {
     left: 0;
 }
 
@@ -747,15 +863,15 @@ span.finding-explanation {
     margin-bottom: 0;
 }
 
-#page-10 ul, #page-11 ul {
+#page-11 ul, #page-16 ul {
     padding-left: 25px;
 }
 
-#page-12 table.comp-table {
+#page-13 table.comp-table {
     text-align: center;
 }
 
-.report-page#page-12 table {
+.report-page#page-13 table {
     margin-top: 15px;
     margin-bottom: 15px;
 }
