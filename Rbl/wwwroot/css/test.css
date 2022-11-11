@@ -756,6 +756,7 @@ span.finding-explanation {
 
 .es-top-text {
     font-size: 11px;
+    line-height: 1.5;
 }
 
 .es-split {
@@ -764,12 +765,12 @@ span.finding-explanation {
 }
 
 .es-bottom-text {
-    font-size: 11px;
+    font-size: 10px;
     line-height: 1.5;
 }
 
 .es-finding-1 table.table td {
-    font-size: 11px !important;
+    font-size: 10px !important;
     line-height: 1.5 !important;
 }
 
