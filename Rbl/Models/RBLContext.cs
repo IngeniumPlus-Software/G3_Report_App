@@ -32,27 +32,27 @@ namespace Rbl.Models
 
             modelBuilder.Entity<ScoresAll>(entity =>
             {
-                entity.ToView("ScoresAll_2021");
+                entity.ToView("ScoresAll");
             });
 
             modelBuilder.Entity<ScoresByIndustry>(entity =>
             {
-                entity.ToView("ScoresByIndustry_2021");
+                entity.ToView("ScoresByIndustry");
             });
 
             modelBuilder.Entity<ScoresByTicker>(entity =>
             {
-                entity.ToView("ScoresByTicker_2021");
+                entity.ToView("ScoresByTicker");
             });
 
             modelBuilder.Entity<ScoresTopTen>(entity =>
             {
-                entity.ToView("ScoresTopTen_2021");
+                entity.ToView("ScoresTopTen");
             });
 
             modelBuilder.Entity<ScoresTotal>(entity =>
             {
-                entity.ToView("ScoresTotal_2021");
+                entity.ToView("ScoresTotal");
                 entity.Property(x => x.TotalScore).HasColumnName("total_score");
                 entity.Property(x => x.Ticker).HasColumnName("ticker");
             });
