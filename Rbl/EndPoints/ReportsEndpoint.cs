@@ -98,6 +98,7 @@ namespace Rbl.EndPoints
 
         private async Task<IActionResult> _PdfAction(string ticker, bool? forceRegeneration = null, bool? shouldReturnPdf = true)
         {
+            ticker = ticker.ToLower();
             var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
             forceRegeneration = forceRegeneration ?? false;
             if (forceRegeneration.Value == false)
