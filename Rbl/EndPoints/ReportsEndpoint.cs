@@ -30,7 +30,7 @@ namespace Rbl.EndPoints
         {
             _service = service;
             _appSettings = appSettings.Value;
-            _context= context;
+            _context = context;
         }
 
         #endregion
@@ -38,24 +38,61 @@ namespace Rbl.EndPoints
         #region Methods
 
         [HttpPost]
-        [Route("pdf")]
-        public async Task<PdfResponse> GetPdf([FromBody]PdfModel model)
+        [Route("pdf/{year?}")]
+        public async Task<PdfResponse> GetPdf([FromBody] PdfModel model, int? year)
         {
+            if (year.HasValue == false)
+            {
+                year = 2021;
+            }
+
             if (!_appSettings.AdminPassword.Equals(model.Password, StringComparison.InvariantCulture))
+            {
                 return new PdfResponse
                 {
                     Success = false,
                     Message = "Invalid password",
                     Redirect = string.Empty
                 };
+            }
 
-            await _PdfAction(model.Code, false, false);
+            if (!_context.Organizations.Any(x => x.ticker == model.Code))
+            {
+                return new PdfResponse
+                {
+                    Success = false,
+                    Message = "Could not find the Organization",
+                    Redirect = string.Empty
+                };
+            }
+
+            bool foundScore = false;
+            if (year == 2021)
+            {
+                foundScore = _context.ScoresByTicker_2021.Any(x => x.Ticker == model.Code);
+            }
+            else if (year == 2022)
+            {
+                foundScore = _context.ScoresByTicker_2022.Any(x => x.Ticker == model.Code);
+            }
+
+            if (!foundScore)
+            {
+                return new PdfResponse
+                {
+                    Success = false,
+                    Message = $"No scores were found for {model.Code}",
+                    Redirect = string.Empty
+                };
+            }
+
+            await _PdfAction(model.Code, year.Value, false, false);
 
             return new PdfResponse
             {
                 Success = true,
                 Message = "Redirecting",
-                Redirect = $"/api/reports/{model.Code}"
+                Redirect = $"/api/reports/{model.Code}/{year}"
             };
         }
 
@@ -67,28 +104,28 @@ namespace Rbl.EndPoints
         }
 
         [HttpGet]
-        [Route("{code}")]
-        public async Task<IActionResult> GeneratePdf(string code, bool? forceRegeneration = null)
+        [Route("{code}/{year}")]
+        public async Task<IActionResult> GeneratePdf(string code, int year = 2021, bool? forceRegeneration = null)
         {
             try
             {
-                return await _PdfAction(code, forceRegeneration);
+                return await _PdfAction(code, year, forceRegeneration);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 return BadRequest(ex.Message);
             }
         }
 
         [HttpPost]
-        [Route("{action}")]
-        public async Task<IActionResult> BatchGeneratePdfs([FromBody] BatchClass model)
+        [Route("{action}/{year}")]
+        public async Task<IActionResult> BatchGeneratePdfs(int year, [FromBody] BatchClass model)
         {
             var tasks = new List<Task>();
 
-            foreach(var ticker in model.Codes)
+            foreach (var ticker in model.Codes)
             {
-                tasks.Add(_PdfAction(ticker, model.ForceRegenerate, false));
+                tasks.Add(_PdfAction(ticker, year, model.ForceRegenerate, false));
             }
 
             Task.WaitAll(tasks.ToArray());
@@ -96,10 +133,10 @@ namespace Rbl.EndPoints
             return Ok($"{tasks.Select(x => x.IsCompletedSuccessfully).Count()} PDFs completed successfully");
         }
 
-        private async Task<IActionResult> _PdfAction(string ticker, bool? forceRegeneration = null, bool? shouldReturnPdf = true)
+        private async Task<IActionResult> _PdfAction(string ticker, int year, bool? forceRegeneration = null, bool? shouldReturnPdf = true)
         {
             ticker = ticker.ToLower();
-            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}.pdf";
+            var pdfPath = $"{_appSettings.PdfLocation}/{ticker}_{year}.pdf";
             forceRegeneration = forceRegeneration ?? false;
             if (forceRegeneration.Value == false)
             {
@@ -148,7 +185,7 @@ namespace Rbl.EndPoints
                 EnableJavaScript = true,
                 RenderDelay = 500
             };
-            var pdf = renderer.RenderUrlAsPdf($"{url}/Report?ticker={ticker}");
+            var pdf = renderer.RenderUrlAsPdf($"{url}/Report?ticker={ticker}&year={year}");
 
             _ApplyFooters(pdf, whiteFooterHtml, blueFooterHtml);
 
@@ -185,14 +222,14 @@ namespace Rbl.EndPoints
 
             var allPdfs = System.IO.Directory.GetFiles(_appSettings.PdfLocation);
             int cleared = 0, skipped = 0;
-            foreach(var pdfPath in allPdfs)
+            foreach (var pdfPath in allPdfs)
             {
                 try
                 {
                     System.IO.File.Delete(pdfPath);
                     cleared++;
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
                     skipped++;
                 }
@@ -210,7 +247,7 @@ namespace Rbl.EndPoints
         private void _ApplyFooters(PdfDocument pdf, HtmlHeaderFooter whiteBg, HtmlHeaderFooter blueBg)
         {
             var allpageNumbers = Enumerable.Range(0, pdf.PageCount);
-            var blueBgPageNumbers = allpageNumbers.Intersect(new int[] { 4, 5, 9, 11, 20, 24, }.Select(x => x-1));
+            var blueBgPageNumbers = allpageNumbers.Intersect(new int[] { 4, 5, 9, 11, 20, 24, }.Select(x => x - 1));
             var restPageNumbers = allpageNumbers.Except(blueBgPageNumbers).Except(new[] { 0 });
 
             pdf.AddHtmlFooters(blueBg, 2, blueBgPageNumbers);

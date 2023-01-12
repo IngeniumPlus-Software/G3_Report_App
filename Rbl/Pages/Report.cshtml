@@ -118,7 +118,7 @@ score compares to others in your industry, all other companies in the SEC and to
                                     <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.TalentScore, true))">@Model.ScoresByTicker.TalentScore</p>
                                 </td>
                                 <td>
-                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrganizationScore, true))">@Model.ScoresByTicker.OrganizationScore</p>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrgScore, true))">@Model.ScoresByTicker.OrgScore</p>
                                 </td>
                                 <td>
                                     <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.LeadershipScore, true))">@Model.ScoresByTicker.LeadershipScore</p>
@@ -135,7 +135,7 @@ score compares to others in your industry, all other companies in the SEC and to
                                     <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.TalentScore))">@Model.ScoresIndustry.TalentScore</p>
                                 </td>
                                 <td>
-                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrganizationScore))">@Model.ScoresIndustry.OrganizationScore</p>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrgScore))">@Model.ScoresIndustry.OrgScore</p>
                                 </td>
                                 <td>
                                     <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.LeadershipScore))">@Model.ScoresIndustry.LeadershipScore</p>
@@ -152,7 +152,7 @@ score compares to others in your industry, all other companies in the SEC and to
                                     <p class="@(Model.GetParityClassNames(Model.ScoresAll.TalentScore))">@Model.ScoresAll.TalentScore</p>
                                 </td>
                                 <td>
-                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrganizationScore))">@Model.ScoresAll.OrganizationScore</p>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrgScore))">@Model.ScoresAll.OrgScore</p>
                                 </td>
                                 <td>
                                     <p class="@(Model.GetParityClassNames(Model.ScoresAll.LeadershipScore))">@Model.ScoresAll.LeadershipScore</p>
@@ -169,7 +169,7 @@ score compares to others in your industry, all other companies in the SEC and to
                                     <p class="@(Model.GetParityClassNames(Model.ScoresTop10.TalentScore))">@Model.ScoresTop10.TalentScore</p>
                                 </td>
                                 <td>
-                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrganizationScore))">@Model.ScoresTop10.OrganizationScore</p>
+                                    <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrgScore))">@Model.ScoresTop10.OrgScore</p>
                                 </td>
                                 <td>
                                     <p class="@(Model.GetParityClassNames(Model.ScoresTop10.LeadershipScore))">@Model.ScoresTop10.LeadershipScore</p>
@@ -555,7 +555,7 @@ score compares to others in your industry, all other companies in the SEC and to
                             <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.TalentScore, true))">@Model.ScoresByTicker.TalentScore</p>
                         </td>
                         <td>
-                            <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrganizationScore, true))">@Model.ScoresByTicker.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.OrgScore, true))">@Model.ScoresByTicker.OrgScore</p>
                         </td>
                         <td>
                             <p class="@(Model.GetParityClassNames(Model.ScoresByTicker.LeadershipScore, true))">@Model.ScoresByTicker.LeadershipScore</p>
@@ -572,7 +572,7 @@ score compares to others in your industry, all other companies in the SEC and to
                             <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.TalentScore))">@Model.ScoresIndustry.TalentScore</p>
                         </td>
                         <td>
-                            <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrganizationScore))">@Model.ScoresIndustry.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.OrgScore))">@Model.ScoresIndustry.OrgScore</p>
                         </td>
                         <td>
                             <p class="@(Model.GetParityClassNames(Model.ScoresIndustry.LeadershipScore))">@Model.ScoresIndustry.LeadershipScore</p>
@@ -589,7 +589,7 @@ score compares to others in your industry, all other companies in the SEC and to
                             <p class="@(Model.GetParityClassNames(Model.ScoresAll.TalentScore))">@Model.ScoresAll.TalentScore</p>
                         </td>
                         <td>
-                            <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrganizationScore))">@Model.ScoresAll.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresAll.OrgScore))">@Model.ScoresAll.OrgScore</p>
                         </td>
                         <td>
                             <p class="@(Model.GetParityClassNames(Model.ScoresAll.LeadershipScore))">@Model.ScoresAll.LeadershipScore</p>
@@ -606,7 +606,7 @@ score compares to others in your industry, all other companies in the SEC and to
                             <p class="@(Model.GetParityClassNames(Model.ScoresTop10.TalentScore))">@Model.ScoresTop10.TalentScore</p>
                         </td>
                         <td>
-                            <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrganizationScore))">@Model.ScoresTop10.OrganizationScore</p>
+                            <p class="@(Model.GetParityClassNames(Model.ScoresTop10.OrgScore))">@Model.ScoresTop10.OrgScore</p>
                         </td>
                         <td>
                             <p class="@(Model.GetParityClassNames(Model.ScoresTop10.LeadershipScore))">@Model.ScoresTop10.LeadershipScore</p>
@@ -752,7 +752,7 @@ score compares to others in your industry, all other companies in the SEC and to
                     pointBorderColor: "#fff",
                     pointHoverBackgroundColor: "#fff",
                     pointHoverBorderColor: "rgba(255, 204, 102, 1)",
-                    data: [@Model.ScoresTop10.OrganizationScore, @Model.ScoresTop10.HrScore, @Model.ScoresTop10.LeadershipScore, @Model.ScoresTop10.TalentScore]
+                    data: [@Model.ScoresTop10.OrgScore, @Model.ScoresTop10.HrScore, @Model.ScoresTop10.LeadershipScore, @Model.ScoresTop10.TalentScore]
                 };
                 const data = {
                     labels: radarLabels,
@@ -4075,7 +4075,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         pointBorderColor: "#fff",
         pointHoverBackgroundColor: "#fff",
         pointHoverBorderColor: "rgba(102, 153, 204, 1)",
-        data: [@Model.ScoresIndustry.OrganizationScore, @Model.ScoresIndustry.HrScore, @Model.ScoresIndustry.LeadershipScore, @Model.ScoresIndustry.TalentScore]
+        data: [@Model.ScoresIndustry.OrgScore, @Model.ScoresIndustry.HrScore, @Model.ScoresIndustry.LeadershipScore, @Model.ScoresIndustry.TalentScore]
 
         }
 
@@ -4088,7 +4088,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         pointBorderColor: "#fff",
         pointHoverBackgroundColor: "#fff",
         pointHoverBorderColor: "rgba(242, 119, 122, 1)",
-        data: [@Model.ScoresByTicker.OrganizationScore, @Model.ScoresByTicker.HrScore, @Model.ScoresByTicker.LeadershipScore, @Model.ScoresByTicker.TalentScore]
+        data: [@Model.ScoresByTicker.OrgScore, @Model.ScoresByTicker.HrScore, @Model.ScoresByTicker.LeadershipScore, @Model.ScoresByTicker.TalentScore]
         }
 
     const datasetAll = {
@@ -4100,7 +4100,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         pointBorderColor: "#fff",
         pointHoverBackgroundColor: "#fff",
         pointHoverBorderColor: "rgba(170, 255, 0, 1)",
-        data: [@Model.ScoresAll.OrganizationScore, @Model.ScoresAll.HrScore, @Model.ScoresAll.LeadershipScore, @Model.ScoresAll.TalentScore]
+        data: [@Model.ScoresAll.OrgScore, @Model.ScoresAll.HrScore, @Model.ScoresAll.LeadershipScore, @Model.ScoresAll.TalentScore]
 
         }
 

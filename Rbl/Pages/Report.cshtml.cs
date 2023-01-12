@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Rbl.Helpers;
 using Rbl.Models;
+using Rbl.Models.Report;
 using Rbl.Services;
 
 namespace Rbl.Pages
@@ -19,11 +20,11 @@ namespace Rbl.Pages
         }
 
         public Organization Organization { get; set; }
-        public ScoresByTicker ScoresByTicker { get; set; }
-        public ScoresAll ScoresAll { get; set; }
-        public ScoresByIndustry ScoresIndustry { get; set; }
-        public ScoresTopTen ScoresTop10 { get; set; }
-        public ScoresTotal LastInTopTenTotal { get; set; }
+        public GeneralScoreResponse ScoresByTicker { get; set; }
+        public GeneralScoreResponse ScoresAll { get; set; }
+        public GeneralScoreResponse ScoresIndustry { get; set; }
+        public GeneralScoreResponse ScoresTop10 { get; set; }
+        public GeneralScoreResponse LastInTopTenTotal { get; set; }
 
         public string CompanyName { get; set; }
 
@@ -43,7 +44,7 @@ namespace Rbl.Pages
         public int G3HCAI_HrPageNumber = 45;
 
 
-        public async Task<IActionResult> OnGetAsync(string ticker)
+        public async Task<IActionResult> OnGetAsync(string ticker, int year = 2021)
         {
             if (String.IsNullOrEmpty(ticker))
             {
@@ -62,25 +63,26 @@ namespace Rbl.Pages
             else
                 return NotFound("Could not find the company's SEC name");
 
-            ScoresByTicker = await _service.GetOrganizationScoresByTicker(ticker);
-            ScoresAll = await _service.GetScoresAll();
-            ScoresIndustry = await _service.GetScoresByIndustry(Organization.industry_code);
-            ScoresTop10 = await _service.GetScoresTopTen();
-            LastInTopTenTotal = await _service.GetScoresTotalForLastInTopTen();
+            ScoresByTicker = await _service.GetOrganizationScoresByTicker(year, ticker);
+            ScoresAll = await _service.GetScoresAll(year);
+            ScoresIndustry = await _service.GetScoresByIndustry(year, Organization.industry_code);
+            ScoresTop10 = await _service.GetScoresTopTen(year);
+            LastInTopTenTotal = await _service.GetScoresTotalForLastInTopTen(year);
 
-            IndustryScoreTotal = (decimal) (ScoresIndustry.HrScore + ScoresIndustry.LeadershipScore +
-                                           ScoresIndustry.OrganizationScore + ScoresIndustry.TalentScore);
 
-            OrganizationScoreTotal = (decimal) (ScoresByTicker.HrScore + ScoresByTicker.LeadershipScore +
-                                                ScoresByTicker.OrganizationScore + ScoresByTicker.TalentScore);
+            IndustryScoreTotal = (decimal)(ScoresIndustry.HrScore + ScoresIndustry.LeadershipScore +
+                                           ScoresIndustry.OrgScore + ScoresIndustry.TalentScore);
 
-            AllScoreTotal = (decimal) (ScoresAll.HrScore + ScoresAll.LeadershipScore +
-                                       ScoresAll.OrganizationScore + ScoresAll.TalentScore);
+            OrganizationScoreTotal = (decimal)(ScoresByTicker.HrScore + ScoresByTicker.LeadershipScore +
+                                                ScoresByTicker.OrgScore + ScoresByTicker.TalentScore);
 
-            TopTenScoreTotal = (decimal) Math.Round((LastInTopTenTotal.TotalScore ?? 0), 2);
+            AllScoreTotal = (decimal)(ScoresAll.HrScore + ScoresAll.LeadershipScore +
+                                       ScoresAll.OrgScore + ScoresAll.TalentScore);
+
+            TopTenScoreTotal = (decimal)Math.Round(LastInTopTenTotal.TotalScore, 2);
 
             TalentEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Talent, ScoresByTicker.TalentScore);
-            OrganizationEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Organization, ScoresByTicker.OrganizationScore);
+            OrganizationEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Organization, ScoresByTicker.OrgScore);
             LeadershipEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Leadership, ScoresByTicker.LeadershipScore);
             HrEoReport5 = GetEndOfReport5Sentences(CompanyName, WordTypesEnum.Hr, ScoresByTicker.HrScore);
             (Report6Narrative, Report6FollowUp, _) = GetReport6Sentence(ScoresByTicker);
@@ -91,7 +93,8 @@ namespace Rbl.Pages
         private string GetEndOfReport5Sentences(string companyName, WordTypesEnum type, double? score)
         {
             var result = "No Score Found";
-            if (score.HasValue == true) {
+            if (score.HasValue == true)
+            {
 
                 var range1 = score.Value > 0 && score.Value < 5;
                 var range2 = score.Value >= 5 && score.Value < 8;
@@ -144,9 +147,9 @@ namespace Rbl.Pages
             return result;
         }
 
-        public (string, string, string) GetReport6Sentence(ScoresByTicker scores)
+        public (string, string, string) GetReport6Sentence(GeneralScoreResponse scores)
         {
-            var anyBelow5 = scores.TalentScore < 5 || scores.OrganizationScore < 5 || scores.LeadershipScore < 5 || scores.HrScore < 5;
+            var anyBelow5 = scores.TalentScore < 5 || scores.OrgScore < 5 || scores.LeadershipScore < 5 || scores.HrScore < 5;
             if (anyBelow5)
             {
                 var below5 = new List<string>();
@@ -154,7 +157,7 @@ namespace Rbl.Pages
                     below5.Add($"<a href='#page-{G3HCAI_TalentPageNumber}' class='red'>Section 1 (Talent)</a>");
                 if (scores.LeadershipScore < 5)
                     below5.Add($"<a href='#page-{G3HCAI_LeadershipPageNumber}' class='red'>Section 2 (Leadership)</a>");
-                if (scores.OrganizationScore < 5)
+                if (scores.OrgScore < 5)
                     below5.Add($"<a href='#page-{G3HCAI_OrganizationPageNumber}' class='red'>Section 3 (Organization)</a>");
                 if (scores.HrScore < 5)
                     below5.Add($"<a href='#page-{G3HCAI_HrPageNumber}' class='red'>Section 4 (Human Resources)</a>");
@@ -166,26 +169,27 @@ namespace Rbl.Pages
                     followup,
                     "Improve on weaknesses"
                     );
-            } else
+            }
+            else
             {
                 var numGreaterThan8 = (scores.TalentScore >= 8 ? 1 : 0) +
-                    (scores.OrganizationScore >= 8 ? 1 : 0) +
+                    (scores.OrgScore >= 8 ? 1 : 0) +
                     (scores.LeadershipScore >= 8 ? 1 : 0) +
                     (scores.HrScore >= 8 ? 1 : 0);
                 var numGreaterThan7 = (scores.TalentScore >= 7 ? 1 : 0) +
-                    (scores.OrganizationScore >= 7 ? 1 : 0) +
+                    (scores.OrgScore >= 7 ? 1 : 0) +
                     (scores.LeadershipScore >= 7 ? 1 : 0) +
                     (scores.HrScore >= 7 ? 1 : 0);
 
                 // Rule 3
-                if(numGreaterThan8 >= 1 && numGreaterThan7 >= 2)
+                if (numGreaterThan8 >= 1 && numGreaterThan7 >= 2)
                 {
                     return (
                         "<b>Prioritize strengths</b>. Your business is already superior. You score at industry best/ <b>world class</b> in one or more pathways. Your focus should be on prioritizing your strengths. You can shift away from comparisons to others and work on “conceptual best”. Conceptual best is imagining ways to ensure your reputation for distinctiveness in this area. In very strong businesses we see intention away from optimizing an individual pathway to integrating across pathways to increase Human Capability and culture.  These businesses have a strong, positive reputation and are very attractive to employees, customers, investors, and communities",
                         "Based on your results; we recommend you review our G3HC Actionable Insights.",
                         ""
                         );
-                } 
+                }
                 // Rule 2
                 else
                 {
@@ -196,9 +200,6 @@ namespace Rbl.Pages
                         );
                 }
             }
-
-            // TODO: REMOVE
-            return ("", "", "");
         }
 
         public string GetParityClassNames(double? score, bool myCompany = false)

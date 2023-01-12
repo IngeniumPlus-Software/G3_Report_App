@@ -20,39 +20,68 @@ namespace Rbl.Models
         }
 
         public virtual DbSet<Organization> Organizations { get; set; }
-        public virtual DbSet<ScoresAll> ScoresAll { get; set; }
-        public virtual DbSet<ScoresByIndustry> ScoresByIndustry { get; set; }
-        public virtual DbSet<ScoresByTicker> ScoresByTicker { get; set; }
-        public virtual DbSet<ScoresTopTen> ScoresTopTen { get; set; }
-        public virtual DbSet<ScoresTotal> ScoresTotal { get; set; }
+        public virtual DbSet<ScoresAll_2021> ScoresAll_2021 { get; set; }
+        public virtual DbSet<ScoresAll_2022> ScoresAll_2022 { get; set; }
+        public virtual DbSet<ScoresByIndustry_2021> ScoresByIndustry_2021 { get; set; }
+        public virtual DbSet<ScoresByIndustry_2022> ScoresByIndustry_2022 { get; set; }
+        public virtual DbSet<ScoresByTicker_2021> ScoresByTicker_2021 { get; set; }
+        public virtual DbSet<ScoresByTicker_2022> ScoresByTicker_2022 { get; set; }
+        public virtual DbSet<ScoresTopTen_2021> ScoresTopTen_2021 { get; set; }
+        public virtual DbSet<ScoresTopTen_2022> ScoresTopTen_2022 { get; set; }
+        public virtual DbSet<ScoresTotal_2021> ScoresTotal_2021 { get; set; }
+        public virtual DbSet<ScoresTotal_2022> ScoresTotal_2022 { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.HasAnnotation("Relational:Collation", "SQL_Latin1_General_CP1_CI_AS");
 
-            modelBuilder.Entity<ScoresAll>(entity =>
+            modelBuilder.Entity<ScoresAll_2021>(entity =>
             {
-                entity.ToView("ScoresAll");
+                entity.ToView("ScoresAll_2021");
             });
 
-            modelBuilder.Entity<ScoresByIndustry>(entity =>
+            modelBuilder.Entity<ScoresAll_2022>(entity =>
             {
-                entity.ToView("ScoresByIndustry");
+                entity.ToView("ScoresAll_2022");
             });
 
-            modelBuilder.Entity<ScoresByTicker>(entity =>
+            modelBuilder.Entity<ScoresByIndustry_2021>(entity =>
             {
-                entity.ToView("ScoresByTicker");
+                entity.ToView("ScoresByIndustry_2021");
+            });
+            modelBuilder.Entity<ScoresByIndustry_2022>(entity =>
+            {
+                entity.ToView("ScoresByIndustry_2022");
             });
 
-            modelBuilder.Entity<ScoresTopTen>(entity =>
+            modelBuilder.Entity<ScoresByTicker_2021>(entity =>
             {
-                entity.ToView("ScoresTopTen");
+                entity.ToView("ScoresByTicker_2021");
+            });
+            modelBuilder.Entity<ScoresByTicker_2022>(entity =>
+            {
+                entity.ToView("ScoresByTicker_2022");
             });
 
-            modelBuilder.Entity<ScoresTotal>(entity =>
+            modelBuilder.Entity<ScoresTopTen_2021>(entity =>
             {
-                entity.ToView("ScoresTotal");
+                entity.ToView("ScoresTopTen_2021");
+            });
+            modelBuilder.Entity<ScoresTopTen_2022>(entity =>
+            {
+                entity.ToView("ScoresTopTen_2022");
+            });
+
+            modelBuilder.Entity<ScoresTotal_2021>(entity =>
+            {
+                entity.ToView("ScoresTotal_2021");
+                entity.Property(x => x.TotalScore).HasColumnName("total_score");
+                entity.Property(x => x.Ticker).HasColumnName("ticker");
+            });
+
+            modelBuilder.Entity<ScoresTotal_2022>(entity =>
+            {
+                entity.ToView("ScoresTotal_2022");
                 entity.Property(x => x.TotalScore).HasColumnName("total_score");
                 entity.Property(x => x.Ticker).HasColumnName("ticker");
             });

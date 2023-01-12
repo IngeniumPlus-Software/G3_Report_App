@@ -11,11 +11,11 @@ namespace Rbl.Services
 {
     public interface IRblDataService
     {
-        Task<ScoresByIndustry> GetScoresByIndustry(string industryCode);
-        Task<ScoresTopTen> GetScoresTopTen();
-        Task<ScoresTotal> GetScoresTotalForLastInTopTen();
-        Task<ScoresAll> GetScoresAll();
-        Task<ScoresByTicker> GetOrganizationScoresByTicker(string ticker);
+        Task<GeneralScoreResponse> GetScoresByIndustry(int year, string industryCode);
+        Task<GeneralScoreResponse> GetScoresTopTen(int year);
+        Task<GeneralScoreResponse> GetScoresTotalForLastInTopTen(int year);
+        Task<GeneralScoreResponse> GetScoresAll(int year);
+        Task<GeneralScoreResponse> GetOrganizationScoresByTicker(int year, string ticker);
         Task<Organization> GetOrganizationByTicker(string ticker);
         Task<IList<SelectListItem>> FillTickerDropdown();
     }

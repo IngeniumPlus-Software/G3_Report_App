@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 
 namespace Rbl.Pages
 {
-    public class IndexModel : PageModel
+    public class Index2021Model : PageModel
     {
         #region Properties
 
@@ -12,7 +12,7 @@ namespace Rbl.Pages
 
         #region Constructor
 
-        public IndexModel()
+        public Index2021Model()
         {
         }
 

@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 namespace Rbl.Models
 {
     [Keyless]
-    public partial class ScoresTotal
+    public partial class ScoresTotal_2022
     {
         public string Ticker { get; set; }
         public double? TotalScore { get; set; }
