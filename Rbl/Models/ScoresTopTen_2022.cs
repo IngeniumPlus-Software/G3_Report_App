@@ -9,9 +9,8 @@ using Microsoft.EntityFrameworkCore;
 namespace Rbl.Models
 {
     [Keyless]
-    public partial class ScoresByIndustry
+    public partial class ScoresTopTen_2022
     {
-        public string IndustryCode { get; set; }
         public double? TalentScore { get; set; }
         public double? LeadershipScore { get; set; }
         public double? HrScore { get; set; }

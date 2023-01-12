@@ -1,6 +1,6 @@
-﻿@page
+﻿@page "/2021"
 @{
-    ViewData["Title"] = "G3HC";
+    ViewData["Title"] = "G3HC - 2021";
     Layout = "~/Pages/Shared/_Layout.cshtml";
 }
 
@@ -32,14 +32,17 @@
     <p>Copyright 2022-2023 G3HC</p>
 </div>
 <script>
-    window.location = '/2021';
     $(document).ready(function () {
             $("#Submit").click(function () {
-                handleSubmit();
+                handleSubmit($(this));
             });
+
         });
 
-        function handleSubmit() {
+        function handleSubmit(btn) {
+            btn.attr('style', 'pointer-events: none; background-color: darkgrey');
+            btn.val('Running...');
+
             $.ajax({
                 url: '/api/reports/pdf/2021',
                 type: 'POST',
@@ -51,15 +54,16 @@
                 if(data.success) {
                     window.location = data.redirect;
                 } else {
-                    handleError(data.message);
+                    handleError(btn, data.message);
                 }
-                console.log(data);
             }).fail((jqXHR, textStatus, errorThrown) => {
-                handleError('A server error occurred; please try again later or contact and admin');
+                handleError(btn, 'A server error occurred; please try again later or contact and admin');
             });
         }
 
-        function handleError(errorMsg) {
+        function handleError(btn, errorMsg) {
+            btn.val('Retry');
+            btn.removeAttr('style');
             $('#error-msg').html(errorMsg);
         }
 </script>
