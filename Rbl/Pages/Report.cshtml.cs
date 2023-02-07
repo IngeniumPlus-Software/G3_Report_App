@@ -38,10 +38,10 @@ namespace Rbl.Pages
         public string HrEoReport5 { get; set; }
         public string Report6Narrative { get; set; }
         public string Report6FollowUp { get; set; }
-        public int G3HCAI_TalentPageNumber = 27;
-        public int G3HCAI_LeadershipPageNumber = 33;
-        public int G3HCAI_OrganizationPageNumber = 38;
-        public int G3HCAI_HrPageNumber = 45;
+        public string G3HCAI_TalentPageId = "ai-1";
+        public string G3HCAI_LeadershipPageId = "ai-2";
+        public string G3HCAI_OrganizationPageId = "ai-3";
+        public string G3HCAI_HrPageId = "ai-4";
 
 
         public async Task<IActionResult> OnGetAsync(string ticker, int year = 2021)
@@ -154,13 +154,13 @@ namespace Rbl.Pages
             {
                 var below5 = new List<string>();
                 if (scores.TalentScore < 5)
-                    below5.Add($"<a href='#page-{G3HCAI_TalentPageNumber}' class='red'>Section 1 (Talent)</a>");
+                    below5.Add($"<a href='#{G3HCAI_TalentPageId}' class='red'>Section 1 (Talent)</a>");
                 if (scores.LeadershipScore < 5)
-                    below5.Add($"<a href='#page-{G3HCAI_LeadershipPageNumber}' class='red'>Section 2 (Leadership)</a>");
+                    below5.Add($"<a href='#{G3HCAI_LeadershipPageId}' class='red'>Section 2 (Leadership)</a>");
                 if (scores.OrgScore < 5)
-                    below5.Add($"<a href='#page-{G3HCAI_OrganizationPageNumber}' class='red'>Section 3 (Organization)</a>");
+                    below5.Add($"<a href='#{G3HCAI_OrganizationPageId}' class='red'>Section 3 (Organization)</a>");
                 if (scores.HrScore < 5)
-                    below5.Add($"<a href='#page-{G3HCAI_HrPageNumber}' class='red'>Section 4 (Human Resources)</a>");
+                    below5.Add($"<a href='#{G3HCAI_HrPageId}' class='red'>Section 4 (Human Resources)</a>");
 
                 var appendixStr = string.Join(", ", below5);
                 var followup = $"Based on your results; we recommend you take some time to review these links to G3HC Actionable Insights {appendixStr}.";

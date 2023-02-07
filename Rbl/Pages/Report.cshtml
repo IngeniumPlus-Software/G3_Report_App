@@ -193,8 +193,8 @@ score compares to others in your industry, all other companies in the SEC and to
             </div>
             <div class="es-side-links">
                 <p>For a closer look at your data, use these hyperlinks to:</p>
-                <p><a href="#page-16">A plot of your individual scores in each Pathways (Finding 3)</a></p>
-                <p><a href="#page-17">A plot or your company Pathway scores versus the overall SEC average (finding 4)</a></p>
+                <p><a href="#finding-3">A plot of your individual scores in each Pathways (Finding 3)</a></p>
+                <p><a href="#finding-4">A plot or your company Pathway scores versus the overall SEC average (Finding 4)</a></p>
                 <p><a href="#finding-5">A plot of your company Pathway scores versus your industry average (Finding 5)</a></p>
             </div>
         </div>
@@ -775,7 +775,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         <div class="bg-white">
             <div class="ips-row">
                 <div class="col-md-11">
-                    <p><strong>Talent</strong> - <a href="#page-@Model.G3HCAI_TalentPageNumber">click here for Actionable Insights for Talent</a></p>
+                    <p><strong>Talent</strong> - <a href="#@Model.G3HCAI_TalentPageId">click here for Actionable Insights for Talent</a></p>
                     <p>
                         @Model.TalentEoReport5
                     </p>
@@ -783,7 +783,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
             </div>
             <div class="ips-row">
                 <div class="col-md-11">
-                    <p><strong>Leadership</strong> - <a href="#page-@Model.G3HCAI_LeadershipPageNumber">click here for Actionable Insights for Leadership</a></p>
+                    <p><strong>Leadership</strong> - <a href="#@Model.G3HCAI_LeadershipPageId">click here for Actionable Insights for Leadership</a></p>
                     <p>
                         @Model.LeadershipEoReport5
                     </p>
@@ -791,7 +791,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
             </div>
             <div class="ips-row">
                 <div class="col-md-11">
-                    <p><strong>Organization</strong> - <a href="#page-@Model.G3HCAI_OrganizationPageNumber">click here for Actionable Insights for Organization</a></p>
+                    <p><strong>Organization</strong> - <a href="#@Model.G3HCAI_OrganizationPageId">click here for Actionable Insights for Organization</a></p>
                     <p>
                         @Model.OrganizationEoReport5
                     </p>
@@ -799,7 +799,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
             </div>
             <div class="ips-row">
                 <div class="col-md-11">
-                    <p><strong>HR</strong> - <a href="#page-@Model.G3HCAI_HrPageNumber">click here for Actionable Insights for HR</a></p>
+                    <p><strong>HR</strong> - <a href="#@Model.G3HCAI_HrPageId">click here for Actionable Insights for HR</a></p>
                     <p>
                         @Model.HrEoReport5
                     </p>
@@ -844,7 +844,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </script>
     </div>
 </section>
-<section class="report-page">
+<section id="finding-4" class="report-page">
     <span class="counter"></span>
     <div>
         <h2 style="background: #1c4c79; background-image: url(./images/1c4c79_element.jpg); background-repeat: no-repeat; background-position: bottom; background-size: 100%;">
@@ -1020,13 +1020,11 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
     <div>
         <p><strong>1 Build the Case that Human Capability is a material issue</strong></p>
         <p>As outlined in Sections 1 and 2 of this report, research shows that people and organization deliver financial, customer, and community results</p>
-        <p>You can create a compelling case for Human Capability that is specific to your organization by collecting business measures and then interpreting the data in the context of your unique environment:</p><ul class="stand-alone-ul">
-            <li>Compare your P/E ratio vs. major competitors for the last 5 years
-        </li><li>
-        Compare your Tobin’s Q vs. major competitors for the last 5 years
-        </li><li>
-        Gather other metrics that are key indicators of performance in your industry (e.g., glassdoor.com, reputation indices)
-        </li>
+        <p>You can create a compelling case for Human Capability that is specific to your organization by collecting business measures and then interpreting the data in the context of your unique environment:</p>
+        <ul class="stand-alone-ul">
+            <li>Compare your P/E ratio vs. major competitors for the last 5 years</li>
+            <li>Compare your Tobin’s Q vs. major competitors for the last 5 years</li>
+            <li>Gather other metrics that are key indicators of performance in your industry (e.g., glassdoor.com, reputation indices)</li>
         </ul>
         <p>Assess the trend line of your metrics to historical changes in your Human Capability policy, procedures, initiatives, and notable new events. Were there positive or negative perceptions regarding changes in your leadership, your current talent pipeline, ability to attract and retain critical talent, or changes in distinctive capabilities of your organization versus competitors?  Are there inflection points in your P/E or Tobin’s Q that can be tied to significant events that could be linked to Human Capability issues? Examples:  A key senior executive change? A merger or acquisition? The launch of a major product? A pandemic?</p>
         <p>Do you lead or lag competitors in key metrics?  Has your reputation within the industry’s top performers changed over time? </p>
@@ -1036,103 +1034,104 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
                 (Follow this link (link and slides need to be created) to the G3 Human Capability website for helpful examples and slides that can be used as you Embed this Six Step process into your planning systems)
             </span>
         </div>
-<p>Before drafting your case for the materiality of Human Capability, take a moment to define your key stakeholders.  Consider the Board of Directors, Executive Team, organizational leadership, investor relations and investors, HR professionals, employees and any other relevant groups that are key to your organization’s competitive and financial success. Make an inventory of the common and different ways that Human Capital can impact these groups. </p>
-<p>Synthesize your quantitative data and understanding of stakeholder perspectives to create a compelling company case to communicate with each stakeholder group about how your organization is materially impacted by positive and negative changes in Human Capability or shifts in comparison to your industry peers. </p><h2>Milestones of this step:</h2>
-<ul class="stand-alone-ul">
-    <li>Compile key performance metrics of your business versus industry peers</li>
-    <li>Segment stakeholder groups and how Human Capability impacts them </li>
-    <li>Create a compelling message that Human Capability is a strategic issue</li>
-</ul>
+        <p>Before drafting your case for the materiality of Human Capability, take a moment to define your key stakeholders.  Consider the Board of Directors, Executive Team, organizational leadership, investor relations and investors, HR professionals, employees and any other relevant groups that are key to your organization’s competitive and financial success. Make an inventory of the common and different ways that Human Capital can impact these groups. </p>
+        <p>Synthesize your quantitative data and understanding of stakeholder perspectives to create a compelling company case to communicate with each stakeholder group about how your organization is materially impacted by positive and negative changes in Human Capability or shifts in comparison to your industry peers. </p><h2>Milestones of this step:</h2>
+        <ul class="stand-alone-ul">
+            <li>Compile key performance metrics of your business versus industry peers</li>
+            <li>Segment stakeholder groups and how Human Capability impacts them </li>
+            <li>Create a compelling message that Human Capability is a strategic issue</li>
+        </ul>
         <p><strong>2. Shift mindset from fragmented initiatives and activities to a systemic framework  </strong></p>
         <p>Avoid the trap of thinking of single initiatives or programs as an overall Human Capability agenda.   The Human Capability framework encompasses the majority of isolated people and organization initiatives and provides four complimentary pathways (Talent + Leadership + Organization + HR function) with 37 initiatives.  Like a menu at a restaurant, this framework is both simple (four categories) and comprehensive (37 initiatives).</p>
-</div>
-</section>
-<section id="section-5-2" class="text-page">
-    <span class="counter"></span>
-    <div>
-<p>Map your current Human Capability investment “portfolio” onto the framework.  Are investments balanced across the Pathways?   Does the current state reveal any blind spots?  Does your current investment “portfolio” align with your conclusions and messaging regarding the case for material importance of Human Capability?</p>
-<p>Add the Human Capability Framework and any new insights to the messaging you are using with key stakeholders.  </p>
-<p>When engaging with stakeholders on people and organization issues, always refer to all four pathways, not just one or two initiatives or “silver bullets”. Improving human capability is NOT an “HR” agenda but a means to deliver value to stakeholders.</p>
-<p>Build out from the HR stakeholder group to create a team of champions that branches out to an enterprise-wide coalition that understands and adopts the framework and how it can impact Human Capability and results. </p>
-<p>Success for this step is represented by the formation of a cross functional team to manage the ongoing processes of Human Capability measurement, investment prioritization and communication.  This team is comprised of a subject matter expert for each HUMAN CAPABILITY pathway and senior representatives from investor relations, finance, legal and communications.  This team would be formally tasked to own the Human Capability building process and work throughout the year on steps 3 through 6 described below.  </p>
-<h2>Milestones of this step:</h2>
-        <ul class="stand-alone-ul">
-<li>Add the G3HC Framework to your ongoing business strategy / resource allocation process</li>
-<li>Map your current state HUMAN CAPABILITY investment portfolio to the framework</li>
-<li>Socialize the model with key stakeholders to build understanding and alignment</li>
-<li>Create a cross functional team to champion the HUMAN CAPABILITY building process</li>
-<li>Embed the process into current strategic planning and business systems  </li>
-</ul><p><strong>3. Measure, interpret and add new insights about your current G3HC scores in each Pathway</strong></p>
-<p>Investors and other stakeholders want to know how you are doing in the four pathways compared to all other firms,
-    firms in your industry, and the top 10% of the SEC. Section 3 of this report provides scores for each of the four
-    pathways versus these comparison groups. This information provides stakeholders with a visual dashboard of how you
-    perform today.</p>
-<p>Section 4 describes the importance of interpreting your results through a lens of how comprehensively you report
-    Human Capability for the year. Intentional or unintentional omissions in disclosing Human Capability investments
-    results in lower scores than they should be. </p><h2>Milestones of this step include:</h2>
-    <ul class="stand-alone-ul">
-        <li>Understand your relative strengths and weaknesses across each Pathway</li>
-        <li>Understand your comparisons to industry peers, the entire SEC and top 10%</li>
-        <li>Critique the validity of your scores relative to what you actually disclosed</li>
-        <li>Compare your portfolio of current investments to scores in each Pathway</li>
-        <li>Assess the perceived ROI on investments made in each Pathway</li>
-    </ul>
-</div>
+    </div>
 </section>
 <section id="section-5-3" class="text-page">
     <span class="counter"></span>
     <div>
-<p><strong>4. Set Human Capability goals and build a roadmap of future human capability investments to deliver outcomes that matter</strong></p>
-<p>Given your current human capability performance (step 3), stakeholders will want to know where and how you should prioritize future investments to build Human Capability and deliver value to them. </p>
-<p>First, link your Human Capability initiatives to results that matter. Look back at the performance indicators you used to build a case for Human Capability and select the result areas and specific improvements that are most important to this strategic planning cycle.  These targets define the value created for your Human Capability goals and priorities.</p>
-<p>Second, set goals for improving performance in each Pathway by linking the pathway to the business outcome.</p>
-<p>Third, review the G3HC actionable insights and supplement your current practices, programs and initiatives in each
-    Pathway with new initiatives that will build greater capability. Rather than focus on a popular initiative because
-    of
-    personal interest, best practices, or those that are socially desirable, work though three questions to prioritize
-    where
-    to invest to deliver value:</p>
-<ul class="stand-alone-ul">
-    <li>Weaknesses: How well do we do the initiative today? Focus on the pathways and initiatives where you are below
-        parity.</li>
-    <li>Impact: How much value does the initiative deliver to stakeholders? Focus on the pathways & initiatives that
-        will most impact business results you care about.</li>
-    <li>Differentiation: How strategic is the pathway to your strategy? Focus on the pathways and initiatives that most
-        strategically differentiate you from others.</li>
-</ul>
-<h2>Milestones of this step include:</h2>
-<ul class="stand-alone-ul">
-    <li>Set business performance targets that are linked to the case for HUMAN CAPABILITY</li>
-    <li>Set Pathway improvement goals that create stakeholder value </li>
-    <li>Prioritize specific initiatives that improve or sustain stakeholder value. </li>
-    <li>Combine improvement plans across Pathways to build a systemic HUMAN CAPABILITY Roadmap</li>
-</ul>
-<p><strong>5. Track your performance over time to see improvements in both human capability initiatives and their impact
-        on business results.</strong></p>
-<p>What gets measured gets done. The most important comparison is to track and communicate your company’s progress over
-    time. As you prioritize and invest in Human Capability initiatives, you will be able to track improvements not only
-    in how you score against others, but also how your Human Capability improvements deliver stakeholder outcomes. For
-    example, when your investors see that your human capability efforts deliver results, they gain confidence in the
-    future. </p>
-<p>Support your Human Capability roadmap with a measurement system. It is insufficient to use only outcome-based
-    measures
-    to effectively deploy your roadmap. Use the metrics in the Actionable Insights section to create a scorecard for
-    each
-    prioritized initiative and for the entire roadmap with a combination of lead and lag measures, and a balanced mix of
-    activity, process, behavioral and outcome measures. Many measures can be monitored on quarterly, monthly or even
-    shorter
-    cycle times. Establishing a measurement system to monitor and communicate metrics are a component of the most
-    effective
-    Human Capability building plans.</p>
-<h2>Milestones of this step include:</h2>
-<ul class="stand-alone-ul">
-    <li>Establish a scorecard that represents key aspects of your HUMAN CAPABILITY roadmap </li>
-    <li>Create a measurement and reporting system that creates high visibility of HUMAN CAPABILITY performance and
-        facilitates course corrections on an ongoing basis </li>
-</ul>
+        <p>Map your current Human Capability investment “portfolio” onto the framework.  Are investments balanced across the Pathways?   Does the current state reveal any blind spots?  Does your current investment “portfolio” align with your conclusions and messaging regarding the case for material importance of Human Capability?</p>
+        <p>Add the Human Capability Framework and any new insights to the messaging you are using with key stakeholders.  </p>
+        <p>When engaging with stakeholders on people and organization issues, always refer to all four pathways, not just one or two initiatives or “silver bullets”. Improving human capability is NOT an “HR” agenda but a means to deliver value to stakeholders.</p>
+        <p>Build out from the HR stakeholder group to create a team of champions that branches out to an enterprise-wide coalition that understands and adopts the framework and how it can impact Human Capability and results. </p>
+        <p>Success for this step is represented by the formation of a cross functional team to manage the ongoing processes of Human Capability measurement, investment prioritization and communication.  This team is comprised of a subject matter expert for each HUMAN CAPABILITY pathway and senior representatives from investor relations, finance, legal and communications.  This team would be formally tasked to own the Human Capability building process and work throughout the year on steps 3 through 6 described below.  </p>
+        <h2>Milestones of this step:</h2>
+        <ul class="stand-alone-ul">
+            <li>Add the G3HC Framework to your ongoing business strategy / resource allocation process</li>
+            <li>Map your current state HUMAN CAPABILITY investment portfolio to the framework</li>
+            <li>Socialize the model with key stakeholders to build understanding and alignment</li>
+            <li>Create a cross functional team to champion the HUMAN CAPABILITY building process</li>
+            <li>Embed the process into current strategic planning and business systems  </li>
+        </ul>
+        <p><strong>3. Measure, interpret and add new insights about your current G3HC scores in each Pathway</strong></p>
+        <p>Investors and other stakeholders want to know how you are doing in the four pathways compared to all other firms,
+            firms in your industry, and the top 10% of the SEC. Section 3 of this report provides scores for each of the four
+            pathways versus these comparison groups. This information provides stakeholders with a visual dashboard of how you
+            perform today.</p>
+        <p>Section 4 describes the importance of interpreting your results through a lens of how comprehensively you report
+            Human Capability for the year. Intentional or unintentional omissions in disclosing Human Capability investments
+            results in lower scores than they should be. </p><h2>Milestones of this step include:</h2>
+        <ul class="stand-alone-ul">
+            <li>Understand your relative strengths and weaknesses across each Pathway</li>
+            <li>Understand your comparisons to industry peers, the entire SEC and top 10%</li>
+            <li>Critique the validity of your scores relative to what you actually disclosed</li>
+            <li>Compare your portfolio of current investments to scores in each Pathway</li>
+            <li>Assess the perceived ROI on investments made in each Pathway</li>
+        </ul>
     </div>
 </section>
 <section id="section-5-4" class="text-page">
+    <span class="counter"></span>
+    <div>
+        <p><strong>4. Set Human Capability goals and build a roadmap of future human capability investments to deliver outcomes that matter</strong></p>
+        <p>Given your current human capability performance (step 3), stakeholders will want to know where and how you should prioritize future investments to build Human Capability and deliver value to them. </p>
+        <p>First, link your Human Capability initiatives to results that matter. Look back at the performance indicators you used to build a case for Human Capability and select the result areas and specific improvements that are most important to this strategic planning cycle.  These targets define the value created for your Human Capability goals and priorities.</p>
+        <p>Second, set goals for improving performance in each Pathway by linking the pathway to the business outcome.</p>
+        <p>Third, review the G3HC actionable insights and supplement your current practices, programs and initiatives in each
+            Pathway with new initiatives that will build greater capability. Rather than focus on a popular initiative because
+            of
+            personal interest, best practices, or those that are socially desirable, work though three questions to prioritize
+            where
+            to invest to deliver value:</p>
+        <ul class="stand-alone-ul">
+            <li>Weaknesses: How well do we do the initiative today? Focus on the pathways and initiatives where you are below
+                parity.</li>
+            <li>Impact: How much value does the initiative deliver to stakeholders? Focus on the pathways & initiatives that
+                will most impact business results you care about.</li>
+            <li>Differentiation: How strategic is the pathway to your strategy? Focus on the pathways and initiatives that most
+                strategically differentiate you from others.</li>
+        </ul>
+        <h2>Milestones of this step include:</h2>
+        <ul class="stand-alone-ul">
+            <li>Set business performance targets that are linked to the case for HUMAN CAPABILITY</li>
+            <li>Set Pathway improvement goals that create stakeholder value </li>
+            <li>Prioritize specific initiatives that improve or sustain stakeholder value. </li>
+            <li>Combine improvement plans across Pathways to build a systemic HUMAN CAPABILITY Roadmap</li>
+        </ul>
+        <p><strong>5. Track your performance over time to see improvements in both human capability initiatives and their impact
+                on business results.</strong></p>
+        <p>What gets measured gets done. The most important comparison is to track and communicate your company’s progress over
+            time. As you prioritize and invest in Human Capability initiatives, you will be able to track improvements not only
+            in how you score against others, but also how your Human Capability improvements deliver stakeholder outcomes. For
+            example, when your investors see that your human capability efforts deliver results, they gain confidence in the
+            future. </p>
+        <p>Support your Human Capability roadmap with a measurement system. It is insufficient to use only outcome-based
+            measures
+            to effectively deploy your roadmap. Use the metrics in the Actionable Insights section to create a scorecard for
+            each
+            prioritized initiative and for the entire roadmap with a combination of lead and lag measures, and a balanced mix of
+            activity, process, behavioral and outcome measures. Many measures can be monitored on quarterly, monthly or even
+            shorter
+            cycle times. Establishing a measurement system to monitor and communicate metrics are a component of the most
+            effective
+            Human Capability building plans.</p>
+        <h2>Milestones of this step include:</h2>
+        <ul class="stand-alone-ul">
+            <li>Establish a scorecard that represents key aspects of your HUMAN CAPABILITY roadmap </li>
+            <li>Create a measurement and reporting system that creates high visibility of HUMAN CAPABILITY performance and
+                facilitates course corrections on an ongoing basis </li>
+        </ul>
+    </div>
+</section>
+<section id="section-5-5" class="text-page">
     <span class="counter"></span>
     <div>
         <p>
@@ -1240,7 +1239,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </table>
     </div>
 </section>
-<section id="section-5-5" class="text-page">
+<section id="section-5-6" class="text-page">
     <span class="counter"></span>
     <div>
         <p>
@@ -1295,7 +1294,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </ul>
     </div>
 </section>
-<section id="section-5-6" class="text-page">
+<section id="section-5-7" class="text-page">
     <span class="counter"></span>
     <div>
         <h2>Disclosure Content (continued):</h2>
@@ -1341,6 +1340,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
             <h1 class="mb-4">
                 G3HC Actionable Insights
             </h1>
+            <h2>G3HC Overall Framework</h2>
             <h2>
                 G3HC Actionable Insights 1
             </h2>
@@ -1383,11 +1383,181 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </div>
     </div>
 </section>
-<section id="ai-toc-1" class="appendix-intro-page">
+<section id="ai-framework-1" class="appendix-page">
+    <span class="counter"></span>
+    <div>
+        <h2 class="mb-4">G3HC Actionable Insights: Overall Framework</h2>
+    <table class="table table-striped table-bordered custom">
+        <tr>
+            <td>RBL Institute Articles/Playbooks</td>
+            <td>LinkedIn</td>
+            <td>Video</td>
+            <td>Metrics</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <p>
+                    <a
+                        href="www.youtube.com/watch?v=QI2qMS-tE4g">
+                        What Does Human Capability Mean
+                    </a>
+                </p>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    <a
+                        href="www.g3humancapability.com">
+                        G3 Human Capability Website
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td>
+                <p>
+                    <a
+                        href="www.youtube.com/watch?v=g2iQNqYs_yA">
+                        The Future of Work
+                    </a>
+                </p>
+            </td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td><p>
+                <a href="www.conference-board.org/webcast/ondemand/human-capability">
+                    Human Capability and Company Performance
+                </a>
+            </p></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td>
+                <p>
+                    <a href="https://michiganross.umich.edu/news/new-human-capability-framework-offers-groundbreaking-approach-creating-value-through-hr">
+                        New Human Capability Framework Offers Groundbreaking Approach to Creating Value Through HR
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/pulse/analytics-assessing-your-hr-capability-dave-ulrich/">
+                        Analytics on Analytics: Assessing Your HR Analytics Capability
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/pulse/how-do-you-advance-your-hr-agenda-dave-ulrich/">
+                        How Do You Advance Your HR Agenda?
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/posts/daveulrichpro_there-are-times-when-our-insights-ideas-activity-7010652921797242882-_0Jq?utm_source=share&utm_medium=member_desktop">
+                        The Conference Board: Human Capability and Company Performance 
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://lnkd.in/g2F4jCzS">
+                        How Human Capability Creates Value for All Stakeholders
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/pulse/how-inform-energize-investors-your-human-capability-agenda-ulrich/">
+                        How to Inform and Energize investors on Your Human Capability Agenda
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/pulse/six-actions-hr-create-more-stakeholder-value-dave-ulrich/">
+                        Six Actions for HR to Create More Stakeholder Value
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/pulse/esg-human-capability-connecting-emerging-intangibles-dave-ulrich/">
+                        ESG and Human Capability: Connecting Emerging Intangibles
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr><tr>
+            <td></td>
+            <td>
+                <p>
+                    <a href="https://www.linkedin.com/pulse/hrs-disclosable-impact-value-creation-governance-guidance-dave-ulrich/">
+                        HR’s Disclosable Impact on Value Creation 
+                    </a>
+                </p>
+            </td>
+            <td></td>
+            <td></td>
+        </tr>
+    </table>
+    </div>
+</section>
+<section id="ai-1" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            Improving Talent
+            Actionable Insights 1: Improving Talent
         </h2>
         <p>
             You have been directed to this section to help you figure out what to focus on in Talent to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for Talent will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your Talent pathway that you can implement and report in the future. 
@@ -1419,7 +1589,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </ol>
     </div>
 </section>
-<section id="ai-toc-2" class="appendix-intro-page">
+<section class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <p><strong>C.	Identify one or two elements for improving @Model.CompanyName Talent pathway</strong></p>
@@ -1450,7 +1620,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </p>
     </div>
 </section>
-<section id="ai-1" class="appendix-page">
+<section class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
@@ -1494,6 +1664,11 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
                 </td>
                 <td></td>
                 <td>
+                    <p>
+                        <a href="www.youtube.com/watch?v=dMYL0d-Hyu0">
+                            Improving Talent
+                        </a>
+                    </p>
                     <p>
                         <a href="https://df42wlfgor5mw.cloudfront.net/Institute/insitute_video/toolkit_video/talent_six_bs_ulrich.mp4">
                             6
@@ -1611,7 +1786,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </table>
     </div>
 </section>
-<section id="ai-1-1" class="appendix-page">
+<section class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1772,7 +1947,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </table>
     </div>
 </section>
-<section id="ai-1-2" class="appendix-page">
+<section class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -1892,7 +2067,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </table>
     </div>
 </section>
-<section id="ai-1-3" class="appendix-page">
+<section class="appendix-page">
     <span class="counter"></span>
     <div>
         <table class="table table-striped table-bordered custom">
@@ -2026,11 +2201,11 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </table>
     </div>
 </section>
-<section class="appendix-intro-page">
+<section id="ai-2" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            Improving Leadership
+            Actionable Insights 2: Improving Leadership
         </h2>
         <p>
             You have been directed to this section to help you figure out what to focus on in Leadership to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for Leadership will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your Leadership pathway that you can implement and report in the future. 
@@ -2153,7 +2328,13 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
                             <a href="https://www.linkedin.com/pulse/now-time-offer-guidance-how-improve-leadership-dave-ulrich/">https://www.linkedin.com/pulse/now-time-offer-guidance-how-improve-leadership-dave-ulrich/</a>
                         </p>
                     </td>
-                    <td></td>
+                    <td>
+                        <p>
+                            <a href="www.youtube.com/watch?v=VTJsAtRothY">
+                                Improving Leadership
+                            </a>
+                        </p>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
@@ -2468,11 +2649,11 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         </table>
     </div>
 </section>
-<section class="appendix-intro-page">
+<section id="ai-3" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            Improving Organization
+            Actionable Insights 3: Improving Organization
         </h2>
         <p>
             You have been directed to this section to help you figure out what to focus on in Organization to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for Organization will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your Organization pathway that you can implement and report in the future.
@@ -2512,8 +2693,7 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
         <p><strong>C.	Identify one or two elements for improving @Model.CompanyName Organization pathway</strong></p>
         <p>
             <i>
-                Low hanging fruit: what we are already doing that we could report but didn’t?<br/>
-Opportunities: what we could do that that we aren’t that will increase our organization?
+                Low hanging fruit: what we are already doing that we could report but didn’t?<br/>Opportunities: what we could do that that we aren’t that will increase our organization?
             </i>
         </p>
         <ol>
@@ -2597,7 +2777,13 @@ Opportunities: what we could do that that we aren’t that will increase our org
                             <a href="https://www.linkedin.com/pulse/what-dominant-force-our-lives-today-organizations-why-dave-ulrich/">https://www.linkedin.com/pulse/what-dominant-force-our-lives-today-organizations-why-dave-ulrich/</a>
                         </p>
                     </td>
-                    <td>&nbsp;</td>
+                    <td>
+                        <p>
+                            <a href="www.youtube.com/watch?v=SGNNns_2nBA">
+                                Improving Organization
+                            </a>
+                        </p>
+                    </td>
                     <td>&nbsp;</td>
                 </tr>
                 <tr>
@@ -3410,12 +3596,11 @@ Opportunities: what we could do that that we aren’t that will increase our org
         </table>
     </div>
 </section>
-
-<section class="appendix-intro-page">
+<section id="ai-4" class="appendix-intro-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">
-            Improving HR
+            Actionable Insights 4: Improving HR
         </h2>
         <p>
             You have been directed to this section to help you figure out what to focus on in HR to have greater impact on your business and to improve your score when you report. Reading through these Actionable Insights for HR will help you determine if you have not reported something that you could and identify potential new initiatives that can strengthen your HR pathway that you can implement and report in the future. 
@@ -3453,8 +3638,7 @@ Opportunities: what we could do that that we aren’t that will increase our org
         <p><strong>C.	Identify one or two elements for improving @Model.CompanyName HR</strong></p>
         <p>
             <i>
-                Low hanging fruit: what we are already doing that we could report but didn’t?<br/>
-Opportunities: what we could do that that we aren’t that will increase our HR?
+                Low hanging fruit: what we are already doing that we could report but didn’t?<br/>Opportunities: what we could do that that we aren’t that will increase our HR?
             </i>
         </p>
         <ol>
@@ -3553,7 +3737,13 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
                             <a href="https://www.linkedin.com/pulse/effectiveness-audit-your-hr-department-dave-ulrich/">https://www.linkedin.com/pulse/effectiveness-audit-your-hr-department-dave-ulrich/</a>
                         </p>
                     </td>
-                    <td></td>
+                    <td>
+                        <p>
+                            <a href="www.youtube.com/watch?v=OXeRByqc9eQ">
+                                Improving Human Resources
+                            </a>
+                        </p>
+                    </td>
                     <td></td>
                 </tr>
                 <tr>
@@ -4043,7 +4233,7 @@ Opportunities: what we could do that that we aren’t that will increase our HR?
         </table>
     </div>
 </section>
-<section class="appendix-page">
+<section id="ai-5" class="appendix-page">
     <span class="counter"></span>
     <div>
         <h2 class="mb-4">

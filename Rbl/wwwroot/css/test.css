@@ -585,8 +585,20 @@ section.red-border-line h6:before {
     padding-left: 25px;
 }
 
-#ai-toc-2 ol li {
+#ai-talent-2 ol li {
     font-style: italic;
+}
+
+#ai-toc h1 {
+    /*font-size: 55px;*/
+}
+
+#ai-toc h2 {
+    font-size: 26px;
+}
+
+#ai-toc h3 {
+    font-size: 17px;
 }
 
 .indent {
@@ -804,7 +816,7 @@ span.finding-explanation {
     width: 50%;
 }
 
-#section-5-4 .table { /* TODO */
+#section-5-5.table { /* TODO */
     margin-top: 15px;
     margin-bottom: 15px;
 }
