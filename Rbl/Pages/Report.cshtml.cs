@@ -20,6 +20,7 @@ namespace Rbl.Pages
         }
 
         public Organization Organization { get; set; }
+        public IDictionary<int, GeneralScoreResponse> YearlyScoresByTicker { get; set; } = new Dictionary<int, GeneralScoreResponse>();
         public GeneralScoreResponse ScoresByTicker { get; set; }
         public GeneralScoreResponse ScoresAll { get; set; }
         public GeneralScoreResponse ScoresIndustry { get; set; }
@@ -64,6 +65,15 @@ namespace Rbl.Pages
                 return NotFound("Could not find the company's SEC name");
 
             ScoresByTicker = await _service.GetOrganizationScoresByTicker(year, ticker);
+            for (int i = 0; i < 5; i++)
+            {
+                int curYear = year - i;
+                if (!(await _service.OrganizationHasScoreForYear(curYear, ticker)))
+                    break;
+
+                YearlyScoresByTicker[curYear] = await _service.GetOrganizationScoresByTicker(curYear, ticker);
+            }
+
             ScoresAll = await _service.GetScoresAll(year);
             ScoresIndustry = await _service.GetScoresByIndustry(year, Organization.industry_code);
             ScoresTop10 = await _service.GetScoresTopTen(year);

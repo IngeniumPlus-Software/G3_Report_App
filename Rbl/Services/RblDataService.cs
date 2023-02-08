@@ -91,6 +91,20 @@ namespace Rbl.Services
             return null;
         }
 
+        public async Task<bool> OrganizationHasScoreForYear(int year, string ticker)
+        {
+            if (year == 2021)
+            {
+                return await _context.ScoresByTicker_2021.AnyAsync(x => x.Ticker == ticker);
+            }
+            else if (year == 2022)
+            {
+                return await _context.ScoresByTicker_2022.AnyAsync(x => x.Ticker == ticker);
+            }
+
+            return false;
+        }
+
         public async Task<GeneralScoreResponse> GetOrganizationScoresByTicker(int year, string ticker)
         {
             if (year == 2021)

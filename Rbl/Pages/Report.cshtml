@@ -5,9 +5,6 @@
     ViewData["Title"] = "Report";
     Layout = "~/Pages/Shared/_LayoutReport.cshtml";
 }
-
-
-
 <section id="title-page" class="bg-image white-border-line">
     <div>
         <h1><i>@Model.CompanyName <br>Human Capability and Governance Report</i></h1>
@@ -698,30 +695,117 @@ Action: Create an intentional plan to engage stakeholders (SEC, investors, custo
                     categories: [2021]
                 });
 
+                var esData = [
+                    {
+                        name: 'Talent',
+                        data: [],
+                        color: '#e6194B'
+                    },
+                    {
+                        name: 'Organization',
+                        data: [],
+                        color: '#f58231'
+                    },
+                    {
+                        name: 'Leadership',
+                        data: [],
+                        color: '#ffe119'
+                    },
+                    {
+                        name: 'HR',
+                        data: [],
+                        color: '#bfef45'
+                    },
+                    {
+                        name: 'Overall',
+                        data: [],
+                        color: '#4363d8'
+                    },
+                ];
+                var years = [];
+                @foreach(var g in Model.YearlyScoresByTicker) {
+                    var curYear = g.Key;
+                    var curValue = g.Value;
+                    <text>
+                    var cur = esData.find(x => x.name === 'Talent');
+                    cur.data.push(@curValue.TalentScore);
+
+                    cur = esData.find(x => x.name === 'Organization');
+                    cur.data.push(@curValue.OrganizationScore);
+
+                    cur = esData.find(x => x.name === 'Leadership');
+                    cur.data.push(@curValue.LeadershipScore);
+
+                    cur = esData.find(x => x.name === 'HR');
+                    cur.data.push(@curValue.HrScore);
+
+                    cur = esData.find(x => x.name === 'Overall');
+                    cur.data.push(@curValue.OverallScore);
+
+                    years.push(@curYear);
+                    </text>
+                }
+
+                @{var bandHeight = .05; var bandOpacity = 1;}
+                var esPlotBands = [
+                    {
+                        from: @(Model.ScoresIndustry.TalentScore-bandHeight),
+                        to: @(Model.ScoresIndustry.TalentScore+bandHeight),
+                        color: "#e6194B",
+                        opacity: @bandOpacity
+                    },
+                    {
+                        from: @(Model.ScoresIndustry.OrganizationScore-bandHeight),
+                        to: @(Model.ScoresIndustry.OrganizationScore+bandHeight),
+                        color: "#f58231",
+                        opacity: @bandOpacity
+                    },
+                    {
+                        from: @(Model.ScoresIndustry.LeadershipScore-bandHeight),
+                        to: @(Model.ScoresIndustry.LeadershipScore+bandHeight),
+                        color: "#ffe119",
+                        opacity: @bandOpacity
+                    },
+                    {
+                        from: @(Model.ScoresIndustry.HrScore-bandHeight),
+                        to: @(Model.ScoresIndustry.HrScore+bandHeight),
+                        color: "#bfef45",
+                        opacity: @bandOpacity
+                    },
+                    {
+                        from: @(Model.ScoresIndustry.OverallScore-bandHeight),
+                        to: @(Model.ScoresIndustry.OverallScore+bandHeight),
+                        color: "#4363d8",
+                        opacity: @bandOpacity
+                    },
+                ];
+
                 $("#es-chart-bar").kendoChart({
-                    series: dataKendo,
-                    seriesDefaults: {
-                        type: "column"
+                    title: {
+                        text: ""
+                    },
+                    series: esData,
+                    categoryAxis: {
+                        categories: years,
+                        majorGridLines: {
+                            visible: true
+                        },
                     },
                     valueAxis: {
-                        majorUnit: 5,
                         labels: {
-                            template: "#= value #",
-                            rotation: "auto"
+                            format: "{0:n2}"
                         },
-                        axisCrossingValue: 0,
-                        narrowRange: false,
-                    },
-                    legend: {
-                        visible: true,
-                        position: "bottom",
+                        majorUnit: 5,
+                        plotBands: esPlotBands,
+                        max: 10,
+                        line: {
+                            visible: false
+                        }
                     },
                     tooltip: {
                         visible: true,
-                        format: "#= value #",
-                        template: "#= series.name #: #= value #"
-                    },
-                    categories: [2021]
+                        format: "N0"
+                    }
                 });
             });
         </script>
