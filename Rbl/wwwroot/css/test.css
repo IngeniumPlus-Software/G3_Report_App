@@ -589,10 +589,6 @@ section.red-border-line h6:before {
     font-style: italic;
 }
 
-#ai-toc h1 {
-    /*font-size: 55px;*/
-}
-
 #ai-toc h2 {
     font-size: 26px;
 }
