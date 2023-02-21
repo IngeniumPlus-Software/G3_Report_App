@@ -28,6 +28,7 @@ namespace Rbl.Pages
         public GeneralScoreResponse LastInTopTenTotal { get; set; }
 
         public string CompanyName { get; set; }
+        public string YearString {get;set;}
 
         public decimal OrganizationScoreTotal { get; set; }
         public decimal AllScoreTotal { get; set; }
@@ -51,6 +52,11 @@ namespace Rbl.Pages
             {
                 return NotFound();
             }
+
+            if(year == 0) {
+                return NotFound("No year provided");
+            }
+            YearString = $"{year}";
 
             Organization = await _service.GetOrganizationByTicker(ticker);
 

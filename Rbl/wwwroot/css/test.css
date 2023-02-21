@@ -757,6 +757,15 @@ span.finding-explanation {
     width: 100%;
 }
 
+#section-5-1 .embedded-graphic {
+    width: 50%;
+    display: flex;
+}
+
+.section-5.text-page h3 {
+    font-weight: bold;
+}
+
 #es-comp-table {
     text-align: center;
 }
@@ -812,7 +821,8 @@ span.finding-explanation {
     width: 50%;
 }
 
-#section-5-5.table { /* TODO */
+#section-5-5.table {
+    /* TODO */
     margin-top: 15px;
     margin-bottom: 15px;
 }
