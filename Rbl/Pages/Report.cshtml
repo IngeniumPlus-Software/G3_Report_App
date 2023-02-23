@@ -68,19 +68,19 @@ score compares to others in your industry, all other companies in the SEC and to
                     <table id="es-comp-table" class="table table-striped table-bordered align-middle comp-table">
                         <tr>
                             <td></td>
-                            <td colspan="3" style="text-align: center;">Comparison Groups</td>
+                            <td colspan="3" style="text-align: center;">@Model.YearString Comparison Groups (Average)</td>
                         </tr>
                         <tr>
                             <td>@Model.CompanyName</td>
-                            <td>SEC Filing Companies</td>
                             <td>Industry</td>
+                            <td>SEC Filing Companies</td>
                             <td>Top 10%</td>
                         </tr>
                         <tr>
-                            <td>@Model.OrganizationScoreTotal</td>
-                            <td>@Model.AllScoreTotal</td>
-                            <td>@Model.IndustryScoreTotal</td>
-                            <td>@Model.TopTenScoreTotal</td>
+                            <td>@Model.ScoresByTicker.EsOverallScore</td>
+                            <td>@Model.ScoresIndustry.EsOverallScore</td>
+                            <td>@Model.ScoresAll.EsOverallScore</td>
+                            <td>@Model.ScoresTop10.EsOverallScore</td>
                         </tr>
                     </table>
                 </div>
@@ -515,19 +515,19 @@ score compares to others in your industry, all other companies in the SEC and to
         <table class="table table-striped table-bordered align-middle comp-table">
             <tr>
                 <td></td>
-                <td colspan="3" style="text-align: center;">Comparison Groups</td>
+                <td colspan="3" style="text-align: center;">@Model.YearString Comparison Groups (Average)</td>
             </tr>
             <tr>
                 <td>@Model.CompanyName</td>
-                <td>SEC Filing Companies</td>
                 <td>Industry</td>
+                <td>SEC Filing Companies</td>
                 <td>Top 10%</td>
             </tr>
             <tr>
-                <td>@Model.OrganizationScoreTotal</td>
-                <td>@Model.AllScoreTotal</td>
-                <td>@Model.IndustryScoreTotal</td>
-                <td>@Model.TopTenScoreTotal</td>
+                <td>@Model.ScoresByTicker.EsOverallScore</td>
+                <td>@Model.ScoresIndustry.EsOverallScore</td>
+                <td>@Model.ScoresAll.EsOverallScore</td>
+                <td>@Model.ScoresTop10.EsOverallScore</td>
             </tr>
         </table>
         <div class="bg-white">
@@ -705,27 +705,27 @@ score compares to others in your industry, all other companies in the SEC and to
 
                 var esData = [
                     {
-                        name: 'Talent',
+                        name: 'Talent/Industry (Avg)',
                         data: [],
                         color: '#e6194B'
                     },
                     {
-                        name: 'Organization',
+                        name: 'Org/Industry (Avg)',
                         data: [],
                         color: '#f58231'
                     },
                     {
-                        name: 'Leadership',
+                        name: 'Leadership/Industry (Avg)',
                         data: [],
                         color: '#ffe119'
                     },
                     {
-                        name: 'HR',
+                        name: 'HR/Industry (Avg)',
                         data: [],
                         color: '#bfef45'
                     },
                     {
-                        name: 'Overall',
+                        name: 'Overall/Industry (Avg)',
                         data: [],
                         color: '#4363d8'
                     },
@@ -735,19 +735,19 @@ score compares to others in your industry, all other companies in the SEC and to
                     var curYear = g.Key;
                     var curValue = g.Value;
                     <text>
-                    var cur = esData.find(x => x.name === 'Talent');
+                    var cur = esData.find(x => x.name === 'Talent/Industry (Avg)');
                     cur.data.push(@curValue.TalentScore);
 
-                    cur = esData.find(x => x.name === 'Organization');
+                    cur = esData.find(x => x.name === 'Org/Industry (Avg)');
                     cur.data.push(@curValue.OrganizationScore);
 
-                    cur = esData.find(x => x.name === 'Leadership');
+                    cur = esData.find(x => x.name === 'Leadership/Industry (Avg)');
                     cur.data.push(@curValue.LeadershipScore);
 
-                    cur = esData.find(x => x.name === 'HR');
+                    cur = esData.find(x => x.name === 'HR/Industry (Avg)');
                     cur.data.push(@curValue.HrScore);
 
-                    cur = esData.find(x => x.name === 'Overall');
+                    cur = esData.find(x => x.name === 'Overall/Industry (Avg)');
                     cur.data.push(@curValue.EsOverallScore);
 
                     years.push(@curYear);
@@ -792,12 +792,20 @@ score compares to others in your industry, all other companies in the SEC and to
                     title: {
                         text: ""
                     },
+                    legend: {
+    orientation: "vertical",
+                        width: 50
+                    },
                     series: esData,
                     categoryAxis: {
                         categories: years,
                         majorGridLines: {
                             visible: true
                         },
+                        labels: {
+                            template: kendo.template("Your #: value #")
+                        },
+                        reverse: true,
                     },
                     valueAxis: {
                         labels: {
@@ -1118,11 +1126,11 @@ score compares to others in your industry, all other companies in the SEC and to
         <p>Assess the trend line of your metrics to historical changes in your Human Capability policy, procedures, initiatives, and notable new events. Were there positive or negative perceptions regarding changes in your leadership, your current talent pipeline, ability to attract and retain critical talent, or changes in distinctive capabilities of your organization versus competitors?  Are there inflection points in your P/E or Tobin’s Q that can be tied to significant events that could be linked to Human Capability issues? Examples:  A key senior executive change? A merger or acquisition? The launch of a major product? A pandemic?</p>
         <p>Do you lead or lag competitors in key metrics?  Has your reputation within the industry’s top performers changed over time? </p>
         <p>As a final refinement, get the perspective of board members and executives regarding how much they think people and organization issues drive results as well as how your company compares to others they work with.  </p>
-        <div class="text-center">
+        <!--<div class="text-center">
             <span>
                 (Follow this link (link and slides need to be created) to the G3 Human Capability website for helpful examples and slides that can be used as you Embed this Six Step process into your planning systems)
             </span>
-        </div>
+        </div>-->
         <p>Before drafting your case for the materiality of Human Capability, take a moment to define your key stakeholders.  Consider the Board of Directors, Executive Team, organizational leadership, investor relations and investors, HR professionals, employees and any other relevant groups that are key to your organization’s competitive and financial success. Make an inventory of the common and different ways that Human Capital can impact these groups. </p>
         <p>Synthesize your quantitative data and understanding of stakeholder perspectives to create a compelling company case to communicate with each stakeholder group about how your organization is materially impacted by positive and negative changes in Human Capability or shifts in comparison to your industry peers. </p>
         <h3>Milestones of this step:</h3>
