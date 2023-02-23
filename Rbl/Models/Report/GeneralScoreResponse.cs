@@ -21,5 +21,6 @@ namespace Rbl.Models.Report
         [Required, JsonProperty("overallScore")]
         public double OverallScore { get; set; }
         public double TotalScore { get; set; }
+        public double EsOverallScore => OverallScore;
     }
 }

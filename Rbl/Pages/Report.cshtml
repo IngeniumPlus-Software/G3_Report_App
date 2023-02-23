@@ -748,7 +748,7 @@ score compares to others in your industry, all other companies in the SEC and to
                     cur.data.push(@curValue.HrScore);
 
                     cur = esData.find(x => x.name === 'Overall');
-                    cur.data.push(@(curValue.TalentScore + curValue.OrganizationScore + curValue.LeadershipScore + curValue.HrScore));
+                    cur.data.push(@curValue.EsOverallScore);
 
                     years.push(@curYear);
                     </text>
@@ -781,8 +781,8 @@ score compares to others in your industry, all other companies in the SEC and to
                         opacity: @bandOpacity
                     },
                     {
-                        from: @((Model.ScoresIndustry.TalentScore + Model.ScoresIndustry.OrganizationScore + Model.ScoresIndustry.LeadershipScore + Model.ScoresIndustry.HrScore)-bandHeight),
-                        to: @(Model.ScoresIndustry.TalentScore + Model.ScoresIndustry.OrganizationScore + Model.ScoresIndustry.LeadershipScore + Model.ScoresIndustry.HrScore),
+                        from: @(Model.ScoresIndustry.EsOverallScore-bandHeight),
+                        to: @(Model.ScoresIndustry.EsOverallScore+bandHeight),
                         color: "#4363d8",
                         opacity: @bandOpacity
                     },
@@ -805,7 +805,7 @@ score compares to others in your industry, all other companies in the SEC and to
                         },
                         majorUnit: 5,
                         plotBands: esPlotBands,
-                        max: 40,
+                        max: 10,
                         line: {
                             visible: false
                         }
