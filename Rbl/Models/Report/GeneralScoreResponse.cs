@@ -21,5 +21,6 @@ namespace Rbl.Models.Report
         [Required, JsonProperty("overallScore")]
         public double OverallScore { get; set; }
         public double TotalScore { get; set; }
+        public double EsOverallScore => Math.Round((TalentScore + LeadershipScore + HrScore + OrgScore) / 4, 2);
     }
 }

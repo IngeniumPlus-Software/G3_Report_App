@@ -1,20 +1,20 @@
 @font-face {
-    font-family: "Timesnewroman";
+    font-family: 'Timesnewroman';
     src: url(../fonts/Timesnewroman.ttf);
 }
 
 @font-face {
-    font-family: "Timesnewroman-italic";
+    font-family: 'Timesnewroman-italic';
     src: url(../fonts/Timesnewromanbolditalic.ttf);
 }
 
 @font-face {
-    font-family: "OpenSans-Light";
+    font-family: 'OpenSans-Light';
     src: url(../fonts/OpenSans-Light.ttf);
 }
 
 @font-face {
-    font-family: "OpenSans";
+    font-family: 'OpenSans';
     src: url(../fonts/OpenSans-Regular.ttf);
 }
 
@@ -81,35 +81,35 @@ p {
     }
 }
 
-#page-3 h3 {
+#toc h3 {
     font-size: 16px;
     margin-bottom: 20px;
     margin-top: 20px;
 }
 
 body {
-    font-family: "Timesnewroman";
+    font-family: 'Timesnewroman';
 }
 
 h1 {
     font-size: 57px;
-    font-family: "Timesnewroman";
+    font-family: 'Timesnewroman';
 }
 
 h2 {
     font-size: 27px;
-    font-family: "Timesnewroman";
+    font-family: 'Timesnewroman';
 }
 
 h3 {
     font-size: 18px;
-    font-family: "OpenSans-Light";
+    font-family: 'OpenSans-Light';
     color: #071d49;
 }
 
 h4 {
     font-size: 14px;
-    font-family: "Timesnewroman";
+    font-family: 'Timesnewroman';
 }
 
 p,
@@ -118,13 +118,13 @@ ol li,
 body table.table-striped tr td,
 .table-striped > tbody > tr:nth-of-type(odd) > * {
     font-size: 12px;
-    font-family: "OpenSans";
+    font-family: 'OpenSans';
     color: #384a6d;
     line-height: 20px;
 }
 
 span {
-    font-family: "Timesnewroman-italic";
+    font-family: 'Timesnewroman-italic';
     color: #0086d6;
     font-size: 12px;
 }
@@ -144,15 +144,15 @@ span {
     position: relative;
 }
 
-    .blue:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        bottom: -25px;
-        height: 1px;
-        width: 230px;
-        border-bottom: 1px solid #0086d6;
-    }
+.blue:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: -25px;
+    height: 1px;
+    width: 230px;
+    border-bottom: 1px solid #0086d6;
+}
 
 .detail h3 {
     font-size: 27px;
@@ -167,7 +167,7 @@ span.counter {
     position: absolute;
     right: 21px;
     color: #fff;
-    font-family: "Timesnewroman";
+    font-family: 'Timesnewroman';
     top: 20px;
     z-index: 9;
 }
@@ -256,16 +256,16 @@ td.arrow-right {
     position: relative;
 }
 
-    td.arrow-right::after {
-        content: "";
-        height: 15px;
-        width: 15px;
-        position: absolute;
-        background-color: #d9dde1;
-        top: 33%;
-        right: 2px;
-        transform: rotate(135deg);
-    }
+td.arrow-right::after {
+    content: '';
+    height: 15px;
+    width: 15px;
+    position: absolute;
+    background-color: #d9dde1;
+    top: 33%;
+    right: 2px;
+    transform: rotate(135deg);
+}
 
 td.navy-blue.arrow-right::after {
     background-color: #0086d6;
@@ -306,7 +306,7 @@ p.red,
 p.red span {
     color: #ed1b34;
     font-size: 12px;
-    font-family: "OpenSans";
+    font-family: 'OpenSans';
 }
 
 table.table-striped ul,
@@ -320,12 +320,12 @@ table.table-striped {
 
 body table.table-striped tr td {
     word-wrap: break-word;
-    padding: 5px
+    padding: 5px;
 }
 
-    body table.table-striped tr td p {
-        margin-bottom: 8px;
-    }
+body table.table-striped tr td p {
+    margin-bottom: 8px;
+}
 
 table.table-striped.custom tr td:nth-child(1) {
     width: 105px;
@@ -347,20 +347,20 @@ table.table-striped.custom tr td:nth-child(5) {
     width: 150px;
 }
 
-#page-20 .embedded-graphic {
+#section-4-1 .embedded-graphic {
     margin-top: 0;
     margin-bottom: 0;
 }
 
-#page-21 img {
+#section-4-2 img {
     margin-top: 10px;
 }
 
-#page-22 .table {
+#section-4-3 .table {
     margin-top: 0;
 }
 
-#page-22 table td li {
+#section-4-3 table td li {
     line-height: 1.5;
     font-size: 11px;
 }
@@ -372,7 +372,6 @@ table.table-striped.custom tr td:nth-child(5) {
 .col-md-6 p {
     margin-top: 10px;
 }
-
 
 .footer h4 {
     position: absolute;
@@ -406,22 +405,22 @@ table.table-striped.custom tr td:nth-child(5) {
     padding-top: 15%;
 }
 
-    .blue-bg h2 {
-        color: #FFF;
-        position: relative;
-    }
+.blue-bg h2 {
+    color: #fff;
+    position: relative;
+}
 
 span.counter {
     position: absolute;
     right: 21px;
-    color: #FFF;
-    font-family: "Timesnewroman";
+    color: #fff;
+    font-family: 'Timesnewroman';
     top: 20px;
     z-index: 9;
 }
 
 .blue-bg span.counter::before {
-    color: #FFF;
+    color: #fff;
 }
 
 span.counter::before {
@@ -431,7 +430,6 @@ span.counter::before {
     color: #0086d6;
     font-weight: bold;
 }
-
 
 section > div {
     padding-left: 50px;
@@ -452,7 +450,7 @@ section.white-border-line h3:before,
 section.white-border-line h4:before,
 section.white-border-line h5:before,
 section.white-border-line h6:before {
-    border-bottom-color: #FFFFFF !important;
+    border-bottom-color: #ffffff !important;
 }
 
 section.red-border-line h1:before,
@@ -481,23 +479,24 @@ section.red-border-line h6:before {
     padding-top: 300px;
 }
 
-#title-page h1, #title-page h3 {
+#title-page h1,
+#title-page h3 {
     color: white;
 }
 
 #title-page h1:before {
-    border-bottom: 5px solid #FFFFFF;
+    border-bottom: 5px solid #ffffff;
 }
 
-#page-5 h2:before {
+#section-1-1 h2:before {
     left: 0;
 }
 
-#page-3 h2:before {
+#toc h2:before {
     left: 0;
 }
 
-#page-4 {
+#section-1 {
     padding-top: 15%;
     background: #071d49;
     background-image: url(../images/pattern_page4.png);
@@ -506,16 +505,16 @@ section.red-border-line h6:before {
     background-repeat: no-repeat;
 }
 
-#page-4 h1:before {
+#section-1 h1:before {
     left: 0;
 }
 
-#page-9 table {
+#section-2-1 table {
     text-align: center;
 }
 
-#page-11 table ul li,
-#page-12 table ul li {
+#section-3-1 table ul li,
+#section-3-2 table ul li {
     font-size: 11px;
     line-height: 1.5em;
 }
@@ -528,7 +527,7 @@ section.red-border-line h6:before {
     left: 50px;
 }
 
-#page-20 ol {
+#section-4-1 ol {
     padding-left: 25px;
 }
 
@@ -549,24 +548,24 @@ section.red-border-line h6:before {
     background-size: 100%;
 }
 
-    #title-page h1:before,
-    .introduction h1:before,
-    .toc h2:before,
-    .section-page h1:before,
-    .report-page h2:before,
-    .text-page h2:first-child::before,
-    .appendix-page h2:first-child::before,
-    .appendix-intro-page h2:first-child::before,
-    .appendix h1:before {
-        content: "";
-        position: absolute;
-        left: 0;
-        top: -60px;
-        height: 1px;
-        width: 95px;
-        /* or 100px */
-        border-bottom: 5px solid #0086d6;
-    }
+#title-page h1:before,
+.introduction h1:before,
+.toc h2:before,
+.section-page h1:before,
+.report-page h2:before,
+.text-page h2:first-child::before,
+.appendix-page h2:first-child::before,
+.appendix-intro-page h2:first-child::before,
+.appendix h1:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: -60px;
+    height: 1px;
+    width: 95px;
+    /* or 100px */
+    border-bottom: 5px solid #0086d6;
+}
 
 .appendix-intro-page ol {
     padding-left: 25px;
@@ -586,8 +585,16 @@ section.red-border-line h6:before {
     padding-left: 25px;
 }
 
-#page-28 ol li {
+#ai-talent-2 ol li {
     font-style: italic;
+}
+
+#ai-toc h2 {
+    font-size: 26px;
+}
+
+#ai-toc h3 {
+    font-size: 17px;
 }
 
 .indent {
@@ -663,21 +670,21 @@ section.report-page {
     padding-top: 15%;
 }
 
-    .text-page h2,
-    .appendix-page h2,
-    .appendix-intro-page h2 {
-        position: relative;
-        color: #071d49;
-    }
+.text-page h2,
+.appendix-page h2,
+.appendix-intro-page h2 {
+    position: relative;
+    color: #071d49;
+}
 
-    .appendix-page table p,
-    .appendix-page table ul li {
-        line-height: 1.5em;
-        font-size: 11px;
-    }
+.appendix-page table p,
+.appendix-page table ul li {
+    line-height: 1.5em;
+    font-size: 11px;
+}
 
-#page-6 {
-    line-height: .9em;
+#section-1-2 {
+    line-height: 0.9em;
 }
 
 .high-parity {
@@ -702,7 +709,7 @@ a.red {
 
 .legend label {
     font-size: 12px;
-    font-family: "OpenSans";
+    font-family: 'OpenSans';
 }
 
 .legend span {
@@ -723,7 +730,7 @@ a.red {
     font-weight: bolder;
 }
 
-#page-6 img {
+#section-1-2 img {
     width: 100%;
 }
 
@@ -741,13 +748,22 @@ span.finding-explanation {
     background-repeat: no-repeat;
 }
 
-#page-23 {
+#section-5 {
     background-image: url(/images/background_section_page5.jpg);
     background-repeat: no-repeat;
     padding-top: 15%;
     background-size: cover;
     background-position: top center;
     width: 100%;
+}
+
+#section-5-1 .embedded-graphic {
+    width: 50%;
+    display: flex;
+}
+
+.section-5.text-page h3 {
+    font-weight: bold;
 }
 
 #es-comp-table {
@@ -800,21 +816,23 @@ span.finding-explanation {
     height: 20%;
 }
 
-#page-23 p {
+#section-5 p {
     color: white !important;
     width: 50%;
 }
 
-#page-24 .table {
+#section-5-5.table {
+    /* TODO */
     margin-top: 15px;
     margin-bottom: 15px;
 }
 
-#page-53 img {
+#appendix-2 img {
     margin-top: 10px;
 }
 
-.footnotes, .footnotes li {
+.footnotes,
+.footnotes li {
     font-size: 10px;
 }
 
@@ -823,11 +841,30 @@ span.finding-explanation {
 }
 
 .section-page h1,
-.section-page h2 {
+.section-page h2,
+.section-page li {
     display: inline-block;
     position: relative;
     color: #fff;
     width: 100%;
+}
+
+.section-page ul {
+    list-style: none;
+    width: 50%;
+}
+
+.section-page ul > li {
+    font-size: 18px;
+    font-style: italic;
+}
+
+.section-page ul > li::before {
+    content: '\2022';
+    color: white;
+    font-weight: bold;
+    display: inline-block;
+    width: 1em;
 }
 
 .section-page h2 {
@@ -844,11 +881,7 @@ span.finding-explanation {
     width: 100%;
 }
 
-#page-18 h2:before {
-    left: 0;
-}
-
-#page-18 h2:before {
+#finding-5 h2:before {
     left: 0;
 }
 
@@ -864,15 +897,16 @@ span.finding-explanation {
     margin-bottom: 0;
 }
 
-#page-11 ul, #page-16 ul {
+#section-3-1 ul,
+#finding-3 ul {
     padding-left: 25px;
 }
 
-#page-13 table.comp-table {
+#finding-1 table.comp-table {
     text-align: center;
 }
 
-.report-page#page-13 table {
+.report-page#finding-1 table {
     margin-top: 15px;
     margin-bottom: 15px;
 }

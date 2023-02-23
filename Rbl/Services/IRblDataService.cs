@@ -15,6 +15,7 @@ namespace Rbl.Services
         Task<GeneralScoreResponse> GetScoresTopTen(int year);
         Task<GeneralScoreResponse> GetScoresTotalForLastInTopTen(int year);
         Task<GeneralScoreResponse> GetScoresAll(int year);
+        Task<bool> OrganizationHasScoreForYear(int year, string ticker);
         Task<GeneralScoreResponse> GetOrganizationScoresByTicker(int year, string ticker);
         Task<Organization> GetOrganizationByTicker(string ticker);
         Task<IList<SelectListItem>> FillTickerDropdown();
