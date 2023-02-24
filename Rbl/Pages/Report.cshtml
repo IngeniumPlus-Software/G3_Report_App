@@ -74,7 +74,7 @@ score compares to others in your industry, all other companies in the SEC and to
                             <td>@Model.CompanyName</td>
                             <td>Your Industry</td>
                             <td>SEC Filing Companies</td>
-                            <td>SEC top 10%</td>
+                            <td>Top 10% SEC</td>
                         </tr>
                         <tr>
                             <td>@Model.ScoresByTicker.EsOverallScore</td>
@@ -521,7 +521,7 @@ score compares to others in your industry, all other companies in the SEC and to
                 <td>@Model.CompanyName</td>
                 <td>Your Industry</td>
                 <td>SEC Filing Companies</td>
-                <td>SEC top 10%</td>
+                <td>Top 10% SEC</td>
             </tr>
             <tr>
                 <td>@Model.ScoresByTicker.EsOverallScore</td>
@@ -703,18 +703,8 @@ score compares to others in your industry, all other companies in the SEC and to
                     categories: [2021]
                 });
 
-                var esData = [
-                    {
-                        name: '2021',
-                        data: [],
-                        color: '#e6194B'
-                    },
-                    {
-                        name: '2022',
-                        data: [],
-                        color: '#4363d8'
-                    }
-                ];
+                var colors = {2021: '#e6194B', 2022: '#4363d8'}
+                var esData = [];
                 var pathways = [
                     'Talent',
                     'Organization',
@@ -722,18 +712,15 @@ score compares to others in your industry, all other companies in the SEC and to
                     'HR',
                     'Overall'
                 ];
-                @foreach(var g in Model.YearlyScoresByTicker) {
+                @foreach(var g in Model.YearlyScoresByTicker.OrderBy(x => x.Key)) {
                     var curYear = g.Key;
                     var curValue = g.Value;
                     <text>
-                    var cur = esData.find(x => x.name == '@curYear');
-                    if(cur) {
-                        cur.data.push(@curValue.TalentScore);
-                        cur.data.push(@curValue.OrganizationScore);
-                        cur.data.push(@curValue.LeadershipScore);
-                        cur.data.push(@curValue.HrScore);
-                        cur.data.push(@curValue.EsOverallScore);
-                    }
+                    esData.push({
+                        name: '@curYear',
+                        data:[@curValue.TalentScore, @curValue.OrganizationScore, @curValue.LeadershipScore, @curValue.HrScore, @curValue.EsOverallScore],
+                        color: colors[@curYear]
+                    });
                     </text>
                 }
 
