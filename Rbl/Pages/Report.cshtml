@@ -705,114 +705,57 @@ score compares to others in your industry, all other companies in the SEC and to
 
                 var esData = [
                     {
-                        name: 'Talent/Industry (Avg)',
+                        name: '2021',
                         data: [],
                         color: '#e6194B'
                     },
                     {
-                        name: 'Org/Industry (Avg)',
-                        data: [],
-                        color: '#f58231'
-                    },
-                    {
-                        name: 'Leadership/Industry (Avg)',
-                        data: [],
-                        color: '#ffe119'
-                    },
-                    {
-                        name: 'HR/Industry (Avg)',
-                        data: [],
-                        color: '#bfef45'
-                    },
-                    {
-                        name: 'Overall/Industry (Avg)',
+                        name: '2022',
                         data: [],
                         color: '#4363d8'
-                    },
+                    }
                 ];
-                var years = [];
+                var pathways = [
+                    'Talent',
+                    'Organization',
+                    'Leadership',
+                    'HR',
+                    'Overall'
+                ];
                 @foreach(var g in Model.YearlyScoresByTicker) {
                     var curYear = g.Key;
                     var curValue = g.Value;
                     <text>
-                    var cur = esData.find(x => x.name === 'Talent/Industry (Avg)');
-                    cur.data.push(@curValue.TalentScore);
-
-                    cur = esData.find(x => x.name === 'Org/Industry (Avg)');
-                    cur.data.push(@curValue.OrganizationScore);
-
-                    cur = esData.find(x => x.name === 'Leadership/Industry (Avg)');
-                    cur.data.push(@curValue.LeadershipScore);
-
-                    cur = esData.find(x => x.name === 'HR/Industry (Avg)');
-                    cur.data.push(@curValue.HrScore);
-
-                    cur = esData.find(x => x.name === 'Overall/Industry (Avg)');
-                    cur.data.push(@curValue.EsOverallScore);
-
-                    years.push(@curYear);
+                    var cur = esData.find(x => x.name == '@curYear');
+                    if(cur) {
+                        cur.data.push(@curValue.TalentScore);
+                        cur.data.push(@curValue.OrganizationScore);
+                        cur.data.push(@curValue.LeadershipScore);
+                        cur.data.push(@curValue.HrScore);
+                        cur.data.push(@curValue.EsOverallScore);
+                    }
                     </text>
                 }
-
-                @{var bandHeight = .05; var bandOpacity = 1;}
-                var esPlotBands = [
-                    {
-                        from: @(Model.ScoresIndustry.TalentScore-bandHeight),
-                        to: @(Model.ScoresIndustry.TalentScore+bandHeight),
-                        color: "#e6194B",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.OrganizationScore-bandHeight),
-                        to: @(Model.ScoresIndustry.OrganizationScore+bandHeight),
-                        color: "#f58231",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.LeadershipScore-bandHeight),
-                        to: @(Model.ScoresIndustry.LeadershipScore+bandHeight),
-                        color: "#ffe119",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.HrScore-bandHeight),
-                        to: @(Model.ScoresIndustry.HrScore+bandHeight),
-                        color: "#bfef45",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.EsOverallScore-bandHeight),
-                        to: @(Model.ScoresIndustry.EsOverallScore+bandHeight),
-                        color: "#4363d8",
-                        opacity: @bandOpacity
-                    },
-                ];
 
                 $("#es-chart-bar").kendoChart({
                     title: {
                         text: ""
                     },
-                    legend: {
-    orientation: "vertical",
-                        width: 50
-                    },
                     series: esData,
                     categoryAxis: {
-                        categories: years,
+                        categories: pathways,
                         majorGridLines: {
                             visible: true
                         },
                         labels: {
-                            template: kendo.template("Your #: value #")
+                            template: kendo.template("#: value #")
                         },
-                        reverse: true,
                     },
                     valueAxis: {
                         labels: {
                             format: "{0:n2}"
                         },
                         majorUnit: 5,
-                        plotBands: esPlotBands,
                         max: 10,
                         line: {
                             visible: false
