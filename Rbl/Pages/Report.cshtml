@@ -72,9 +72,9 @@ score compares to others in your industry, all other companies in the SEC and to
                         </tr>
                         <tr>
                             <td>@Model.CompanyName</td>
-                            <td>Industry</td>
+                            <td>Your Industry</td>
                             <td>SEC Filing Companies</td>
-                            <td>Top 10%</td>
+                            <td>Top 10% SEC</td>
                         </tr>
                         <tr>
                             <td>@Model.ScoresByTicker.EsOverallScore</td>
@@ -519,9 +519,9 @@ score compares to others in your industry, all other companies in the SEC and to
             </tr>
             <tr>
                 <td>@Model.CompanyName</td>
-                <td>Industry</td>
+                <td>Your Industry</td>
                 <td>SEC Filing Companies</td>
-                <td>Top 10%</td>
+                <td>Top 10% SEC</td>
             </tr>
             <tr>
                 <td>@Model.ScoresByTicker.EsOverallScore</td>
@@ -703,116 +703,46 @@ score compares to others in your industry, all other companies in the SEC and to
                     categories: [2021]
                 });
 
-                var esData = [
-                    {
-                        name: 'Talent/Industry (Avg)',
-                        data: [],
-                        color: '#e6194B'
-                    },
-                    {
-                        name: 'Org/Industry (Avg)',
-                        data: [],
-                        color: '#f58231'
-                    },
-                    {
-                        name: 'Leadership/Industry (Avg)',
-                        data: [],
-                        color: '#ffe119'
-                    },
-                    {
-                        name: 'HR/Industry (Avg)',
-                        data: [],
-                        color: '#bfef45'
-                    },
-                    {
-                        name: 'Overall/Industry (Avg)',
-                        data: [],
-                        color: '#4363d8'
-                    },
+                var colors = {2021: '#e6194B', 2022: '#4363d8'}
+                var esData = [];
+                var pathways = [
+                    'Talent',
+                    'Organization',
+                    'Leadership',
+                    'HR',
+                    'Overall'
                 ];
-                var years = [];
-                @foreach(var g in Model.YearlyScoresByTicker) {
+                @foreach(var g in Model.YearlyScoresByTicker.OrderBy(x => x.Key)) {
                     var curYear = g.Key;
                     var curValue = g.Value;
                     <text>
-                    var cur = esData.find(x => x.name === 'Talent/Industry (Avg)');
-                    cur.data.push(@curValue.TalentScore);
-
-                    cur = esData.find(x => x.name === 'Org/Industry (Avg)');
-                    cur.data.push(@curValue.OrganizationScore);
-
-                    cur = esData.find(x => x.name === 'Leadership/Industry (Avg)');
-                    cur.data.push(@curValue.LeadershipScore);
-
-                    cur = esData.find(x => x.name === 'HR/Industry (Avg)');
-                    cur.data.push(@curValue.HrScore);
-
-                    cur = esData.find(x => x.name === 'Overall/Industry (Avg)');
-                    cur.data.push(@curValue.EsOverallScore);
-
-                    years.push(@curYear);
+                    esData.push({
+                        name: '@curYear',
+                        data:[@curValue.TalentScore, @curValue.OrganizationScore, @curValue.LeadershipScore, @curValue.HrScore, @curValue.EsOverallScore],
+                        color: colors[@curYear]
+                    });
                     </text>
                 }
-
-                @{var bandHeight = .05; var bandOpacity = 1;}
-                var esPlotBands = [
-                    {
-                        from: @(Model.ScoresIndustry.TalentScore-bandHeight),
-                        to: @(Model.ScoresIndustry.TalentScore+bandHeight),
-                        color: "#e6194B",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.OrganizationScore-bandHeight),
-                        to: @(Model.ScoresIndustry.OrganizationScore+bandHeight),
-                        color: "#f58231",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.LeadershipScore-bandHeight),
-                        to: @(Model.ScoresIndustry.LeadershipScore+bandHeight),
-                        color: "#ffe119",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.HrScore-bandHeight),
-                        to: @(Model.ScoresIndustry.HrScore+bandHeight),
-                        color: "#bfef45",
-                        opacity: @bandOpacity
-                    },
-                    {
-                        from: @(Model.ScoresIndustry.EsOverallScore-bandHeight),
-                        to: @(Model.ScoresIndustry.EsOverallScore+bandHeight),
-                        color: "#4363d8",
-                        opacity: @bandOpacity
-                    },
-                ];
 
                 $("#es-chart-bar").kendoChart({
                     title: {
                         text: ""
                     },
-                    legend: {
-    orientation: "vertical",
-                        width: 50
-                    },
                     series: esData,
                     categoryAxis: {
-                        categories: years,
+                        categories: pathways,
                         majorGridLines: {
                             visible: true
                         },
                         labels: {
-                            template: kendo.template("Your #: value #")
+                            template: kendo.template("#: value #")
                         },
-                        reverse: true,
                     },
                     valueAxis: {
                         labels: {
                             format: "{0:n2}"
                         },
                         majorUnit: 5,
-                        plotBands: esPlotBands,
                         max: 10,
                         line: {
                             visible: false
